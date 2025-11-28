@@ -351,11 +351,11 @@ export const Hero: React.FC<HeroProps> = ({ setAppState }) => {
           </div>
         </div>
 
-        {/* Spacer for fixed nav */}
-        <div className="h-[76px] md:h-24" />
+        {/* Spacer for fixed nav - ensures content is always below navbar */}
+        <div className="h-[120px] sm:h-[100px] md:h-24" />
 
         {/* Hero Content - Centered in remaining space */}
-        <div className="relative z-10 flex-1 flex items-start md:items-center pt-12 md:pt-0 max-w-[1400px] mx-auto px-5 md:px-12 w-full">
+        <div className="relative z-10 flex-1 flex items-start md:items-center pt-4 sm:pt-8 md:pt-0 max-w-[1400px] mx-auto px-5 md:px-12 w-full">
           <div className="max-w-2xl">
             <h1 className="text-[2.25rem] sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-medium text-white leading-[1.05] tracking-[-0.03em] mb-6 md:mb-8">
               {/* Line 1: OoitGedacht */}
