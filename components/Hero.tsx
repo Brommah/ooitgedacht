@@ -291,7 +291,7 @@ export const Hero: React.FC<HeroProps> = ({ setAppState }) => {
                     icon: <FileText size={22} />, 
                     label: 'Woningpaspoort', 
                     sublabel: 'Volledige documentatie',
-                    color: 'from-emerald-400 to-teal-400',
+                    color: 'from-blue-400 to-cyan-400',
                     onClick: () => {
                       const el = document.getElementById('passport-section');
                       el?.scrollIntoView({ behavior: 'smooth' });
@@ -338,7 +338,7 @@ export const Hero: React.FC<HeroProps> = ({ setAppState }) => {
                   setAppState(AppState.WIZARD_HOUSEHOLD);
                   setMobileMenuOpen(false);
                 }}
-                className="w-full flex items-center justify-center gap-3 bg-gradient-to-r from-emerald-500 to-emerald-600 text-white px-8 py-5 text-lg font-semibold rounded-2xl shadow-2xl shadow-emerald-500/25 hover:shadow-emerald-500/40 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300"
+                className="w-full flex items-center justify-center gap-3 bg-gradient-to-r from-blue-500 to-blue-600 text-white px-8 py-5 text-lg font-semibold rounded-2xl shadow-2xl shadow-blue-500/25 hover:shadow-blue-500/40 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300"
               >
                 <Sparkles size={22} />
                 Start je droomhuis
@@ -473,7 +473,7 @@ export const Hero: React.FC<HeroProps> = ({ setAppState }) => {
           <AnimatedSection delay={200} className="text-center">
             <button 
               onClick={() => setAppState(AppState.WIZARD_HOUSEHOLD)}
-              className="inline-flex items-center gap-3 bg-emerald-500 hover:bg-emerald-400 text-white px-8 py-4 text-base font-semibold rounded-full transition-all duration-200"
+              className="inline-flex items-center gap-3 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-400 hover:to-blue-500 text-white px-8 py-4 text-base font-semibold rounded-full transition-all duration-200 shadow-lg shadow-blue-500/25"
             >
               Start jouw ontwerp
               <ArrowRight size={18} />

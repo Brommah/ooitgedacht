@@ -115,10 +115,10 @@ export const Results: React.FC<ResultsProps> = ({ image, locked, onUnlock, onDas
         {/* Top badges */}
         <div className="absolute top-6 left-6 flex gap-2 z-10">
           <div className="flex items-center gap-1.5 px-3 py-1.5 bg-white/90 backdrop-blur-sm text-[#0a1628] text-[10px] font-bold uppercase tracking-wider rounded-full">
-            <Check size={12} className="text-emerald-600" />
+            <Check size={12} className="text-blue-600" />
             Gevalideerd
           </div>
-          <div className="flex items-center gap-1.5 px-3 py-1.5 bg-emerald-500 text-white text-[10px] font-bold uppercase tracking-wider rounded-full">
+          <div className="flex items-center gap-1.5 px-3 py-1.5 bg-gradient-to-r from-blue-500 to-blue-600 text-white text-[10px] font-bold uppercase tracking-wider rounded-full">
             <Sparkles size={12} />
             AI Generated
           </div>
@@ -134,9 +134,9 @@ export const Results: React.FC<ResultsProps> = ({ image, locked, onUnlock, onDas
             <div className="text-xl font-mono font-bold text-white">{preferences.household.bedrooms}</div>
             <div className="text-[9px] text-white/60 uppercase tracking-wider">Slaapkamers</div>
           </div>
-          <div className="bg-emerald-500/30 backdrop-blur-xl rounded-xl px-4 py-2 border border-emerald-500/40">
-            <div className="text-xl font-mono font-bold text-emerald-400">{energyLabel}</div>
-            <div className="text-[9px] text-emerald-400/70 uppercase tracking-wider">Energie</div>
+          <div className="bg-blue-500/30 backdrop-blur-xl rounded-xl px-4 py-2 border border-blue-500/40">
+            <div className="text-xl font-mono font-bold text-blue-400">{energyLabel}</div>
+            <div className="text-[9px] text-blue-400/70 uppercase tracking-wider">Energie</div>
           </div>
         </div>
 
@@ -157,7 +157,7 @@ export const Results: React.FC<ResultsProps> = ({ image, locked, onUnlock, onDas
                 <div className="text-2xl font-mono font-bold text-white">
                   {CURRENCY_SYMBOL} {totalCost.toLocaleString('nl-NL')}
                 </div>
-                <div className="text-emerald-400 text-sm">
+                <div className="text-blue-400 text-sm">
                   -{CURRENCY_SYMBOL}{saving.toLocaleString('nl-NL')} besparing
                 </div>
               </div>
@@ -168,7 +168,7 @@ export const Results: React.FC<ResultsProps> = ({ image, locked, onUnlock, onDas
                 placeholder="Jouw emailadres"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full bg-white/10 border border-white/20 rounded-xl py-3 px-4 text-center text-white placeholder:text-white/30 outline-none focus:border-emerald-500/50 mb-3"
+                className="w-full bg-white/10 border border-white/20 rounded-xl py-3 px-4 text-center text-white placeholder:text-white/30 outline-none focus:border-blue-500/50 mb-3"
               />
               
               <motion.button 
@@ -176,7 +176,7 @@ export const Results: React.FC<ResultsProps> = ({ image, locked, onUnlock, onDas
                 whileTap={{ scale: 0.98 }}
                 onClick={onUnlock}
                 disabled={!email.includes('@')}
-                className="w-full bg-emerald-500 disabled:bg-white/10 disabled:text-white/30 text-white py-3 font-semibold rounded-xl flex items-center justify-center gap-2"
+                className="w-full bg-gradient-to-r from-blue-500 to-blue-600 disabled:bg-white/10 disabled:text-white/30 text-white py-3 font-semibold rounded-xl flex items-center justify-center gap-2 shadow-lg shadow-blue-500/25"
               >
                 Bekijk Volledig Passport
                 <ArrowRight size={18} />
@@ -279,10 +279,10 @@ export const Results: React.FC<ResultsProps> = ({ image, locked, onUnlock, onDas
       <div className="absolute top-4 left-4 right-4 flex justify-between items-start z-10">
         <div className="flex gap-2">
         <div className="flex items-center gap-1.5 px-3 py-1.5 bg-white/90 backdrop-blur-sm text-[#0a1628] text-[10px] font-bold uppercase tracking-wider rounded-full shadow-lg">
-          <Check size={12} className="text-emerald-600" />
+          <Check size={12} className="text-blue-600" />
           Gevalideerd
         </div>
-        <div className="flex items-center gap-1.5 px-3 py-1.5 bg-emerald-500 text-white text-[10px] font-bold uppercase tracking-wider rounded-full shadow-lg">
+        <div className="flex items-center gap-1.5 px-3 py-1.5 bg-gradient-to-r from-blue-500 to-blue-600 text-white text-[10px] font-bold uppercase tracking-wider rounded-full shadow-lg">
           <Sparkles size={12} />
           AI Generated
         </div>
@@ -344,9 +344,9 @@ export const Results: React.FC<ResultsProps> = ({ image, locked, onUnlock, onDas
           <div className="text-2xl font-mono font-bold text-white">{preferences.household.bedrooms}</div>
           <div className="text-[9px] text-white/60 uppercase tracking-wider">Slaapkamers</div>
         </div>
-        <div className="bg-emerald-500/30 backdrop-blur-xl rounded-xl px-4 py-3 border border-emerald-500/40 text-center">
-          <div className="text-2xl font-mono font-bold text-emerald-400">{energyLabel}</div>
-          <div className="text-[9px] text-emerald-400/70 uppercase tracking-wider">Energie</div>
+        <div className="bg-blue-500/30 backdrop-blur-xl rounded-xl px-4 py-3 border border-blue-500/40 text-center">
+          <div className="text-2xl font-mono font-bold text-blue-400">{energyLabel}</div>
+          <div className="text-[9px] text-blue-400/70 uppercase tracking-wider">Energie</div>
         </div>
       </motion.div>
 
@@ -379,12 +379,12 @@ export const Results: React.FC<ResultsProps> = ({ image, locked, onUnlock, onDas
               <div className="flex items-center justify-between mb-4">
                 <div>
                   <span className="text-white font-mono text-2xl font-bold">{CURRENCY_SYMBOL} {totalCost.toLocaleString('nl-NL')}</span>
-                  <span className="text-emerald-400 text-sm ml-2">-{CURRENCY_SYMBOL}{saving.toLocaleString('nl-NL')}</span>
+                  <span className="text-blue-400 text-sm ml-2">-{CURRENCY_SYMBOL}{saving.toLocaleString('nl-NL')}</span>
                 </div>
                 <motion.button 
                   whileTap={{ scale: 0.95 }}
                   onClick={onDashboard}
-                  className="bg-emerald-500 text-white px-5 py-2.5 font-semibold rounded-xl flex items-center gap-2 shadow-lg shadow-emerald-500/20"
+                  className="bg-gradient-to-r from-blue-500 to-blue-600 text-white px-5 py-2.5 font-semibold rounded-xl flex items-center gap-2 shadow-lg shadow-blue-500/20"
                 >
                   <MessageSquare size={16} />
                   Dashboard
@@ -414,7 +414,7 @@ export const Results: React.FC<ResultsProps> = ({ image, locked, onUnlock, onDas
                           </div>
                         )}
                         {preferences.config.extras.length > 0 && (
-                          <div className="flex justify-between text-emerald-400">
+                          <div className="flex justify-between text-blue-400">
                             <span>Inclusief {preferences.config.extras.length} extra's</span>
                             <Check size={16} />
                           </div>
@@ -425,7 +425,7 @@ export const Results: React.FC<ResultsProps> = ({ image, locked, onUnlock, onDas
                     {/* Mini stats row */}
                     <div className="grid grid-cols-3 gap-2 mb-4">
                       <div className="bg-white/5 rounded-xl p-3 text-center border border-white/10">
-                        <div className="text-lg font-mono font-bold text-emerald-400">{energyLabel}</div>
+                        <div className="text-lg font-mono font-bold text-blue-400">{energyLabel}</div>
                         <div className="text-[10px] text-white/50 uppercase">Energielabel</div>
                       </div>
                       <div className="bg-white/5 rounded-xl p-3 text-center border border-white/10">
@@ -523,7 +523,7 @@ export const Results: React.FC<ResultsProps> = ({ image, locked, onUnlock, onDas
                         </div>
                       )}
                       {preferences.config.extras.length > 0 && (
-                        <div className="flex justify-between text-emerald-400">
+                        <div className="flex justify-between text-blue-400">
                           <span>Incl. {preferences.config.extras.length} extra's</span>
                           <Check size={14} />
                         </div>
@@ -532,12 +532,12 @@ export const Results: React.FC<ResultsProps> = ({ image, locked, onUnlock, onDas
                   </div>
 
                   {/* Savings */}
-                  <div className="bg-emerald-500/10 rounded-xl p-4 border border-emerald-500/20 relative">
-                    <div className="absolute top-2 right-2 bg-emerald-500 text-white px-2 py-0.5 rounded-full text-[10px] font-bold">
+                  <div className="bg-blue-500/10 rounded-xl p-4 border border-blue-500/20 relative">
+                    <div className="absolute top-2 right-2 bg-gradient-to-r from-blue-500 to-blue-600 text-white px-2 py-0.5 rounded-full text-[10px] font-bold">
                       -13%
                     </div>
-                    <div className="text-[10px] text-emerald-400/70 uppercase tracking-wider mb-1">Directe Besparing</div>
-                    <div className="text-2xl font-mono font-bold text-emerald-400">
+                    <div className="text-[10px] text-blue-400/70 uppercase tracking-wider mb-1">Directe Besparing</div>
+                    <div className="text-2xl font-mono font-bold text-blue-400">
                       {CURRENCY_SYMBOL} {saving.toLocaleString('nl-NL')}
                     </div>
                     <p className="text-xs text-white/40 mt-2">
@@ -554,7 +554,7 @@ export const Results: React.FC<ResultsProps> = ({ image, locked, onUnlock, onDas
                     {/* Mini stats */}
                     <div className="grid grid-cols-3 gap-2">
                       <div className="bg-white/5 rounded-lg p-2 text-center border border-white/10">
-                        <div className="text-sm font-mono font-bold text-emerald-400">{energyLabel}</div>
+                        <div className="text-sm font-mono font-bold text-blue-400">{energyLabel}</div>
                         <div className="text-[8px] text-white/40 uppercase">Energielabel</div>
                       </div>
                       <div className="bg-white/5 rounded-lg p-2 text-center border border-white/10">
@@ -601,7 +601,7 @@ export const Results: React.FC<ResultsProps> = ({ image, locked, onUnlock, onDas
                         whileHover={{ scale: 1.02 }}
                         whileTap={{ scale: 0.98 }}
                         onClick={onDashboard}
-                        className="flex-1 bg-emerald-500 hover:bg-emerald-600 text-white py-3 font-semibold rounded-xl flex items-center justify-center gap-2 shadow-lg shadow-emerald-500/20 transition-colors"
+                        className="flex-1 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-400 hover:to-blue-500 text-white py-3 font-semibold rounded-xl flex items-center justify-center gap-2 shadow-lg shadow-blue-500/20 transition-colors"
                       >
                         <MessageSquare size={16} />
                         Open Dashboard
@@ -630,13 +630,13 @@ export const Results: React.FC<ResultsProps> = ({ image, locked, onUnlock, onDas
             <div className="max-w-5xl mx-auto flex items-center justify-between">
               <div>
                 <span className="text-white font-mono font-bold">{CURRENCY_SYMBOL} {totalCost.toLocaleString('nl-NL')}</span>
-                <span className="text-emerald-400 text-sm ml-2">-{CURRENCY_SYMBOL}{saving.toLocaleString('nl-NL')}</span>
+                <span className="text-blue-400 text-sm ml-2">-{CURRENCY_SYMBOL}{saving.toLocaleString('nl-NL')}</span>
               </div>
               <motion.button 
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 onClick={onDashboard}
-                className="bg-emerald-500 text-white px-6 py-2 font-semibold rounded-lg flex items-center gap-2"
+                className="bg-gradient-to-r from-blue-500 to-blue-600 text-white px-6 py-2 font-semibold rounded-lg flex items-center gap-2 shadow-lg shadow-blue-500/20"
               >
                 <MessageSquare size={16} />
                 Dashboard

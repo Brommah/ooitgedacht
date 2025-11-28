@@ -171,7 +171,7 @@ export const Wizard: React.FC<WizardProps> = ({ appState, setAppState }) => {
           <div className="w-48 mx-auto mb-8">
             <div className="h-[2px] bg-white/10 rounded-full overflow-hidden">
               <motion.div
-                className="h-full bg-gradient-to-r from-blue-400 to-emerald-400"
+                className="h-full bg-gradient-to-r from-blue-400 to-blue-600"
                 initial={{ width: '0%' }}
                 animate={{ width: `${((generationStep + 1) / GENERATION_MESSAGES.length) * 100}%` }}
               />
