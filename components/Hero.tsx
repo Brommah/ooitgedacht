@@ -357,31 +357,31 @@ export const Hero: React.FC<HeroProps> = ({ setAppState }) => {
         {/* Hero Content - Centered in remaining space */}
         <div className="relative z-10 flex-1 flex items-center max-w-[1400px] mx-auto px-6 md:px-12 w-full">
           <div className="max-w-2xl">
-            <h1 className="text-[2.5rem] sm:text-5xl md:text-6xl lg:text-7xl font-serif text-white leading-[1.05] tracking-tight mb-8">
+            <h1 className="text-[2.5rem] sm:text-5xl md:text-6xl lg:text-7xl font-medium text-white leading-[0.95] tracking-[-0.03em] mb-8">
               <span className="block">
-                <span className="relative inline-block">
+                <span className="relative inline-block font-semibold">
                   OoitGedacht
                   <svg className="absolute -bottom-1 md:-bottom-2 left-0 w-full h-2 md:h-3 text-white/40" viewBox="0 0 200 12" preserveAspectRatio="none">
                     <path d="M0,6.4 L4,6.2 L196,6.3 L200,6.5" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round"/>
                   </svg>
                 </span>
-                {' '}dat je
+                {' '}<span className="font-light">dat je</span>
               </span>
-              <span className="block">een huis{' '}
+              <span className="block font-light">een huis{' '}
                 <span className="relative inline-block whitespace-nowrap">
-                  <span className="bg-gradient-to-r from-[#4a90d9] via-[#7bb3eb] to-[#5b9fde] bg-clip-text text-transparent">kon toveren?</span>
+                  <span className="font-semibold bg-gradient-to-r from-[#60a5fa] via-[#a78bfa] to-[#34d399] bg-clip-text text-transparent">kon toveren?</span>
                   <span className="relative">
                     {/* Elegant sparkles */}
-                    <span className="absolute -top-4 -right-2 md:-top-6 md:-right-3 text-[#7bb3eb] text-2xl md:text-3xl animate-pulse">✦</span>
-                    <span className="absolute -top-8 right-4 md:-top-12 md:right-6 text-[#a8d4ff] text-lg md:text-xl opacity-70" style={{animationDelay: '0.5s'}}>✧</span>
-                    <span className="absolute -top-2 -right-8 md:-top-3 md:-right-12 text-[#5b9fde] text-sm md:text-base opacity-50" style={{animationDelay: '1s'}}>✦</span>
+                    <span className="absolute -top-4 -right-2 md:-top-6 md:-right-3 text-[#a78bfa] text-2xl md:text-3xl animate-pulse">✦</span>
+                    <span className="absolute -top-8 right-4 md:-top-12 md:right-6 text-[#60a5fa] text-lg md:text-xl opacity-70" style={{animationDelay: '0.5s'}}>✧</span>
+                    <span className="absolute -top-2 -right-8 md:-top-3 md:-right-12 text-[#34d399] text-sm md:text-base opacity-50" style={{animationDelay: '1s'}}>✦</span>
                   </span>
                   <svg className="absolute -bottom-1 md:-bottom-2 left-0 w-full h-2 md:h-3" viewBox="0 0 200 12" preserveAspectRatio="none">
                     <defs>
                       <linearGradient id="underlineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                        <stop offset="0%" stopColor="#4a90d9"/>
-                        <stop offset="50%" stopColor="#7bb3eb"/>
-                        <stop offset="100%" stopColor="#5b9fde"/>
+                        <stop offset="0%" stopColor="#60a5fa"/>
+                        <stop offset="50%" stopColor="#a78bfa"/>
+                        <stop offset="100%" stopColor="#34d399"/>
                       </linearGradient>
                     </defs>
                     <path d="M0,6.5 L3,6.3 L197,6.1 L200,6.3" stroke="url(#underlineGradient)" strokeWidth="2.5" fill="none" strokeLinecap="round" strokeLinejoin="round"/>
@@ -442,120 +442,7 @@ export const Hero: React.FC<HeroProps> = ({ setAppState }) => {
         </div>
       </div>
 
-      {/* 2. THE SHIFT - Compact Side-by-Side Comparison */}
-      <div className="bg-[#0a1628] py-16 md:py-20 px-6 relative overflow-hidden">
-        {/* Subtle diagonal split background */}
-        <div className="absolute inset-0 opacity-[0.03]" style={{
-          background: 'linear-gradient(135deg, rgba(239,68,68,0.3) 0%, transparent 50%, rgba(59,130,246,0.3) 100%)'
-        }} />
-        
-        <div className="max-w-6xl mx-auto relative">
-          {/* Header */}
-          <AnimatedSection className="text-center mb-10">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-3">
-              Het verschil is <span className="text-blue-400">enorm</span>
-            </h2>
-            <p className="text-blue-200/50 text-lg">Traditioneel bouwen vs. bouwen met Homie</p>
-          </AnimatedSection>
-          
-          {/* Side-by-Side Comparison Grid */}
-          <div className="grid md:grid-cols-2 gap-6 md:gap-8 mb-10">
-            
-            {/* OLD WAY - Left Side */}
-            <AnimatedSection delay={100}>
-              <div className="bg-red-500/5 border border-red-500/20 rounded-2xl p-6 md:p-8 h-full">
-                <div className="flex items-center gap-2 mb-6">
-                  <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse" />
-                  <span className="text-red-400 text-xs font-mono uppercase tracking-wider">Traditioneel</span>
-                </div>
-                
-                <div className="space-y-4">
-                  <div className="flex items-center justify-between py-3 border-b border-red-500/10">
-                    <span className="text-gray-400">Bouwtijd</span>
-                    <span className="text-2xl md:text-3xl font-bold text-red-400">18 mnd</span>
-                  </div>
-                  <div className="flex items-center justify-between py-3 border-b border-red-500/10">
-                    <span className="text-gray-400">Over budget</span>
-                    <span className="text-2xl md:text-3xl font-bold text-red-400">67%</span>
-                  </div>
-                  <div className="flex items-center justify-between py-3 border-b border-red-500/10">
-                    <span className="text-gray-400">Partijen</span>
-                    <span className="text-2xl md:text-3xl font-bold text-red-400">12+</span>
-                  </div>
-                  <div className="flex items-center justify-between py-3">
-                    <span className="text-gray-400">Garantie</span>
-                    <span className="text-2xl md:text-3xl font-bold text-red-400">Geen</span>
-                  </div>
-                </div>
-              </div>
-            </AnimatedSection>
-            
-            {/* NEW WAY - Right Side */}
-            <AnimatedSection delay={200}>
-              <div className="bg-blue-500/10 border border-blue-500/30 rounded-2xl p-6 md:p-8 h-full relative overflow-hidden">
-                {/* Glow effect */}
-                <div className="absolute -top-20 -right-20 w-40 h-40 bg-blue-500/20 rounded-full blur-3xl" />
-                
-                <div className="flex items-center gap-2 mb-6 relative">
-                  <div className="w-2 h-2 bg-blue-400 rounded-full" />
-                  <span className="text-blue-400 text-xs font-mono uppercase tracking-wider">Met Homie</span>
-                </div>
-                
-                <div className="space-y-4 relative">
-                  <div className="flex items-center justify-between py-3 border-b border-blue-500/10">
-                    <span className="text-blue-200/60">Bouwtijd</span>
-                    <span className="text-2xl md:text-3xl font-bold text-blue-400">8 mnd</span>
-                  </div>
-                  <div className="flex items-center justify-between py-3 border-b border-blue-500/10">
-                    <span className="text-blue-200/60">Vaste prijs</span>
-                    <span className="text-2xl md:text-3xl font-bold text-blue-400">100%</span>
-                  </div>
-                  <div className="flex items-center justify-between py-3 border-b border-blue-500/10">
-                    <span className="text-blue-200/60">Aanspreekpunt</span>
-                    <span className="text-2xl md:text-3xl font-bold text-blue-400">1</span>
-                  </div>
-                  <div className="flex items-center justify-between py-3">
-                    <span className="text-blue-200/60">Garantie</span>
-                    <span className="text-2xl md:text-3xl font-bold text-blue-400">10 jaar</span>
-                  </div>
-                </div>
-              </div>
-            </AnimatedSection>
-          </div>
-          
-          {/* Value Props Row */}
-          <AnimatedSection delay={300}>
-            <div className="grid grid-cols-3 gap-4 mb-10">
-              <div className="text-center p-4">
-                <Sparkles size={24} className="text-blue-400 mx-auto mb-2" />
-                <p className="text-white font-medium text-sm">5 min AI ontwerp</p>
-              </div>
-              <div className="text-center p-4">
-                <Shield size={24} className="text-blue-400 mx-auto mb-2" />
-                <p className="text-white font-medium text-sm">Vaste prijsgarantie</p>
-              </div>
-              <div className="text-center p-4">
-                <Home size={24} className="text-blue-400 mx-auto mb-2" />
-                <p className="text-white font-medium text-sm">Eén aanspreekpunt</p>
-              </div>
-            </div>
-          </AnimatedSection>
-          
-          {/* CTA */}
-          <AnimatedSection delay={400} className="text-center">
-            <button 
-              onClick={() => setAppState(AppState.WIZARD_MOODBOARD)}
-              className="group bg-blue-400 text-[#0a1628] px-8 py-4 text-lg font-semibold hover:bg-blue-300 transition-all duration-300 rounded-full inline-flex items-center gap-3"
-            >
-              Start je droomhuis
-              <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
-            </button>
-            <p className="text-sm text-blue-300/40 mt-3">Gratis • 5 minuten • Geen account nodig</p>
-          </AnimatedSection>
-          </div>
-        </div>
-
-      {/* 4. DASHBOARD WORKFLOW PREVIEW */}
+      {/* 3. DASHBOARD WORKFLOW PREVIEW */}
       <div className="bg-[#0d1f3c] py-24 md:py-32 px-6 relative overflow-hidden">
           {/* Tinted background image */}
           <div className="absolute inset-0">
@@ -573,7 +460,7 @@ export const Hero: React.FC<HeroProps> = ({ setAppState }) => {
           
           <div className="max-w-5xl mx-auto relative z-10">
              <AnimatedSection className="text-center mb-12 md:mb-16">
-               <h2 className="text-3xl md:text-5xl font-bold leading-tight mb-4 text-white">
+               <h2 className="text-3xl md:text-5xl font-semibold leading-tight mb-4 text-white tracking-[-0.02em]">
                    Jouw Construction OS
                </h2>
                <div className="text-lg md:text-xl text-blue-200/60 font-light leading-relaxed max-w-2xl mx-auto">
@@ -677,7 +564,7 @@ export const Hero: React.FC<HeroProps> = ({ setAppState }) => {
           </div>
       </div>
 
-      {/* 5. HOUSING PASSPORT SECTION - Provenance & Authenticity */}
+      {/* 4. HOUSING PASSPORT SECTION - Provenance & Authenticity */}
       <div id="passport-section" className="bg-[#0a1628] py-24 md:py-32 px-6 border-b border-blue-500/10 relative overflow-hidden">
           {/* Tinted background image */}
           <div className="absolute inset-0">
@@ -699,7 +586,7 @@ export const Hero: React.FC<HeroProps> = ({ setAppState }) => {
                   <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-500/10 border border-blue-500/20 text-xs font-bold uppercase tracking-[0.2em] mb-6 text-blue-300">
                       <Shield size={12} /> Certificaat van Authenticiteit
                   </div>
-                  <h2 className="text-4xl md:text-6xl font-bold leading-tight mb-6 text-white">
+                  <h2 className="text-4xl md:text-6xl font-semibold leading-tight mb-6 text-white tracking-[-0.02em]">
                       Het Housing Passport
              </h2>
                   <div className="text-lg md:text-xl text-blue-200/60 max-w-2xl mx-auto font-light">
@@ -727,7 +614,7 @@ export const Hero: React.FC<HeroProps> = ({ setAppState }) => {
                                   </div>
                  <div>
                                       <div className="text-[10px] uppercase tracking-[0.3em] text-gray-400 mb-1">Ooit Gedacht × Bureau Broersma</div>
-                                      <div className="text-xl md:text-2xl font-serif tracking-tight">Housing Passport</div>
+                                      <div className="text-xl md:text-2xl font-medium tracking-[-0.01em]">Housing Passport</div>
                  </div>
                               </div>
                               <div className="text-left md:text-right">
@@ -1016,12 +903,12 @@ export const Hero: React.FC<HeroProps> = ({ setAppState }) => {
           </div>
       </div>
 
-      {/* 6. HOW IT WORKS - Timeline */}
+      {/* 5. HOW IT WORKS - Timeline */}
       <div id="how-it-works" className="bg-[#0d1f3c] py-24 md:py-32 px-6">
         <div className="max-w-[1200px] mx-auto">
           <AnimatedSection className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 md:mb-24 gap-4">
              <div>
-                <h2 className="text-3xl md:text-4xl font-bold mb-2 md:mb-4 text-white">De Factory Line.</h2>
+                <h2 className="text-3xl md:text-4xl font-semibold mb-2 md:mb-4 text-white tracking-[-0.02em]">De Factory Line.</h2>
                 <p className="text-blue-200/50 font-light">Van droom naar sleuteloverdracht in 4 stappen.</p>
              </div>
              <button 
@@ -1043,7 +930,7 @@ export const Hero: React.FC<HeroProps> = ({ setAppState }) => {
                      <span className="font-mono text-xs text-blue-400">01</span>
                      <div className="h-[1px] bg-blue-500/30 w-12"></div>
                  </div>
-                   <h3 className="text-xl md:text-2xl font-semibold mb-2 text-white group-hover:text-blue-400 transition-colors">Vibe & Stijl</h3>
+                   <h3 className="text-xl md:text-2xl font-medium mb-2 text-white group-hover:text-blue-400 transition-colors tracking-[-0.01em]">Vibe & Stijl</h3>
                  <p className="text-sm text-blue-200/50 font-light leading-relaxed">
                      Bepaal je esthetiek. Onze AI vertaalt jouw smaak naar een architectonisch ontwerp.
                  </p>
@@ -1060,7 +947,7 @@ export const Hero: React.FC<HeroProps> = ({ setAppState }) => {
                      <span className="font-mono text-xs text-blue-400">02</span>
                      <div className="h-[1px] bg-blue-500/30 w-12"></div>
                  </div>
-                   <h3 className="text-xl md:text-2xl font-semibold mb-2 text-white group-hover:text-blue-400 transition-colors">Kavel Check</h3>
+                   <h3 className="text-xl md:text-2xl font-medium mb-2 text-white group-hover:text-blue-400 transition-colors tracking-[-0.01em]">Kavel Check</h3>
                  <p className="text-sm text-blue-200/50 font-light leading-relaxed">
                      Wij scannen het bestemmingsplan. Mag je hier bouwen? Wat zijn de regels? Direct antwoord.
                  </p>
@@ -1083,7 +970,7 @@ export const Hero: React.FC<HeroProps> = ({ setAppState }) => {
                      <span className="font-mono text-xs text-blue-400">03</span>
                      <div className="h-[1px] bg-blue-500/30 w-12"></div>
                  </div>
-                   <h3 className="text-xl md:text-2xl font-semibold mb-2 text-white group-hover:text-blue-400 transition-colors">Het Paspoort</h3>
+                   <h3 className="text-xl md:text-2xl font-medium mb-2 text-white group-hover:text-blue-400 transition-colors tracking-[-0.01em]">Het Paspoort</h3>
                  <p className="text-sm text-blue-200/50 font-light leading-relaxed">
                      Je ontvangt een 'Feasibility Passport'. Kosten, materialen en duurzaamheid in één dossier.
                  </p>
@@ -1103,7 +990,7 @@ export const Hero: React.FC<HeroProps> = ({ setAppState }) => {
                      <span className="font-mono text-xs text-blue-400">04</span>
                      <div className="h-[1px] bg-blue-500/30 w-12"></div>
                  </div>
-                   <h3 className="text-xl md:text-2xl font-semibold mb-2 text-white group-hover:text-blue-400 transition-colors">De Bouw OS</h3>
+                   <h3 className="text-xl md:text-2xl font-medium mb-2 text-white group-hover:text-blue-400 transition-colors tracking-[-0.01em]">De Bouw OS</h3>
                  <p className="text-sm text-blue-200/50 font-light leading-relaxed">
                      Geen gedoe. Volg de bouw via je dashboard. Betalingen gaan pas weg als het werk af is.
                  </p>
@@ -1129,9 +1016,9 @@ export const Hero: React.FC<HeroProps> = ({ setAppState }) => {
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 border border-white/20 rounded-full text-xs font-bold uppercase tracking-[0.2em] mb-6">
               <Users size={14} /> Voor Iedereen in het Proces
         </div>
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif leading-tight mb-6">
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-semibold leading-[1.05] mb-6 tracking-[-0.02em]">
               Ongekende samenwerking.<br/>
-              <span className="text-[#5b8ac7]">Volledige transparantie.</span>
+              <span className="bg-gradient-to-r from-[#60a5fa] to-[#34d399] bg-clip-text text-transparent">Volledige transparantie.</span>
             </h2>
             <p className="text-xl text-white/60 max-w-2xl mx-auto font-light">
               Eén platform waar bouwheer, architect, constructeur, gemeente en aannemer samen werken aan hetzelfde dossier. Realtime. Auditeerbaar. Foutloos.
@@ -1148,7 +1035,7 @@ export const Hero: React.FC<HeroProps> = ({ setAppState }) => {
                     <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
                   </svg>
       </div>
-                <h3 className="text-xl font-serif mb-3">Bouwheer</h3>
+                <h3 className="text-xl font-medium mb-3 tracking-[-0.01em]">Bouwheer</h3>
                 <p className="text-white/50 text-sm leading-relaxed mb-4">
                   Volledige controle over je project. Zie precies waar elke euro naartoe gaat en volg de voortgang realtime.
                 </p>
@@ -1177,7 +1064,7 @@ export const Hero: React.FC<HeroProps> = ({ setAppState }) => {
                     <path strokeLinecap="round" strokeLinejoin="round" d="M9.53 16.122a3 3 0 00-5.78 1.128 2.25 2.25 0 01-2.4 2.245 4.5 4.5 0 008.4-2.245c0-.399-.078-.78-.22-1.128zm0 0a15.998 15.998 0 003.388-1.62m-5.043-.025a15.994 15.994 0 011.622-3.395m3.42 3.42a15.995 15.995 0 004.764-4.648l3.876-5.814a1.151 1.151 0 00-1.597-1.597L14.146 6.32a15.996 15.996 0 00-4.649 4.763m3.42 3.42a6.776 6.776 0 00-3.42-3.42" />
                   </svg>
                 </div>
-                <h3 className="text-xl font-serif mb-3">Architect</h3>
+                <h3 className="text-xl font-medium mb-3 tracking-[-0.01em]">Architect</h3>
                 <p className="text-white/50 text-sm leading-relaxed mb-4">
                   Focus op ontwerp, niet op papierwerk. AI-assistentie voor snelle iteraties met directe validatie.
                 </p>
@@ -1206,7 +1093,7 @@ export const Hero: React.FC<HeroProps> = ({ setAppState }) => {
                     <path strokeLinecap="round" strokeLinejoin="round" d="M11.42 15.17L17.25 21A2.652 2.652 0 0021 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 11-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 004.486-6.336l-3.276 3.277a3.004 3.004 0 01-2.25-2.25l3.276-3.276a4.5 4.5 0 00-6.336 4.486c.091 1.076-.071 2.264-.904 2.95l-.102.085m-1.745 1.437L5.909 7.5H4.5L2.25 3.75l1.5-1.5L7.5 4.5v1.409l4.26 4.26m-1.745 1.437l1.745-1.437m6.615 8.206L15.75 15.75M4.867 19.125h.008v.008h-.008v-.008z" />
                   </svg>
                 </div>
-                <h3 className="text-xl font-serif mb-3">Constructeur</h3>
+                <h3 className="text-xl font-medium mb-3 tracking-[-0.01em]">Constructeur</h3>
                 <p className="text-white/50 text-sm leading-relaxed mb-4">
                   Efficiënte validatie met vooraf gestructureerde data. Minder heen-en-weer, snellere goedkeuring.
                 </p>
@@ -1235,7 +1122,7 @@ export const Hero: React.FC<HeroProps> = ({ setAppState }) => {
                     <path strokeLinecap="round" strokeLinejoin="round" d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0012 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75z" />
                   </svg>
                 </div>
-                <h3 className="text-xl font-serif mb-3">Gemeente</h3>
+                <h3 className="text-xl font-medium mb-3 tracking-[-0.01em]">Gemeente</h3>
                 <p className="text-white/50 text-sm leading-relaxed mb-4">
                   Complete, gevalideerde dossiers die direct voldoen aan bestemmingsplan eisen. Snellere afhandeling.
                 </p>
@@ -1266,7 +1153,7 @@ export const Hero: React.FC<HeroProps> = ({ setAppState }) => {
                     <Lock size={16} />
                     Volledige Audit Trail
                   </div>
-                  <h3 className="text-2xl md:text-3xl font-serif mb-4">Elke beslissing. Elke wijziging. Gedocumenteerd.</h3>
+                  <h3 className="text-2xl md:text-3xl font-medium mb-4 tracking-[-0.01em]">Elke beslissing. Elke wijziging. Gedocumenteerd.</h3>
                   <p className="text-white/60 leading-relaxed mb-6">
                     Van eerste schets tot oplevering: elk document, elke goedkeuring, elke wijziging wordt vastgelegd. Nooit meer discussie over wie wat wanneer heeft besloten.
                   </p>
@@ -1306,7 +1193,7 @@ export const Hero: React.FC<HeroProps> = ({ setAppState }) => {
         </div>
               </div>
               
-      {/* 7. FAQ SECTION */}
+      {/* 6. FAQ SECTION */}
       <div className="bg-[#0a1628] py-24 md:py-32 px-6 relative overflow-hidden">
         {/* Tinted background image */}
         <div className="absolute inset-0">
@@ -1323,7 +1210,7 @@ export const Hero: React.FC<HeroProps> = ({ setAppState }) => {
         }} />
         <div className="max-w-3xl mx-auto relative z-10">
           <AnimatedSection className="text-center mb-12 md:mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">Veelgestelde vragen</h2>
+            <h2 className="text-3xl md:text-4xl font-semibold mb-4 text-white tracking-[-0.02em]">Veelgestelde vragen</h2>
             <p className="text-blue-200/60 font-light">Alles wat je wilt weten over de Ooit Gedacht methode.</p>
           </AnimatedSection>
           
@@ -1343,7 +1230,7 @@ export const Hero: React.FC<HeroProps> = ({ setAppState }) => {
         </div>
       </div>
 
-      {/* 8. NEWSLETTER / LEAD CAPTURE */}
+      {/* 7. NEWSLETTER / LEAD CAPTURE */}
       <div className="py-24 md:py-32 px-6 relative overflow-hidden" style={darkBluePattern}>
         {/* Background image */}
         <div className="absolute inset-0">
@@ -1370,7 +1257,7 @@ export const Hero: React.FC<HeroProps> = ({ setAppState }) => {
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 border border-white/20 rounded-full text-xs font-bold uppercase tracking-widest mb-8 text-white/80">
               <Mail size={14} /> Blijf op de hoogte
             </div>
-            <h2 className="text-3xl md:text-4xl font-serif text-white mb-4">
+            <h2 className="text-3xl md:text-4xl font-semibold text-white mb-4 tracking-[-0.02em]">
               Wekelijks kavelnieuws & tips
             </h2>
             <p className="text-lg text-white/60 font-light mb-8 leading-relaxed">
@@ -1409,7 +1296,7 @@ export const Hero: React.FC<HeroProps> = ({ setAppState }) => {
         </div>
       </div>
 
-      {/* 9. FOOTER */}
+      {/* 8. FOOTER */}
       <footer className="text-white py-16 md:py-20 px-6" style={{background: 'linear-gradient(to bottom, #0a1628, #06101f)'}}>
           <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-start gap-10 md:gap-12">
               <div className="max-w-xs">
