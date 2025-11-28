@@ -204,7 +204,7 @@ export const HouseholdStep: React.FC<HouseholdStepProps> = ({ initialPrefs, onNe
           <motion.button 
             whileTap={{ scale: 0.99 }}
             onClick={handleNext}
-            className="w-full bg-blue-400 text-[#0a1628] font-semibold py-4 sm:py-3 rounded-xl sm:rounded-lg flex items-center justify-center gap-2 transition-all hover:bg-blue-300 text-base sm:text-sm shadow-lg shadow-blue-500/20"
+            className="w-full bg-gradient-to-r from-[#1e3a5f] to-[#0d1f3c] text-white font-semibold py-4 sm:py-3 rounded-full flex items-center justify-center gap-2 transition-all hover:from-[#2a4a73] hover:to-[#1e3a5f] text-base sm:text-sm shadow-lg shadow-[#0a1628]/40 border border-[#2a4a73]/30"
           >
             Kies je stijl <ArrowRight size={18} className="sm:w-4 sm:h-4" />
           </motion.button>

@@ -324,9 +324,9 @@ export const LocationStep: React.FC<LocationStepProps> = ({ initialPrefs, onNext
             whileTap={{ scale: canProceed ? 0.99 : 1 }}
             onClick={handleNext}
             disabled={!canProceed}
-            className={`w-full py-4 lg:py-5 rounded-xl lg:rounded-2xl flex items-center justify-center gap-3 transition-all text-base lg:text-lg font-semibold shadow-xl ${
+            className={`w-full py-4 lg:py-5 rounded-full flex items-center justify-center gap-3 transition-all text-base lg:text-lg font-semibold shadow-lg ${
               canProceed
-                ? 'bg-blue-400 text-[#0a1628] hover:bg-blue-300 shadow-blue-500/20' 
+                ? 'bg-gradient-to-r from-[#1e3a5f] to-[#0d1f3c] text-white hover:from-[#2a4a73] hover:to-[#1e3a5f] shadow-[#0a1628]/40 border border-[#2a4a73]/30' 
                 : 'bg-blue-500/10 text-blue-400/30 cursor-not-allowed border border-blue-500/10 shadow-none'
             }`}
           >

@@ -338,7 +338,7 @@ export const Hero: React.FC<HeroProps> = ({ setAppState }) => {
                   setAppState(AppState.WIZARD_HOUSEHOLD);
                   setMobileMenuOpen(false);
                 }}
-                className="w-full flex items-center justify-center gap-3 bg-gradient-to-r from-blue-500 to-blue-600 text-white px-8 py-5 text-lg font-semibold rounded-2xl shadow-2xl shadow-blue-500/25 hover:shadow-blue-500/40 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300"
+                className="w-full flex items-center justify-center gap-3 bg-gradient-to-r from-[#1e3a5f] to-[#0d1f3c] text-white px-8 py-5 text-lg font-semibold rounded-full shadow-lg shadow-[#0a1628]/40 hover:from-[#2a4a73] hover:to-[#1e3a5f] hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 border border-[#2a4a73]/30"
               >
                 <Sparkles size={22} />
                 Start je droomhuis
@@ -473,7 +473,7 @@ export const Hero: React.FC<HeroProps> = ({ setAppState }) => {
           <AnimatedSection delay={200} className="text-center">
             <button 
               onClick={() => setAppState(AppState.WIZARD_HOUSEHOLD)}
-              className="inline-flex items-center gap-3 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-400 hover:to-blue-500 text-white px-8 py-4 text-base font-semibold rounded-full transition-all duration-200 shadow-lg shadow-blue-500/25"
+              className="inline-flex items-center gap-3 bg-gradient-to-r from-[#1e3a5f] to-[#0d1f3c] text-white px-8 py-4 text-base font-semibold rounded-full transition-all duration-200 hover:from-[#2a4a73] hover:to-[#1e3a5f] shadow-lg shadow-[#0a1628]/40 border border-[#2a4a73]/30"
             >
               Start jouw ontwerp
               <ArrowRight size={18} />
@@ -598,7 +598,7 @@ export const Hero: React.FC<HeroProps> = ({ setAppState }) => {
                  </div>
                  <button 
                    onClick={() => setAppState(AppState.WIZARD_HOUSEHOLD)}
-                   className="group bg-blue-400 text-[#0a1628] px-8 py-4 text-lg font-semibold hover:bg-blue-300 transition-all flex items-center justify-center gap-3 rounded-full shadow-lg shadow-blue-500/30"
+                   className="group bg-gradient-to-r from-[#1e3a5f] to-[#0d1f3c] text-white px-8 py-4 text-lg font-semibold hover:from-[#2a4a73] hover:to-[#1e3a5f] transition-all flex items-center justify-center gap-3 rounded-full shadow-lg shadow-[#0a1628]/40 border border-[#2a4a73]/30"
                  >
                    Start je droomhuis ontwerp
                    <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
@@ -951,7 +951,7 @@ export const Hero: React.FC<HeroProps> = ({ setAppState }) => {
                   </p>
                   <button 
                       onClick={() => setAppState(AppState.WIZARD_HOUSEHOLD)}
-                      className="group relative px-8 py-4 bg-gradient-to-r from-blue-500 to-blue-600 text-white font-semibold rounded-xl hover:from-blue-400 hover:to-blue-500 transition-all duration-300 shadow-lg shadow-blue-500/25 hover:shadow-blue-400/40 hover:scale-105"
+                      className="group relative px-8 py-4 bg-gradient-to-r from-[#1e3a5f] to-[#0d1f3c] text-white font-semibold rounded-full hover:from-[#2a4a73] hover:to-[#1e3a5f] transition-all duration-300 shadow-lg shadow-[#0a1628]/40 border border-[#2a4a73]/30 hover:scale-105"
                   >
                       <span className="flex items-center gap-3">
                           Start Gratis Configuratie

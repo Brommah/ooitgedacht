@@ -176,7 +176,7 @@ export const Results: React.FC<ResultsProps> = ({ image, locked, onUnlock, onDas
                 whileTap={{ scale: 0.98 }}
                 onClick={onUnlock}
                 disabled={!email.includes('@')}
-                className="w-full bg-gradient-to-r from-blue-500 to-blue-600 disabled:bg-white/10 disabled:text-white/30 text-white py-3 font-semibold rounded-xl flex items-center justify-center gap-2 shadow-lg shadow-blue-500/25"
+                className="w-full bg-gradient-to-r from-[#1e3a5f] to-[#0d1f3c] disabled:bg-white/10 disabled:text-white/30 text-white py-3 font-semibold rounded-full flex items-center justify-center gap-2 shadow-lg shadow-[#0a1628]/40 border border-[#2a4a73]/30 hover:from-[#2a4a73] hover:to-[#1e3a5f]"
               >
                 Bekijk Volledig Passport
                 <ArrowRight size={18} />
@@ -384,7 +384,7 @@ export const Results: React.FC<ResultsProps> = ({ image, locked, onUnlock, onDas
                 <motion.button 
                   whileTap={{ scale: 0.95 }}
                   onClick={onDashboard}
-                  className="bg-gradient-to-r from-blue-500 to-blue-600 text-white px-5 py-2.5 font-semibold rounded-xl flex items-center gap-2 shadow-lg shadow-blue-500/20"
+                  className="bg-gradient-to-r from-[#1e3a5f] to-[#0d1f3c] text-white px-5 py-2.5 font-semibold rounded-full flex items-center gap-2 shadow-lg shadow-[#0a1628]/40 border border-[#2a4a73]/30 hover:from-[#2a4a73] hover:to-[#1e3a5f]"
                 >
                   <MessageSquare size={16} />
                   Dashboard
@@ -601,7 +601,7 @@ export const Results: React.FC<ResultsProps> = ({ image, locked, onUnlock, onDas
                         whileHover={{ scale: 1.02 }}
                         whileTap={{ scale: 0.98 }}
                         onClick={onDashboard}
-                        className="flex-1 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-400 hover:to-blue-500 text-white py-3 font-semibold rounded-xl flex items-center justify-center gap-2 shadow-lg shadow-blue-500/20 transition-colors"
+                        className="flex-1 bg-gradient-to-r from-[#1e3a5f] to-[#0d1f3c] hover:from-[#2a4a73] hover:to-[#1e3a5f] text-white py-3 font-semibold rounded-full flex items-center justify-center gap-2 shadow-lg shadow-[#0a1628]/40 border border-[#2a4a73]/30 transition-colors"
                       >
                         <MessageSquare size={16} />
                         Open Dashboard
@@ -636,7 +636,7 @@ export const Results: React.FC<ResultsProps> = ({ image, locked, onUnlock, onDas
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 onClick={onDashboard}
-                className="bg-gradient-to-r from-blue-500 to-blue-600 text-white px-6 py-2 font-semibold rounded-lg flex items-center gap-2 shadow-lg shadow-blue-500/20"
+                className="bg-gradient-to-r from-[#1e3a5f] to-[#0d1f3c] text-white px-6 py-2 font-semibold rounded-full flex items-center gap-2 shadow-lg shadow-[#0a1628]/40 border border-[#2a4a73]/30 hover:from-[#2a4a73] hover:to-[#1e3a5f]"
               >
                 <MessageSquare size={16} />
                 Dashboard

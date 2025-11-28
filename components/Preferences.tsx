@@ -422,7 +422,7 @@ export const Preferences: React.FC<PreferencesProps> = ({ initialPrefs, onNext, 
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
             onClick={handleNext}
-            className="w-full lg:w-auto bg-blue-400 text-[#0a1628] font-semibold py-4 lg:py-5 px-8 lg:px-16 rounded-xl lg:rounded-2xl flex items-center justify-center gap-3 transition-all hover:bg-blue-300 text-base lg:text-lg shadow-xl shadow-blue-500/20"
+            className="w-full lg:w-auto bg-gradient-to-r from-[#1e3a5f] to-[#0d1f3c] text-white font-semibold py-4 lg:py-5 px-8 lg:px-16 rounded-full flex items-center justify-center gap-3 transition-all hover:from-[#2a4a73] hover:to-[#1e3a5f] text-base lg:text-lg shadow-lg shadow-[#0a1628]/40 border border-[#2a4a73]/30"
           >
             <span>Locatie kiezen</span>
             <ArrowRight size={20} />

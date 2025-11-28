@@ -320,7 +320,7 @@ export const BudgetStep: React.FC<BudgetStepProps> = ({ preferences, onNext, onB
             whileHover={{ scale: 1.01 }}
             whileTap={{ scale: 0.99 }}
             onClick={handleNext}
-            className="w-full bg-gradient-to-r from-blue-400 to-emerald-400 text-[#0a1628] font-bold py-4 lg:py-5 rounded-xl lg:rounded-2xl flex items-center justify-center gap-3 transition-all hover:opacity-90 text-base lg:text-lg shadow-xl shadow-blue-500/30"
+            className="w-full bg-gradient-to-r from-[#1e3a5f] to-[#0d1f3c] text-white font-bold py-4 lg:py-5 rounded-full flex items-center justify-center gap-3 transition-all hover:from-[#2a4a73] hover:to-[#1e3a5f] text-base lg:text-lg shadow-lg shadow-[#0a1628]/40 border border-[#2a4a73]/30"
           >
             <span>🏠 Genereer Mijn Droomhuis</span>
             <ArrowRight size={20} />
