@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { UserPreferences } from '../types';
-import { ArrowRight, MessageSquare, Download, Sparkles, Check, Shield, Home, Users, Leaf, X, ChevronUp } from 'lucide-react';
+import { ArrowRight, MessageSquare, Download, Sparkles, Check, Shield, ChevronUp, Move, ZoomIn, ZoomOut, Maximize2 } from 'lucide-react';
 import { CURRENCY_SYMBOL, calculateBuildCost, estimateLandCost, ENERGY_OPTIONS, MATERIAL_OPTIONS } from '../constants';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useMotionValue, useTransform, PanInfo } from 'framer-motion';
 
 interface ResultsProps {
   image: string;
@@ -15,7 +15,29 @@ interface ResultsProps {
 export const Results: React.FC<ResultsProps> = ({ image, locked, onUnlock, onDashboard, preferences }) => {
   const [email, setEmail] = useState('');
   const [showConfetti, setShowConfetti] = useState(false);
-  const [panelExpanded, setPanelExpanded] = useState(true);
+  const [panelExpanded, setPanelExpanded] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  const [imageScale, setImageScale] = useState(1);
+  const [showHint, setShowHint] = useState(true);
+  const constraintsRef = useRef<HTMLDivElement>(null);
+
+  // Motion values for image panning
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+
+  // Check for mobile viewport
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  // Hide hint after first interaction
+  useEffect(() => {
+    const timeout = setTimeout(() => setShowHint(false), 4000);
+    return () => clearTimeout(timeout);
+  }, []);
 
   // Calculate costs
   const buildCost = calculateBuildCost(
@@ -35,7 +57,6 @@ export const Results: React.FC<ResultsProps> = ({ image, locked, onUnlock, onDas
   const saving = Math.round(totalCost * 0.13 / 1000) * 1000;
 
   // Get labels
-  const energyOpt = ENERGY_OPTIONS.find(e => e.value === preferences.config.energyLevel);
   const energyLabel = preferences.config.energyLevel === 'positive' ? 'A+++' 
     : preferences.config.energyLevel === 'neutral' ? 'A++' 
     : preferences.config.energyLevel === 'aplus' ? 'A+' 
@@ -51,6 +72,27 @@ export const Results: React.FC<ResultsProps> = ({ image, locked, onUnlock, onDas
       setTimeout(() => setShowConfetti(false), 3000);
     }
   }, [locked]);
+
+  // Handle image zoom
+  const handleZoom = (delta: number) => {
+    setImageScale(prev => Math.min(3, Math.max(1, prev + delta)));
+    if (delta < 0 && imageScale <= 1.1) {
+      x.set(0);
+      y.set(0);
+    }
+  };
+
+  // Reset view
+  const resetView = () => {
+    setImageScale(1);
+    x.set(0);
+    y.set(0);
+  };
+
+  // Handle drag end - snap back if too far
+  const handleDragEnd = (_: any, info: PanInfo) => {
+    setShowHint(false);
+  };
 
   // LOCKED STATE - Email capture with full image background
   if (locked) {
@@ -150,12 +192,13 @@ export const Results: React.FC<ResultsProps> = ({ image, locked, onUnlock, onDas
     );
   }
 
-  // UNLOCKED STATE - Full image with slide-up panel
+  // UNLOCKED STATE - Mobile optimized with draggable image
   return (
     <motion.div 
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       className="h-screen w-screen relative overflow-hidden bg-black"
+      ref={constraintsRef}
     >
       {/* Confetti */}
       <AnimatePresence>
@@ -178,21 +221,63 @@ export const Results: React.FC<ResultsProps> = ({ image, locked, onUnlock, onDas
         )}
       </AnimatePresence>
 
-      {/* FULL SCREEN IMAGE */}
+      {/* DRAGGABLE IMAGE - Mobile gets full interaction */}
+      <motion.div
+        className="absolute inset-0 cursor-grab active:cursor-grabbing"
+        drag={isMobile || imageScale > 1}
+        dragConstraints={{
+          left: imageScale > 1 ? -((imageScale - 1) * window.innerWidth / 2) : 0,
+          right: imageScale > 1 ? ((imageScale - 1) * window.innerWidth / 2) : 0,
+          top: imageScale > 1 ? -((imageScale - 1) * window.innerHeight / 2) : 0,
+          bottom: imageScale > 1 ? ((imageScale - 1) * window.innerHeight / 2) : 0,
+        }}
+        dragElastic={0.1}
+        dragMomentum={true}
+        onDragEnd={handleDragEnd}
+        style={{ x, y }}
+        whileTap={{ cursor: 'grabbing' }}
+      >
       <motion.img 
         src={image} 
         alt="Your Dream Home" 
-        className="absolute inset-0 w-full h-full object-cover"
+          className="w-full h-full object-cover select-none pointer-events-none"
+          style={{ scale: imageScale }}
         initial={{ scale: 1.05 }}
-        animate={{ scale: 1 }}
-        transition={{ duration: 1.5, ease: 'easeOut' }}
+          animate={{ scale: imageScale }}
+          transition={{ duration: 0.3, ease: 'easeOut' }}
+          draggable={false}
       />
+      </motion.div>
       
       {/* Subtle vignette */}
       <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/30 pointer-events-none" />
 
-      {/* Top badges */}
-      <div className="absolute top-4 left-4 flex gap-2 z-10">
+      {/* Mobile drag hint */}
+      <AnimatePresence>
+        {isMobile && showHint && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-30 pointer-events-none"
+          >
+            <div className="bg-black/70 backdrop-blur-xl px-6 py-4 rounded-2xl border border-white/20 text-center">
+              <motion.div
+                animate={{ x: [0, 20, 0, -20, 0] }}
+                transition={{ duration: 2, repeat: Infinity }}
+              >
+                <Move size={32} className="text-white/80 mx-auto mb-2" />
+              </motion.div>
+              <p className="text-white/80 text-sm font-medium">Sleep om te verkennen</p>
+              <p className="text-white/50 text-xs mt-1">Pinch to zoom</p>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Top badges - repositioned for mobile */}
+      <div className="absolute top-4 left-4 right-4 flex justify-between items-start z-10">
+        <div className="flex gap-2">
         <div className="flex items-center gap-1.5 px-3 py-1.5 bg-white/90 backdrop-blur-sm text-[#0a1628] text-[10px] font-bold uppercase tracking-wider rounded-full shadow-lg">
           <Check size={12} className="text-emerald-600" />
           Gevalideerd
@@ -203,8 +288,35 @@ export const Results: React.FC<ResultsProps> = ({ image, locked, onUnlock, onDas
         </div>
       </div>
 
-      {/* Title overlay - top left */}
-      <div className="absolute top-4 right-4 z-10 text-right">
+        {/* Zoom controls - mobile */}
+        {isMobile && (
+          <div className="flex gap-1">
+            <button 
+              onClick={() => handleZoom(-0.5)}
+              className="w-10 h-10 bg-black/50 backdrop-blur-xl rounded-full flex items-center justify-center border border-white/20 text-white/70 active:scale-95 transition-transform"
+            >
+              <ZoomOut size={18} />
+            </button>
+            <button 
+              onClick={() => handleZoom(0.5)}
+              className="w-10 h-10 bg-black/50 backdrop-blur-xl rounded-full flex items-center justify-center border border-white/20 text-white/70 active:scale-95 transition-transform"
+            >
+              <ZoomIn size={18} />
+            </button>
+            {imageScale > 1 && (
+              <button 
+                onClick={resetView}
+                className="w-10 h-10 bg-white/20 backdrop-blur-xl rounded-full flex items-center justify-center border border-white/30 text-white active:scale-95 transition-transform"
+              >
+                <Maximize2 size={18} />
+              </button>
+            )}
+          </div>
+        )}
+      </div>
+
+      {/* Title overlay - different position for mobile */}
+      <div className={`absolute z-10 ${isMobile ? 'bottom-[200px] left-4 text-left' : 'top-4 right-4 text-right'}`}>
         <h1 className="text-white text-xl md:text-2xl font-bold drop-shadow-lg">
           The {locationName} Residence
         </h1>
@@ -213,12 +325,16 @@ export const Results: React.FC<ResultsProps> = ({ image, locked, onUnlock, onDas
         </p>
       </div>
 
-      {/* Floating stats - left side */}
+      {/* Floating stats - repositioned for mobile */}
       <motion.div 
         initial={{ opacity: 0, x: -20 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ delay: 0.5 }}
-        className="absolute left-4 top-1/2 -translate-y-1/2 flex flex-col gap-2 z-10"
+        className={`absolute z-10 ${
+          isMobile 
+            ? 'left-4 bottom-[280px] flex flex-col gap-2' 
+            : 'left-4 top-1/2 -translate-y-1/2 flex flex-col gap-2'
+        }`}
       >
         <div className="bg-black/50 backdrop-blur-xl rounded-xl px-4 py-3 border border-white/20 text-center min-w-[80px]">
           <div className="text-2xl font-mono font-bold text-white">{preferences.config.sqm}</div>
@@ -234,7 +350,130 @@ export const Results: React.FC<ResultsProps> = ({ image, locked, onUnlock, onDas
         </div>
       </motion.div>
 
-      {/* Bottom panel - expandable */}
+      {/* MOBILE: Swipeable bottom sheet */}
+      {isMobile ? (
+        <motion.div 
+          className="absolute bottom-0 left-0 right-0 z-20"
+          initial={{ y: 200 }}
+          animate={{ y: panelExpanded ? 0 : 130 }}
+          transition={{ type: 'spring', damping: 30, stiffness: 300 }}
+          drag="y"
+          dragConstraints={{ top: 0, bottom: 130 }}
+          dragElastic={0.2}
+          onDragEnd={(_, info) => {
+            if (info.velocity.y < -100 || info.offset.y < -50) {
+              setPanelExpanded(true);
+            } else if (info.velocity.y > 100 || info.offset.y > 50) {
+              setPanelExpanded(false);
+            }
+          }}
+        >
+          {/* Drag handle */}
+          <div className="flex justify-center pt-3 pb-2 cursor-grab active:cursor-grabbing">
+            <div className="w-12 h-1.5 bg-white/30 rounded-full" />
+          </div>
+
+          <div className="bg-[#0a1628]/95 backdrop-blur-xl rounded-t-3xl border-t border-white/10 min-h-[280px]">
+            {/* Collapsed view - always visible */}
+            <div className="px-5 pb-4">
+              <div className="flex items-center justify-between mb-4">
+                <div>
+                  <span className="text-white font-mono text-2xl font-bold">{CURRENCY_SYMBOL} {totalCost.toLocaleString('nl-NL')}</span>
+                  <span className="text-emerald-400 text-sm ml-2">-{CURRENCY_SYMBOL}{saving.toLocaleString('nl-NL')}</span>
+                </div>
+                <motion.button 
+                  whileTap={{ scale: 0.95 }}
+                  onClick={onDashboard}
+                  className="bg-emerald-500 text-white px-5 py-2.5 font-semibold rounded-xl flex items-center gap-2 shadow-lg shadow-emerald-500/20"
+                >
+                  <MessageSquare size={16} />
+                  Dashboard
+                </motion.button>
+              </div>
+
+              {/* Expanded content */}
+              <AnimatePresence>
+                {panelExpanded && (
+                  <motion.div
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: 'auto' }}
+                    exit={{ opacity: 0, height: 0 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    {/* Cost breakdown */}
+                    <div className="bg-white/5 rounded-xl p-4 mb-4 border border-white/10">
+                      <div className="space-y-2 text-sm">
+                        <div className="flex justify-between text-white/60">
+                          <span>Bouwkosten</span>
+                          <span className="font-mono text-white">{CURRENCY_SYMBOL} {buildCost.toLocaleString('nl-NL')}</span>
+                        </div>
+                        {landCost > 0 && (
+                          <div className="flex justify-between text-white/60">
+                            <span>Kavel (geschat)</span>
+                            <span className="font-mono text-white">{CURRENCY_SYMBOL} {landCost.toLocaleString('nl-NL')}</span>
+                          </div>
+                        )}
+                        {preferences.config.extras.length > 0 && (
+                          <div className="flex justify-between text-emerald-400">
+                            <span>Inclusief {preferences.config.extras.length} extra's</span>
+                            <Check size={16} />
+                          </div>
+                        )}
+                      </div>
+                    </div>
+
+                    {/* Mini stats row */}
+                    <div className="grid grid-cols-3 gap-2 mb-4">
+                      <div className="bg-white/5 rounded-xl p-3 text-center border border-white/10">
+                        <div className="text-lg font-mono font-bold text-emerald-400">{energyLabel}</div>
+                        <div className="text-[10px] text-white/50 uppercase">Energielabel</div>
+                      </div>
+                      <div className="bg-white/5 rounded-xl p-3 text-center border border-white/10">
+                        <div className="text-lg font-mono font-bold text-white">0.48</div>
+                        <div className="text-[10px] text-white/50 uppercase">MPG Score</div>
+                      </div>
+                      <div className="bg-white/5 rounded-xl p-3 text-center border border-white/10">
+                        <div className="text-lg font-mono font-bold text-white">
+                          {preferences.config.energyLevel === 'neutral' || preferences.config.energyLevel === 'positive' ? '€0' : '~€50'}
+                        </div>
+                        <div className="text-[10px] text-white/50 uppercase">/maand</div>
+                      </div>
+                    </div>
+
+                    {/* Features */}
+                    {(preferences.household.workFromHome || preferences.household.pets || preferences.config.extras.length > 0) && (
+                      <div className="flex flex-wrap gap-2 mb-4">
+                        {preferences.household.workFromHome && (
+                          <span className="px-3 py-1.5 bg-blue-500/10 rounded-lg text-xs text-blue-400 border border-blue-500/20">
+                            💼 Thuiskantoor
+                          </span>
+                        )}
+                        {preferences.household.pets && (
+                          <span className="px-3 py-1.5 bg-amber-500/10 rounded-lg text-xs text-amber-400 border border-amber-500/20">
+                            🐕 Huisdieren
+                          </span>
+                        )}
+                        {preferences.config.extras.slice(0, 3).map((extra, i) => (
+                          <span key={i} className="px-3 py-1.5 bg-white/5 rounded-lg text-xs text-white/60 border border-white/10">
+                            {extra}
+                          </span>
+                        ))}
+                      </div>
+                    )}
+
+                    {/* Validation badge */}
+                    <div className="flex items-center justify-center gap-2 text-white/30 text-xs py-2">
+                      <Shield size={14} />
+                      <span>Gevalideerd door Bureau Broersma</span>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+          </div>
+        </motion.div>
+      ) : (
+        /* DESKTOP: Original expandable panel */
       <motion.div 
         className="absolute bottom-0 left-0 right-0 z-20"
         initial={{ y: 100 }}
@@ -406,6 +645,7 @@ export const Results: React.FC<ResultsProps> = ({ image, locked, onUnlock, onDas
           </div>
         )}
       </motion.div>
+      )}
     </motion.div>
   );
 };
