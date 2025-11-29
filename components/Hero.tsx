@@ -368,10 +368,10 @@ export const Hero: React.FC<HeroProps> = ({ setAppState }) => {
               <span className="block font-light">
                 dat je een huis
               </span>
-              {/* Line 3: Kon Toveren (blue gradient) */}
+              {/* Line 3: Kon Toveren? (blue gradient) */}
               <span className="block">
                 <span className="relative inline-block whitespace-nowrap">
-                  <span className="font-semibold bg-gradient-to-r from-[#60a5fa] via-[#3b82f6] to-[#2563eb] bg-clip-text text-transparent">Kon Toveren</span>
+                  <span className="font-semibold bg-gradient-to-r from-[#60a5fa] via-[#3b82f6] to-[#2563eb] bg-clip-text text-transparent">Kon Toveren?</span>
                   <span className="relative">
                     {/* Elegant sparkles - all blue */}
                     <span className="absolute -top-4 -right-2 md:-top-6 md:-right-3 text-[#60a5fa] text-2xl md:text-3xl animate-pulse">✦</span>
@@ -414,21 +414,6 @@ export const Hero: React.FC<HeroProps> = ({ setAppState }) => {
                 Hoe werkt het?
             </button>
             </div>
-            
-            <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-white/50">
-              <span className="flex items-center gap-1.5">
-                <CheckCircle2 size={14} className="text-[#5b8ac7]" />
-                Gratis starten
-              </span>
-              <span className="flex items-center gap-1.5">
-                <CheckCircle2 size={14} className="text-[#5b8ac7]" />
-                Binnen 5 minuten je eerste ontwerp
-              </span>
-              <span className="flex items-center gap-1.5">
-                <CheckCircle2 size={14} className="text-[#5b8ac7]" />
-                Gevalideerd door experts
-              </span>
-            </div>
           </div>
         </div>
 
@@ -451,7 +436,7 @@ export const Hero: React.FC<HeroProps> = ({ setAppState }) => {
           {/* Header */}
           <AnimatedSection className="text-center mb-12 md:mb-16">
             <h2 className="text-3xl md:text-5xl font-semibold text-white tracking-[-0.02em] mb-4">
-              Dit is wat je krijgt.
+              Wat je gratis krijgt van OoitGedacht
             </h2>
             <p className="text-white/50 font-light max-w-xl mx-auto text-base md:text-lg">
               Een volledig gevalideerd ontwerp met realistische kosten en specificaties.
