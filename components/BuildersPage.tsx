@@ -8,40 +8,36 @@ import {
   FileCheck,
   Zap,
   Clock,
-  Lock,
   Camera,
   Cpu,
   FileText,
   Building2,
   HardHat,
   Glasses,
-  TrendingUp,
+  TrendingDown,
   Users,
   BadgeCheck,
   ChevronRight,
   Mail,
-  Phone
+  Phone,
+  AlertTriangle,
+  XCircle,
+  Timer,
+  Banknote,
+  Scale,
+  CheckCheck,
+  Play,
+  Quote
 } from 'lucide-react';
 import { AppState } from '../types';
 
 const BROERSMA_LOGO = "https://www.bureau-broersma.nl/wp-content/uploads/2015/09/logo-broersma-bouwadvies.png";
 
-// Dark blue grid pattern styles
-const darkBluePattern = {
-  background: 'linear-gradient(to bottom right, #0a1628, #0d1f3c)',
-  backgroundImage: `
-    linear-gradient(to bottom right, #0a1628, #0d1f3c),
-    linear-gradient(rgba(30, 58, 95, 0.3) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(30, 58, 95, 0.3) 1px, transparent 1px)
-  `,
-  backgroundSize: '100% 100%, 60px 60px, 60px 60px',
-};
-
 interface BuildersPageProps {
   setAppState: (state: AppState) => void;
 }
 
-// Intersection Observer hook for entrance animations
+// Intersection Observer hook
 const useInView = (threshold = 0.1) => {
   const ref = useRef<HTMLDivElement>(null);
   const [isInView, setIsInView] = useState(false);
@@ -56,25 +52,17 @@ const useInView = (threshold = 0.1) => {
       },
       { threshold }
     );
-
-    if (ref.current) {
-      observer.observe(ref.current);
-    }
-
+    if (ref.current) observer.observe(ref.current);
     return () => observer.disconnect();
   }, [threshold]);
 
   return { ref, isInView };
 };
 
-// Animated section wrapper
 const AnimatedSection: React.FC<{ children: React.ReactNode; className?: string; delay?: number }> = ({ 
-  children, 
-  className = '',
-  delay = 0 
+  children, className = '', delay = 0 
 }) => {
   const { ref, isInView } = useInView();
-  
   return (
     <div
       ref={ref}
@@ -93,564 +81,675 @@ const AnimatedSection: React.FC<{ children: React.ReactNode; className?: string;
 export const BuildersPage: React.FC<BuildersPageProps> = ({ setAppState }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [email, setEmail] = useState('');
+  const [company, setCompany] = useState('');
 
-  // Sticky header on scroll
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 100);
-    };
+    const handleScroll = () => setIsScrolled(window.scrollY > 50);
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const benefits = [
-    {
-      icon: <Clock size={24} />,
-      title: "80% Minder Administratie",
-      description: "Automatische documentatie via smart glasses. Geen handmatig invullen meer van WKB-formulieren."
-    },
-    {
-      icon: <Shield size={24} />,
-      title: "Volledige WKB Compliance",
-      description: "Elk bewijs wordt cryptografisch verankerd en gevalideerd door Bureau Broersma constructeurs."
-    },
-    {
-      icon: <TrendingUp size={24} />,
-      title: "Lagere Verzekeringspremies",
-      description: "Aannemers die BouwBorg gebruiken krijgen tot 10% korting op CAR-verzekeringen."
-    },
-    {
-      icon: <BadgeCheck size={24} />,
-      title: "Directe Betaling Vrijgave",
-      description: "FSM-logica zorgt voor automatische milestone-betalingen zodra werk is gevalideerd."
-    }
-  ];
-
-  const stackFeatures = [
-    {
-      icon: <Glasses size={32} />,
-      title: "Smart Safety Glasses",
-      subtitle: "Hardware",
-      description: "Ruggedized veiligheidsbril met geïntegreerde camera, GPS en voice control. Hands-free bewijsvoering terwijl je werkt.",
-      color: "from-amber-400 to-orange-500",
-      bgColor: "bg-amber-500/10",
-      borderColor: "border-amber-500/20"
-    },
-    {
-      icon: <Cpu size={32} />,
-      title: "Bouwbesturingssysteem",
-      subtitle: "Software Platform",
-      description: "Finite State Machine workflow die elke fase van de bouw bewaakt. Geen stap zonder validatie.",
-      color: "from-blue-400 to-cyan-500",
-      bgColor: "bg-blue-500/10",
-      borderColor: "border-blue-500/20"
-    },
-    {
-      icon: <FileCheck size={32} />,
-      title: "Auto Compliance Engine",
-      subtitle: "AI + Bureau Broersma",
-      description: "AI analyseert beelden, Bureau Broersma valideert constructie. WKB-dossier wordt automatisch opgebouwd.",
-      color: "from-emerald-400 to-green-500",
-      bgColor: "bg-emerald-500/10",
-      borderColor: "border-emerald-500/20"
-    }
-  ];
-
   return (
-    <div className="bg-[#0a1628] w-full text-white min-h-screen">
-      {/* Navigation */}
-      <nav className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-500 ${isScrolled ? 'py-2 md:py-3' : 'py-3 md:py-5'}`}>
-        <div className="max-w-[1400px] mx-auto px-4 md:px-8">
-          <div className={`relative flex items-center justify-between px-4 md:px-8 py-2.5 md:py-4 rounded-xl md:rounded-2xl transition-all duration-500 ${
-            isScrolled 
-              ? 'bg-[#0a1628]/95 backdrop-blur-xl shadow-2xl shadow-[#0a1628]/40 border border-[#1e3a5f]/30' 
-              : 'bg-white/[0.03] backdrop-blur-md border border-white/[0.06]'
-          }`}>
-            {/* Logo */}
-            <button 
-              onClick={() => setAppState(AppState.LANDING)}
-              className="relative group z-10"
-            >
-              <img 
-                src="/generated/og-logo.png" 
-                alt="OoitGedacht" 
-                className="h-8 md:h-10 brightness-0 invert transition-transform duration-300 group-hover:scale-105" 
-              />
-            </button>
-            
-            {/* Center Badge */}
-            <div className="hidden md:flex items-center gap-2 px-4 py-1.5 bg-amber-500/10 border border-amber-500/30 rounded-full">
-              <HardHat size={14} className="text-amber-400" />
-              <span className="text-xs font-medium text-amber-300">Voor Aannemers & Bouwers</span>
-            </div>
-
-            {/* Right Section */}
-            <div className="flex items-center gap-3 z-10">
-              <button 
-                onClick={() => setAppState(AppState.LANDING)}
-                className="flex items-center gap-2 text-white/60 hover:text-white px-4 py-2 text-sm transition-colors"
-              >
-                <ArrowLeft size={16} />
-                <span className="hidden sm:inline">Terug</span>
-              </button>
-              <button 
-                onClick={() => {
-                  const el = document.getElementById('contact-section');
-                  el?.scrollIntoView({ behavior: 'smooth' });
-                }}
-                className="flex items-center gap-2 bg-gradient-to-r from-amber-500 to-orange-500 text-white px-6 py-2.5 text-[13px] font-semibold hover:from-amber-400 hover:to-orange-400 transition-all duration-300 rounded-full shadow-lg shadow-amber-500/20"
-              >
-                <Phone size={14} />
-                Contact Sales
-              </button>
-            </div>
+    <div className="bg-[#0a0f1a] w-full text-white min-h-screen">
+      
+      {/* ============================================ */}
+      {/* NAVIGATION */}
+      {/* ============================================ */}
+      <nav className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-300 ${
+        isScrolled ? 'bg-[#0a0f1a]/95 backdrop-blur-xl border-b border-white/5' : ''
+      }`}>
+        <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+          <button onClick={() => setAppState(AppState.LANDING)} className="flex items-center gap-3 group">
+            <ArrowLeft size={18} className="text-white/40 group-hover:text-white transition-colors" />
+            <img src="/generated/og-logo.png" alt="OoitGedacht" className="h-7 brightness-0 invert opacity-70 group-hover:opacity-100 transition-opacity" />
+          </button>
+          
+          <div className="hidden md:flex items-center gap-2 text-xs">
+            <span className="px-3 py-1.5 bg-amber-500/10 text-amber-400 rounded-full font-medium flex items-center gap-1.5">
+              <HardHat size={12} />
+              B2B Platform
+            </span>
           </div>
+
+          <button 
+            onClick={() => document.getElementById('demo-form')?.scrollIntoView({ behavior: 'smooth' })}
+            className="bg-white text-[#0a0f1a] px-5 py-2 text-sm font-semibold rounded-full hover:bg-white/90 transition-colors"
+          >
+            Plan Demo
+          </button>
         </div>
       </nav>
 
-      {/* Hero Section */}
-      <div className="relative min-h-screen flex flex-col justify-center pt-28 md:pt-32 pb-20">
+      {/* ============================================ */}
+      {/* HERO - The Hook */}
+      {/* ============================================ */}
+      <section className="relative min-h-[90vh] flex items-center pt-20">
         {/* Background */}
         <div className="absolute inset-0">
           <img 
             src="/generated/b2b/smart-glasses-on-site.jpg" 
-            alt="Aannemer met smart glasses op bouwplaats" 
-            className="w-full h-full object-cover opacity-30"
+            alt="" 
+            className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#0a1628] via-[#0a1628]/90 to-[#0a1628]/70" />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0a1628] via-transparent to-[#0a1628]/50" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#0a0f1a] via-[#0a0f1a]/95 to-[#0a0f1a]/60" />
         </div>
 
-        <div className="relative z-10 max-w-[1400px] mx-auto px-6 md:px-12 w-full">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-            {/* Left Content */}
-            <div>
-              <div className="inline-flex items-center gap-2 px-4 py-2 bg-amber-500/10 border border-amber-500/30 rounded-full text-xs font-bold uppercase tracking-[0.15em] mb-6 text-amber-300">
-                <Building2 size={14} />
-                BouwBorg voor Aannemers
-              </div>
-              
-              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-semibold text-white leading-[1.05] tracking-[-0.03em] mb-6">
-                <span className="block">De Compliance</span>
-                <span className="block">
-                  <span className="bg-gradient-to-r from-amber-400 via-orange-400 to-amber-500 bg-clip-text text-transparent">Revolution</span>
-                </span>
-                <span className="block font-light text-white/80">voor Bouwers</span>
-              </h1>
-              
-              <p className="text-lg md:text-xl text-white/70 leading-relaxed mb-8 font-light max-w-lg">
-                <strong className="text-white font-medium">Smart glasses + AI + FSM software</strong> = 
-                automatische WKB-compliance zonder administratielast. 
-                <span className="text-amber-400"> Bouw, wij documenteren.</span>
-              </p>
-
-              <div className="flex flex-col sm:flex-row gap-4 mb-8">
-                <button 
-                  onClick={() => {
-                    const el = document.getElementById('contact-section');
-                    el?.scrollIntoView({ behavior: 'smooth' });
-                  }}
-                  className="group bg-gradient-to-r from-amber-500 to-orange-500 text-white px-8 py-4 text-base font-semibold hover:from-amber-400 hover:to-orange-400 transition-all flex items-center justify-center gap-3 rounded-full shadow-lg shadow-amber-500/30"
-                >
-                  Plan een Demo
-                  <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
-                </button>
-                <button 
-                  onClick={() => {
-                    const el = document.getElementById('stack-section');
-                    el?.scrollIntoView({ behavior: 'smooth' });
-                  }}
-                  className="text-white/60 hover:text-white px-6 py-4 text-base transition-colors flex items-center justify-center gap-2 border border-white/10 rounded-full hover:border-white/30"
-                >
-                  Bekijk de Stack
-                  <ChevronRight size={18} />
-                </button>
-              </div>
-
-              {/* Trust Indicators */}
-              <div className="flex items-center gap-6 pt-4 border-t border-white/10">
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 size={16} className="text-emerald-400" />
-                  <span className="text-sm text-white/60">WKB Gecertificeerd</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 size={16} className="text-emerald-400" />
-                  <span className="text-sm text-white/60">Bureau Broersma Partner</span>
-                </div>
-              </div>
+        <div className="relative z-10 max-w-6xl mx-auto px-6 py-20">
+          <div className="max-w-2xl">
+            {/* Eyebrow */}
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-red-500/10 border border-red-500/20 rounded-full text-xs font-medium text-red-400 mb-6">
+              <AlertTriangle size={12} />
+              Wkb 2024: Nieuwe Wet, Nieuwe Risico's
             </div>
 
-            {/* Right - Glasses Product Shot */}
-            <div className="relative">
-              <div className="aspect-square max-w-lg mx-auto relative">
-                <div className="absolute inset-0 bg-gradient-to-br from-amber-500/20 to-orange-500/10 rounded-3xl transform rotate-3" />
-                <img 
-                  src="/generated/b2b/smart-glasses-product.jpg" 
-                  alt="BouwBorg Smart Safety Glasses" 
-                  className="relative z-10 w-full h-full object-cover rounded-2xl shadow-2xl shadow-black/50"
-                />
-                {/* Floating badge */}
-                <div className="absolute -bottom-4 -right-4 z-20 bg-[#0d1f3c] border border-amber-500/30 rounded-xl px-4 py-3 shadow-xl">
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 bg-amber-500/20 rounded-lg flex items-center justify-center">
-                      <Camera size={20} className="text-amber-400" />
-                    </div>
-                    <div>
-                      <div className="text-xs text-white/50">4K Video</div>
-                      <div className="text-sm font-semibold text-white">Hands-Free Capture</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* The Problem Section */}
-      <div className="bg-[#06101f] py-24 md:py-32 px-6 relative overflow-hidden">
-        <div className="absolute inset-0 opacity-[0.03]" style={{
-          backgroundImage: 'linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)',
-          backgroundSize: '60px 60px'
-        }} />
-        
-        <div className="max-w-5xl mx-auto relative z-10">
-          <AnimatedSection className="text-center mb-16">
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-red-500/10 border border-red-500/30 rounded-full text-xs font-bold uppercase tracking-[0.15em] mb-6 text-red-400">
-              <FileText size={14} />
-              Het WKB Probleem
-            </div>
-            <h2 className="text-3xl md:text-5xl font-semibold text-white tracking-[-0.02em] mb-6">
-              De Wkb veranderde alles.
+            {/* Headline */}
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.1] tracking-tight mb-6">
+              Stop met{' '}
+              <span className="text-red-400 line-through decoration-2">papierwerk.</span>
               <br />
-              <span className="text-white/50">Bent u er klaar voor?</span>
-            </h2>
-          </AnimatedSection>
+              <span className="bg-gradient-to-r from-amber-400 to-orange-400 bg-clip-text text-transparent">
+                Start met bouwen.
+              </span>
+            </h1>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <AnimatedSection delay={100} className="bg-red-500/5 border border-red-500/20 rounded-2xl p-8 text-center">
-              <div className="text-5xl font-bold text-red-400 mb-3">20</div>
-              <div className="text-lg font-medium text-white mb-2">Jaar Aansprakelijkheid</div>
-              <p className="text-sm text-white/50">De Wkb verschuift de bewijslast naar aannemers. 20 jaar lang moet je kunnen bewijzen dat correct is gebouwd.</p>
-            </AnimatedSection>
-            
-            <AnimatedSection delay={200} className="bg-red-500/5 border border-red-500/20 rounded-2xl p-8 text-center">
-              <div className="text-5xl font-bold text-red-400 mb-3">60K+</div>
-              <div className="text-lg font-medium text-white mb-2">Aannemers in NL</div>
-              <p className="text-sm text-white/50">Vrijwel allemaal nog afhankelijk van WhatsApp, e-mail en papieren bonnetjes. Juridisch onhoudbaar.</p>
-            </AnimatedSection>
-            
-            <AnimatedSection delay={300} className="bg-red-500/5 border border-red-500/20 rounded-2xl p-8 text-center">
-              <div className="text-5xl font-bold text-red-400 mb-3">€50K+</div>
-              <div className="text-lg font-medium text-white mb-2">Gemiddelde Claim</div>
-              <p className="text-sm text-white/50">Zonder proper bewijsvoering bent u persoonlijk aansprakelijk voor bouwfouten die jaren later opduiken.</p>
-            </AnimatedSection>
+            {/* Subheadline */}
+            <p className="text-lg sm:text-xl text-white/60 leading-relaxed mb-8 max-w-xl">
+              De Wkb dwingt 20 jaar bewijslast op aannemers. 
+              BouwBorg automatiseert je complete WKB-dossier via smart glasses + AI. 
+              <strong className="text-white"> Jij bouwt, wij documenteren.</strong>
+            </p>
+
+            {/* CTA Buttons */}
+            <div className="flex flex-col sm:flex-row gap-4 mb-12">
+              <button 
+                onClick={() => document.getElementById('demo-form')?.scrollIntoView({ behavior: 'smooth' })}
+                className="group bg-gradient-to-r from-amber-500 to-orange-500 text-white px-8 py-4 font-semibold rounded-full shadow-lg shadow-amber-500/25 hover:shadow-amber-500/40 transition-all flex items-center justify-center gap-2"
+              >
+                Bekijk Live Demo
+                <Play size={18} className="group-hover:translate-x-0.5 transition-transform" />
+              </button>
+              <button 
+                onClick={() => document.getElementById('how-it-works')?.scrollIntoView({ behavior: 'smooth' })}
+                className="px-8 py-4 font-medium text-white/70 hover:text-white transition-colors flex items-center justify-center gap-2"
+              >
+                Hoe werkt het?
+                <ChevronRight size={18} />
+              </button>
+            </div>
+
+            {/* Trust bar */}
+            <div className="flex items-center gap-6 pt-6 border-t border-white/10">
+              <div className="flex items-center gap-2 text-sm text-white/50">
+                <CheckCircle2 size={16} className="text-emerald-400" />
+                WKB Compliant
+              </div>
+              <div className="flex items-center gap-2 text-sm text-white/50">
+                <img src={BROERSMA_LOGO} alt="" className="h-4 brightness-0 invert opacity-50" />
+                Bureau Broersma Partner
+              </div>
+            </div>
           </div>
         </div>
-      </div>
+      </section>
 
-      {/* The Stack Section */}
-      <div id="stack-section" className="py-24 md:py-32 px-6 relative overflow-hidden" style={darkBluePattern}>
-        <div className="max-w-6xl mx-auto relative z-10">
-          <AnimatedSection className="text-center mb-16 md:mb-20">
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-500/10 border border-blue-500/30 rounded-full text-xs font-bold uppercase tracking-[0.15em] mb-6 text-blue-300">
-              <Zap size={14} />
-              De Oplossing
-            </div>
-            <h2 className="text-3xl md:text-5xl font-semibold text-white tracking-[-0.02em] mb-6">
-              Verticaal Geïntegreerde Stack
+      {/* ============================================ */}
+      {/* PROBLEM - Why This Matters */}
+      {/* ============================================ */}
+      <section className="py-24 bg-[#060a12] relative overflow-hidden">
+        {/* Grid pattern */}
+        <div className="absolute inset-0 opacity-[0.02]" style={{
+          backgroundImage: 'linear-gradient(white 1px, transparent 1px), linear-gradient(90deg, white 1px, transparent 1px)',
+          backgroundSize: '40px 40px'
+        }} />
+
+        <div className="max-w-6xl mx-auto px-6 relative z-10">
+          <AnimatedSection className="text-center mb-16">
+            <h2 className="text-3xl sm:text-4xl font-bold mb-4">
+              De Wkb heeft alles veranderd.
+              <br />
+              <span className="text-white/40">Is uw bedrijf voorbereid?</span>
             </h2>
-            <p className="text-lg text-white/50 max-w-2xl mx-auto font-light">
-              Hardware + Software + Expert Validatie. Eén ecosysteem dat compliance transformeert van last naar bijproduct.
-            </p>
           </AnimatedSection>
 
-          {/* Stack Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 mb-16">
-            {stackFeatures.map((feature, index) => (
-              <AnimatedSection key={index} delay={index * 100}>
-                <div className={`${feature.bgColor} border ${feature.borderColor} rounded-2xl p-8 h-full transition-all duration-300 hover:scale-[1.02]`}>
-                  <div className={`w-16 h-16 rounded-xl bg-gradient-to-br ${feature.color} p-[1px] mb-6`}>
-                    <div className="w-full h-full rounded-xl bg-[#0a1628] flex items-center justify-center text-white">
-                      {feature.icon}
-                    </div>
+          <div className="grid md:grid-cols-3 gap-6">
+            {[
+              {
+                icon: <Scale size={28} />,
+                stat: "20 jaar",
+                label: "Aansprakelijkheid",
+                description: "U moet kunnen bewijzen dat elk detail correct is uitgevoerd. Twintig jaar lang.",
+                color: "red"
+              },
+              {
+                icon: <Timer size={28} />,
+                stat: "4+ uur",
+                label: "Extra per project",
+                description: "Gemiddelde tijd aan WKB-documentatie per week. Tijd die u niet factureert.",
+                color: "amber"
+              },
+              {
+                icon: <Banknote size={28} />,
+                stat: "€15.000+",
+                label: "Bij claims",
+                description: "Gemiddelde schade bij WKB-geschillen waar bewijs ontbreekt.",
+                color: "red"
+              }
+            ].map((item, i) => (
+              <AnimatedSection key={i} delay={i * 100}>
+                <div className={`bg-${item.color}-500/5 border border-${item.color}-500/10 rounded-2xl p-8 h-full`}>
+                  <div className={`w-12 h-12 rounded-xl bg-${item.color}-500/10 flex items-center justify-center mb-6 text-${item.color}-400`}>
+                    {item.icon}
                   </div>
-                  <div className="text-xs font-bold uppercase tracking-[0.15em] text-white/40 mb-2">{feature.subtitle}</div>
-                  <h3 className="text-xl font-semibold text-white mb-3">{feature.title}</h3>
-                  <p className="text-white/60 text-sm leading-relaxed">{feature.description}</p>
+                  <div className={`text-4xl font-bold text-${item.color}-400 mb-1`}>{item.stat}</div>
+                  <div className="text-lg font-medium text-white mb-3">{item.label}</div>
+                  <p className="text-white/50 text-sm leading-relaxed">{item.description}</p>
                 </div>
               </AnimatedSection>
             ))}
           </div>
 
-          {/* Integration Arrow */}
-          <AnimatedSection delay={400} className="text-center mb-16">
-            <div className="inline-flex flex-col items-center">
-              <div className="w-px h-16 bg-gradient-to-b from-transparent via-amber-500 to-amber-500" />
-              <div className="px-6 py-3 bg-amber-500/10 border border-amber-500/30 rounded-full">
-                <span className="text-amber-300 font-semibold">= Volledig Geautomatiseerd WKB Dossier</span>
-              </div>
-            </div>
-          </AnimatedSection>
-
-          {/* Workflow Preview */}
-          <AnimatedSection delay={500}>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center bg-white/[0.02] border border-white/10 rounded-2xl p-8 md:p-12">
-              <div>
-                <h3 className="text-2xl md:text-3xl font-semibold text-white mb-4">Zo Werkt Het</h3>
-                <div className="space-y-4">
-                  <div className="flex items-start gap-4">
-                    <div className="w-8 h-8 rounded-full bg-amber-500/20 flex items-center justify-center flex-shrink-0 mt-0.5">
-                      <span className="text-amber-400 font-bold text-sm">1</span>
-                    </div>
-                    <div>
-                      <div className="font-medium text-white">Zet de bril op en werk</div>
-                      <div className="text-sm text-white/50">De bril detecteert automatisch welke fase je uitvoert</div>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-4">
-                    <div className="w-8 h-8 rounded-full bg-blue-500/20 flex items-center justify-center flex-shrink-0 mt-0.5">
-                      <span className="text-blue-400 font-bold text-sm">2</span>
-                    </div>
-                    <div>
-                      <div className="font-medium text-white">AI analyseert realtime</div>
-                      <div className="text-sm text-white/50">Gemini Vision controleert of het werk overeenkomt met specificaties</div>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-4">
-                    <div className="w-8 h-8 rounded-full bg-emerald-500/20 flex items-center justify-center flex-shrink-0 mt-0.5">
-                      <span className="text-emerald-400 font-bold text-sm">3</span>
-                    </div>
-                    <div>
-                      <div className="font-medium text-white">Bureau Broersma valideert</div>
-                      <div className="text-sm text-white/50">Expert constructeurs keuren kritieke punten binnen 4 uur</div>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-4">
-                    <div className="w-8 h-8 rounded-full bg-purple-500/20 flex items-center justify-center flex-shrink-0 mt-0.5">
-                      <span className="text-purple-400 font-bold text-sm">4</span>
-                    </div>
-                    <div>
-                      <div className="font-medium text-white">Betaling wordt vrijgegeven</div>
-                      <div className="text-sm text-white/50">FSM ontgrendelt automatisch de volgende fase + milestone-betaling</div>
+          {/* Current situation */}
+          <AnimatedSection delay={400} className="mt-16">
+            <div className="bg-white/[0.02] border border-white/5 rounded-2xl p-8 md:p-12">
+              <div className="grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                  <div className="text-xs font-bold uppercase tracking-widest text-red-400/60 mb-4">Het probleem</div>
+                  <h3 className="text-2xl font-bold mb-4">Hoe de meeste aannemers nu werken:</h3>
+                  <ul className="space-y-3">
+                    {[
+                      "WhatsApp-groepen vol onvindbare foto's",
+                      "Excel-sheets die niemand bijhoudt",
+                      "Bonnetjes in dashboardkastjes",
+                      "E-mails die verloren gaan",
+                      "Geen timestamped bewijs bij geschillen"
+                    ].map((item, i) => (
+                      <li key={i} className="flex items-start gap-3 text-white/60">
+                        <XCircle size={18} className="text-red-400/60 mt-0.5 flex-shrink-0" />
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div className="relative">
+                  <div className="aspect-video bg-gradient-to-br from-red-500/10 to-orange-500/5 rounded-xl border border-red-500/10 flex items-center justify-center">
+                    <div className="text-center px-8">
+                      <AlertTriangle size={48} className="text-red-400/40 mx-auto mb-4" />
+                      <p className="text-white/40 text-sm">
+                        "Bij een geschil vroeg de rechter om bewijs van de wapeningskeuring. 
+                        We hadden alleen een WhatsApp foto zonder datum of locatie."
+                      </p>
+                      <p className="text-white/30 text-xs mt-3">— Anonieme aannemer, rechtszaak 2024</p>
                     </div>
                   </div>
                 </div>
               </div>
+            </div>
+          </AnimatedSection>
+        </div>
+      </section>
+
+      {/* ============================================ */}
+      {/* SOLUTION INTRO - The Big Idea */}
+      {/* ============================================ */}
+      <section className="py-24 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-[#060a12] via-[#0a0f1a] to-[#0a0f1a]" />
+        
+        <div className="max-w-6xl mx-auto px-6 relative z-10">
+          <AnimatedSection className="text-center max-w-3xl mx-auto mb-20">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-emerald-500/10 border border-emerald-500/20 rounded-full text-xs font-medium text-emerald-400 mb-6">
+              <Zap size={12} />
+              De Oplossing
+            </div>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6">
+              Eén systeem.{' '}
+              <span className="bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent">
+                Volledige compliance.
+              </span>
+            </h2>
+            <p className="text-lg text-white/50 leading-relaxed">
+              BouwBorg combineert smart glasses, AI-validatie en expert-verificatie 
+              tot één geïntegreerd systeem dat automatisch uw WKB-dossier opbouwt 
+              terwijl u werkt.
+            </p>
+          </AnimatedSection>
+
+          {/* The Stack Visual */}
+          <AnimatedSection delay={200}>
+            <div className="grid md:grid-cols-3 gap-4 mb-8">
+              {[
+                {
+                  step: "01",
+                  icon: <Glasses size={32} />,
+                  title: "Smart Safety Glasses",
+                  subtitle: "Hardware",
+                  description: "Veiligheidsbril met 4K camera, GPS, en voice control. Draag hem, werk normaal, wij leggen alles vast.",
+                  gradient: "from-amber-500 to-orange-500",
+                  bgGradient: "from-amber-500/10 to-orange-500/5"
+                },
+                {
+                  step: "02",
+                  icon: <Cpu size={32} />,
+                  title: "BouwBorg OS",
+                  subtitle: "Software",
+                  description: "Finite State Machine workflow. Elke fase heeft checkpoints. Geen stap verder zonder validatie.",
+                  gradient: "from-blue-500 to-cyan-500",
+                  bgGradient: "from-blue-500/10 to-cyan-500/5"
+                },
+                {
+                  step: "03",
+                  icon: <BadgeCheck size={32} />,
+                  title: "Expert Validatie",
+                  subtitle: "Bureau Broersma",
+                  description: "AI doet de eerste check. Bureau Broersma constructeurs valideren kritieke punten binnen 4 uur.",
+                  gradient: "from-emerald-500 to-green-500",
+                  bgGradient: "from-emerald-500/10 to-green-500/5"
+                }
+              ].map((item, i) => (
+                <div key={i} className={`bg-gradient-to-br ${item.bgGradient} border border-white/5 rounded-2xl p-8 relative overflow-hidden group hover:border-white/10 transition-colors`}>
+                  <div className="absolute top-4 right-4 text-6xl font-black text-white/[0.03]">{item.step}</div>
+                  <div className={`w-14 h-14 rounded-xl bg-gradient-to-br ${item.gradient} flex items-center justify-center mb-6 text-white shadow-lg`}>
+                    {item.icon}
+                  </div>
+                  <div className="text-xs font-bold uppercase tracking-widest text-white/30 mb-2">{item.subtitle}</div>
+                  <h3 className="text-xl font-bold mb-3">{item.title}</h3>
+                  <p className="text-white/50 text-sm leading-relaxed">{item.description}</p>
+                </div>
+              ))}
+            </div>
+          </AnimatedSection>
+
+          {/* Equals */}
+          <AnimatedSection delay={400} className="flex justify-center my-8">
+            <div className="flex items-center gap-4">
+              <div className="h-px w-16 bg-gradient-to-r from-transparent to-amber-500/50" />
+              <div className="px-6 py-3 bg-gradient-to-r from-amber-500/10 to-orange-500/10 border border-amber-500/20 rounded-full">
+                <span className="text-sm font-bold bg-gradient-to-r from-amber-400 to-orange-400 bg-clip-text text-transparent">
+                  = Automatisch WKB-Dossier
+                </span>
+              </div>
+              <div className="h-px w-16 bg-gradient-to-l from-transparent to-amber-500/50" />
+            </div>
+          </AnimatedSection>
+        </div>
+      </section>
+
+      {/* ============================================ */}
+      {/* HOW IT WORKS - Step by Step */}
+      {/* ============================================ */}
+      <section id="how-it-works" className="py-24 bg-[#060a12]">
+        <div className="max-w-6xl mx-auto px-6">
+          <AnimatedSection className="text-center mb-16">
+            <h2 className="text-3xl sm:text-4xl font-bold mb-4">Hoe het werkt</h2>
+            <p className="text-white/50 max-w-xl mx-auto">
+              Van bril opzetten tot WKB-dossier. Vier stappen, volledig geautomatiseerd.
+            </p>
+          </AnimatedSection>
+
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            {/* Steps */}
+            <AnimatedSection>
+              <div className="space-y-6">
+                {[
+                  {
+                    num: "1",
+                    title: "Zet de bril op en werk",
+                    description: "De bril detecteert automatisch welke bouwfase u uitvoert op basis van locatie en context.",
+                    icon: <Glasses size={20} />
+                  },
+                  {
+                    num: "2",
+                    title: "AI analyseert realtime",
+                    description: "Computer vision controleert of het werk overeenkomt met de bouwtekeningen en specificaties.",
+                    icon: <Eye size={20} />
+                  },
+                  {
+                    num: "3",
+                    title: "Expert valideert",
+                    description: "Bij kritieke punten reviewt een Bureau Broersma constructeur het bewijs binnen 4 uur.",
+                    icon: <BadgeCheck size={20} />
+                  },
+                  {
+                    num: "4",
+                    title: "Fase ontgrendeld",
+                    description: "Validatie succesvol? De volgende bouwfase wordt vrijgegeven en betaling wordt getriggerd.",
+                    icon: <CheckCheck size={20} />
+                  }
+                ].map((step, i) => (
+                  <div key={i} className="flex gap-5 group">
+                    <div className="flex-shrink-0">
+                      <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-amber-500/20 to-orange-500/10 border border-amber-500/20 flex items-center justify-center text-amber-400 font-bold group-hover:border-amber-500/40 transition-colors">
+                        {step.num}
+                      </div>
+                    </div>
+                    <div>
+                      <h4 className="font-semibold mb-1 flex items-center gap-2">
+                        {step.title}
+                        <span className="text-white/20">{step.icon}</span>
+                      </h4>
+                      <p className="text-white/50 text-sm leading-relaxed">{step.description}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </AnimatedSection>
+
+            {/* Image */}
+            <AnimatedSection delay={200}>
               <div className="relative">
                 <img 
                   src="/generated/b2b/smart-glasses-workflow.jpg" 
                   alt="BouwBorg workflow op de bouwplaats" 
-                  className="w-full rounded-xl shadow-xl"
+                  className="rounded-2xl shadow-2xl shadow-black/50"
                 />
+                {/* Overlay badge */}
+                <div className="absolute bottom-4 left-4 right-4 bg-[#0a0f1a]/90 backdrop-blur-sm border border-white/10 rounded-xl p-4">
+                  <div className="flex items-center justify-between text-sm">
+                    <div className="flex items-center gap-3">
+                      <div className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse" />
+                      <span className="text-white/70">Fase: Wapeningskeuring</span>
+                    </div>
+                    <span className="text-emerald-400 font-medium">AI Validatie: 98%</span>
+                  </div>
+                </div>
               </div>
-            </div>
-          </AnimatedSection>
+            </AnimatedSection>
+          </div>
         </div>
-      </div>
+      </section>
 
-      {/* Benefits Grid */}
-      <div className="bg-[#0a1628] py-24 md:py-32 px-6 relative overflow-hidden">
+      {/* ============================================ */}
+      {/* RESULTS - What You Get */}
+      {/* ============================================ */}
+      <section className="py-24 relative">
         <div className="absolute inset-0">
           <img 
             src="/generated/b2b/smart-glasses-collaboration.jpg" 
-            alt="Samenwerking kantoor en bouwplaats" 
-            className="w-full h-full object-cover opacity-10"
+            alt="" 
+            className="w-full h-full object-cover opacity-20"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0a1628] via-[#0a1628]/95 to-[#0a1628]" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0a0f1a] via-[#0a0f1a]/95 to-[#0a0f1a]" />
         </div>
-        
-        <div className="max-w-6xl mx-auto relative z-10">
+
+        <div className="max-w-6xl mx-auto px-6 relative z-10">
           <AnimatedSection className="text-center mb-16">
-            <h2 className="text-3xl md:text-5xl font-semibold text-white tracking-[-0.02em] mb-6">
-              Waarom Aannemers Kiezen
-              <br />
-              <span className="bg-gradient-to-r from-amber-400 to-orange-500 bg-clip-text text-transparent">voor BouwBorg</span>
+            <h2 className="text-3xl sm:text-4xl font-bold mb-4">
+              Concrete resultaten
             </h2>
+            <p className="text-white/50 max-w-xl mx-auto">
+              Geen vage beloftes. Dit is wat BouwBorg-gebruikers rapporteren.
+            </p>
           </AnimatedSection>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
-            {benefits.map((benefit, index) => (
-              <AnimatedSection key={index} delay={index * 100}>
-                <div className="bg-white/[0.03] border border-white/10 rounded-2xl p-8 hover:bg-white/[0.05] transition-colors h-full">
-                  <div className="flex items-start gap-5">
-                    <div className="w-14 h-14 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center flex-shrink-0 text-amber-400">
-                      {benefit.icon}
-                    </div>
-                    <div>
-                      <h3 className="text-xl font-semibold text-white mb-2">{benefit.title}</h3>
-                      <p className="text-white/60 leading-relaxed">{benefit.description}</p>
-                    </div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+            {[
+              { value: "80%", label: "Minder administratietijd", sub: "4+ uur → 45 min per week" },
+              { value: "100%", label: "Timestamped bewijs", sub: "GPS + datum op elk item" },
+              { value: "4 uur", label: "Expert validatie SLA", sub: "Constructeur check" },
+              { value: "€0", label: "Extra software kosten", sub: "Alles in één abonnement" }
+            ].map((stat, i) => (
+              <AnimatedSection key={i} delay={i * 100}>
+                <div className="bg-white/[0.03] border border-white/5 rounded-2xl p-6 text-center hover:border-white/10 transition-colors">
+                  <div className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-amber-400 to-orange-400 bg-clip-text text-transparent mb-2">
+                    {stat.value}
+                  </div>
+                  <div className="font-medium mb-1">{stat.label}</div>
+                  <div className="text-xs text-white/40">{stat.sub}</div>
+                </div>
+              </AnimatedSection>
+            ))}
+          </div>
+
+          {/* Benefits grid */}
+          <div className="grid md:grid-cols-2 gap-6">
+            {[
+              {
+                icon: <TrendingDown size={24} />,
+                title: "Lagere verzekeringspremies",
+                description: "Verzekeraars geven tot 10% korting aan BouwBorg-gebruikers door bewezen lagere claims.",
+                color: "emerald"
+              },
+              {
+                icon: <Shield size={24} />,
+                title: "Juridische bescherming",
+                description: "Elk bewijs is cryptografisch verankerd met timestamp en GPS. Onweerlegbaar in rechtszaken.",
+                color: "blue"
+              },
+              {
+                icon: <Banknote size={24} />,
+                title: "Snellere betalingen",
+                description: "Milestone-betalingen worden automatisch getriggerd zodra validatie rond is. Geen discussie.",
+                color: "amber"
+              },
+              {
+                icon: <Users size={24} />,
+                title: "Tevreden opdrachtgevers",
+                description: "Klanten krijgen realtime inzicht in voortgang. Transparantie bouwt vertrouwen.",
+                color: "purple"
+              }
+            ].map((benefit, i) => (
+              <AnimatedSection key={i} delay={i * 100}>
+                <div className="flex gap-5 bg-white/[0.02] border border-white/5 rounded-xl p-6 hover:bg-white/[0.03] transition-colors">
+                  <div className={`w-12 h-12 rounded-xl bg-${benefit.color}-500/10 flex items-center justify-center flex-shrink-0 text-${benefit.color}-400`}>
+                    {benefit.icon}
+                  </div>
+                  <div>
+                    <h4 className="font-semibold mb-1">{benefit.title}</h4>
+                    <p className="text-white/50 text-sm leading-relaxed">{benefit.description}</p>
                   </div>
                 </div>
               </AnimatedSection>
             ))}
           </div>
         </div>
-      </div>
+      </section>
 
-      {/* Pricing Section */}
-      <div className="bg-[#06101f] py-24 md:py-32 px-6">
-        <div className="max-w-5xl mx-auto">
-          <AnimatedSection className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-semibold text-white tracking-[-0.02em] mb-4">
-              Compliance as a Service
-            </h2>
-            <p className="text-lg text-white/50 max-w-xl mx-auto">
-              Geen grote upfront investering. Betaal per project, doorberekend aan de klant.
-            </p>
-          </AnimatedSection>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <AnimatedSection delay={100}>
-              <div className="bg-white/[0.03] border border-white/10 rounded-2xl p-8 text-center h-full">
-                <div className="text-sm font-bold uppercase tracking-[0.15em] text-white/40 mb-3">Klein Project</div>
-                <div className="text-lg text-white/60 mb-4">Dakkapel / Aanbouw</div>
-                <div className="text-4xl font-bold text-white mb-2">€450</div>
-                <div className="text-sm text-white/40 mb-6">per project</div>
-                <ul className="text-left text-sm space-y-2 text-white/60">
-                  <li className="flex items-center gap-2"><CheckCircle2 size={14} className="text-emerald-400" /> Smart glasses lease</li>
-                  <li className="flex items-center gap-2"><CheckCircle2 size={14} className="text-emerald-400" /> WKB dossier generatie</li>
-                  <li className="flex items-center gap-2"><CheckCircle2 size={14} className="text-emerald-400" /> AI validatie</li>
-                </ul>
-              </div>
-            </AnimatedSection>
-
-            <AnimatedSection delay={200}>
-              <div className="bg-gradient-to-b from-amber-500/10 to-orange-500/5 border-2 border-amber-500/30 rounded-2xl p-8 text-center h-full relative">
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 bg-amber-500 text-white text-xs font-bold rounded-full">
-                  POPULAIR
-                </div>
-                <div className="text-sm font-bold uppercase tracking-[0.15em] text-amber-400 mb-3">Nieuwbouw Woning</div>
-                <div className="text-lg text-white/60 mb-4">Volledige woningbouw</div>
-                <div className="text-4xl font-bold text-white mb-2">€1.500</div>
-                <div className="text-sm text-white/40 mb-6">per project</div>
-                <ul className="text-left text-sm space-y-2 text-white/60">
-                  <li className="flex items-center gap-2"><CheckCircle2 size={14} className="text-emerald-400" /> Alles van Klein +</li>
-                  <li className="flex items-center gap-2"><CheckCircle2 size={14} className="text-emerald-400" /> Bureau Broersma validatie</li>
-                  <li className="flex items-center gap-2"><CheckCircle2 size={14} className="text-emerald-400" /> Constructeur check</li>
-                  <li className="flex items-center gap-2"><CheckCircle2 size={14} className="text-emerald-400" /> Woningpaspoort</li>
-                </ul>
-              </div>
-            </AnimatedSection>
-
-            <AnimatedSection delay={300}>
-              <div className="bg-white/[0.03] border border-white/10 rounded-2xl p-8 text-center h-full">
-                <div className="text-sm font-bold uppercase tracking-[0.15em] text-white/40 mb-3">Enterprise</div>
-                <div className="text-lg text-white/60 mb-4">Appartementencomplex</div>
-                <div className="text-4xl font-bold text-white mb-2">Custom</div>
-                <div className="text-sm text-white/40 mb-6">op aanvraag</div>
-                <ul className="text-left text-sm space-y-2 text-white/60">
-                  <li className="flex items-center gap-2"><CheckCircle2 size={14} className="text-emerald-400" /> Dedicated support</li>
-                  <li className="flex items-center gap-2"><CheckCircle2 size={14} className="text-emerald-400" /> Meerdere brilsets</li>
-                  <li className="flex items-center gap-2"><CheckCircle2 size={14} className="text-emerald-400" /> White-label optie</li>
-                  <li className="flex items-center gap-2"><CheckCircle2 size={14} className="text-emerald-400" /> API integraties</li>
-                </ul>
-              </div>
-            </AnimatedSection>
-          </div>
-
-          <AnimatedSection delay={400} className="mt-12 text-center">
-            <p className="text-white/40 text-sm">
-              Alle prijzen worden doorberekend aan de eindklant als "WKB Compliance & Digitale Garantie" line item.
-            </p>
-          </AnimatedSection>
-        </div>
-      </div>
-
-      {/* Partner Logos */}
-      <div className="bg-[#0a1628] py-16 px-6 border-y border-white/5">
-        <div className="max-w-4xl mx-auto text-center">
-          <div className="text-xs font-bold uppercase tracking-[0.2em] text-white/30 mb-8">In Samenwerking Met</div>
-          <div className="flex flex-wrap items-center justify-center gap-12">
-            <a 
-              href="https://www.bureau-broersma.nl" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="opacity-40 hover:opacity-70 transition-opacity"
-            >
-              <img src={BROERSMA_LOGO} alt="Bureau Broersma" className="h-10 brightness-0 invert" />
-            </a>
-          </div>
-        </div>
-      </div>
-
-      {/* Contact CTA Section */}
-      <div id="contact-section" className="py-24 md:py-32 px-6 relative overflow-hidden" style={darkBluePattern}>
-        <div className="max-w-3xl mx-auto text-center relative z-10">
+      {/* ============================================ */}
+      {/* TESTIMONIAL / SOCIAL PROOF */}
+      {/* ============================================ */}
+      <section className="py-24 bg-[#060a12]">
+        <div className="max-w-4xl mx-auto px-6">
           <AnimatedSection>
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-amber-500/10 border border-amber-500/30 rounded-full text-xs font-bold uppercase tracking-[0.15em] mb-6 text-amber-300">
-              <Mail size={14} />
-              Neem Contact Op
+            <div className="bg-gradient-to-br from-amber-500/5 to-orange-500/5 border border-amber-500/10 rounded-3xl p-8 md:p-12 relative overflow-hidden">
+              <Quote size={80} className="absolute top-6 right-6 text-amber-500/10" />
+              
+              <div className="flex items-center gap-4 mb-8">
+                <img src={BROERSMA_LOGO} alt="Bureau Broersma" className="h-10 brightness-0 invert" />
+                <div className="h-8 w-px bg-white/10" />
+                <span className="text-sm text-white/40">Technologie Partner</span>
+              </div>
+
+              <blockquote className="text-xl sm:text-2xl font-medium leading-relaxed mb-8 text-white/90">
+                "Na 70 jaar constructieberekeningen weten wij: de grootste risico's zitten niet in de engineering, 
+                maar in de documentatie. BouwBorg lost precies dat probleem op."
+              </blockquote>
+
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-amber-500/20 to-orange-500/20 flex items-center justify-center text-amber-400 font-bold">
+                  BB
+                </div>
+                <div>
+                  <div className="font-semibold">Bureau Broersma</div>
+                  <div className="text-sm text-white/40">Constructie & Advies sinds 1956</div>
+                </div>
+              </div>
             </div>
-            <h2 className="text-3xl md:text-5xl font-semibold text-white tracking-[-0.02em] mb-6">
-              Klaar om de Compliance
-              <br />
-              <span className="bg-gradient-to-r from-amber-400 to-orange-500 bg-clip-text text-transparent">Last te Verlichten?</span>
+          </AnimatedSection>
+        </div>
+      </section>
+
+      {/* ============================================ */}
+      {/* PRICING */}
+      {/* ============================================ */}
+      <section className="py-24">
+        <div className="max-w-5xl mx-auto px-6">
+          <AnimatedSection className="text-center mb-16">
+            <h2 className="text-3xl sm:text-4xl font-bold mb-4">
+              Transparante prijzen
             </h2>
-            <p className="text-lg text-white/60 mb-10 max-w-xl mx-auto font-light">
-              Plan een vrijblijvende demo en ontdek hoe BouwBorg uw werkprocessen kan transformeren.
+            <p className="text-white/50 max-w-xl mx-auto">
+              Geen verborgen kosten. U rekent de WKB-compliance fee door aan uw klant.
+            </p>
+          </AnimatedSection>
+
+          <div className="grid md:grid-cols-3 gap-6">
+            {[
+              {
+                name: "Aanbouw / Dakkapel",
+                price: "€450",
+                per: "per project",
+                features: ["Smart glasses lease", "AI validatie", "WKB dossier", "30 dagen support"],
+                popular: false
+              },
+              {
+                name: "Nieuwbouw Woning",
+                price: "€1.500",
+                per: "per project",
+                features: ["Alles van Aanbouw +", "Bureau Broersma check", "Constructeur validatie", "Woningpaspoort", "90 dagen support"],
+                popular: true
+              },
+              {
+                name: "Meerdere Woningen",
+                price: "Custom",
+                per: "op aanvraag",
+                features: ["Volume korting", "Dedicated support", "API integraties", "White-label optie", "Onbeperkt support"],
+                popular: false
+              }
+            ].map((plan, i) => (
+              <AnimatedSection key={i} delay={i * 100}>
+                <div className={`rounded-2xl p-8 h-full relative ${
+                  plan.popular 
+                    ? 'bg-gradient-to-b from-amber-500/10 to-orange-500/5 border-2 border-amber-500/30' 
+                    : 'bg-white/[0.02] border border-white/5'
+                }`}>
+                  {plan.popular && (
+                    <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 bg-gradient-to-r from-amber-500 to-orange-500 text-white text-xs font-bold rounded-full">
+                      MEEST GEKOZEN
+                    </div>
+                  )}
+                  <div className="text-sm font-medium text-white/40 mb-2">{plan.name}</div>
+                  <div className="flex items-baseline gap-1 mb-1">
+                    <span className="text-4xl font-bold">{plan.price}</span>
+                  </div>
+                  <div className="text-sm text-white/40 mb-6">{plan.per}</div>
+                  <ul className="space-y-3 mb-8">
+                    {plan.features.map((feature, j) => (
+                      <li key={j} className="flex items-center gap-2 text-sm text-white/70">
+                        <CheckCircle2 size={16} className="text-emerald-400 flex-shrink-0" />
+                        {feature}
+                      </li>
+                    ))}
+                  </ul>
+                  <button 
+                    onClick={() => document.getElementById('demo-form')?.scrollIntoView({ behavior: 'smooth' })}
+                    className={`w-full py-3 rounded-full font-medium transition-colors ${
+                      plan.popular
+                        ? 'bg-gradient-to-r from-amber-500 to-orange-500 text-white hover:from-amber-400 hover:to-orange-400'
+                        : 'bg-white/5 text-white hover:bg-white/10'
+                    }`}
+                  >
+                    Start gesprek
+                  </button>
+                </div>
+              </AnimatedSection>
+            ))}
+          </div>
+
+          <AnimatedSection delay={400} className="mt-8 text-center">
+            <p className="text-sm text-white/30">
+              Alle prijzen excl. BTW. Doorberekend aan eindklant als "WKB Compliance & Digitale Garantie".
+            </p>
+          </AnimatedSection>
+        </div>
+      </section>
+
+      {/* ============================================ */}
+      {/* CTA / DEMO FORM */}
+      {/* ============================================ */}
+      <section id="demo-form" className="py-24 bg-[#060a12] relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-amber-500/5 via-transparent to-transparent" />
+        
+        <div className="max-w-2xl mx-auto px-6 relative z-10">
+          <AnimatedSection className="text-center">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-amber-500/10 border border-amber-500/20 rounded-full text-xs font-medium text-amber-400 mb-6">
+              <Mail size={12} />
+              Vrijblijvend
+            </div>
+            
+            <h2 className="text-3xl sm:text-4xl font-bold mb-4">
+              Klaar om tijd terug te winnen?
+            </h2>
+            <p className="text-white/50 mb-10 max-w-md mx-auto">
+              Plan een 30-minuten demo en zie hoe BouwBorg uw WKB-administratie automatiseert.
             </p>
 
             <form 
               onSubmit={(e) => {
                 e.preventDefault();
-                alert('Bedankt! We nemen zo snel mogelijk contact op.');
+                alert('Bedankt! We nemen binnen 24 uur contact op.');
                 setEmail('');
+                setCompany('');
               }}
-              className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto mb-8"
+              className="space-y-4 max-w-md mx-auto"
             >
+              <input
+                type="text"
+                value={company}
+                onChange={(e) => setCompany(e.target.value)}
+                placeholder="Bedrijfsnaam"
+                required
+                className="w-full px-5 py-4 bg-white/5 border border-white/10 text-white placeholder:text-white/30 rounded-xl focus:border-amber-500/50 focus:outline-none transition-colors"
+              />
               <input
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="uw@email.nl"
+                placeholder="E-mailadres"
                 required
-                className="flex-1 px-5 py-4 bg-white/10 border border-white/20 text-white placeholder:text-white/40 outline-none focus:border-amber-500/50 transition-colors rounded-full"
+                className="w-full px-5 py-4 bg-white/5 border border-white/10 text-white placeholder:text-white/30 rounded-xl focus:border-amber-500/50 focus:outline-none transition-colors"
               />
               <button
                 type="submit"
-                className="px-8 py-4 bg-gradient-to-r from-amber-500 to-orange-500 text-white font-semibold hover:from-amber-400 hover:to-orange-400 transition-colors flex items-center justify-center gap-2 rounded-full"
+                className="w-full bg-gradient-to-r from-amber-500 to-orange-500 text-white py-4 font-semibold rounded-xl hover:from-amber-400 hover:to-orange-400 transition-colors flex items-center justify-center gap-2"
               >
-                Plan Demo <ArrowRight size={18} />
+                Plan Demo
+                <ArrowRight size={18} />
               </button>
             </form>
 
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-6 text-sm text-white/40">
-              <a href="tel:+31701234567" className="flex items-center gap-2 hover:text-white/60 transition-colors">
-                <Phone size={16} />
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-6 mt-8 text-sm text-white/30">
+              <a href="tel:+31701234567" className="flex items-center gap-2 hover:text-white/50 transition-colors">
+                <Phone size={14} />
                 +31 (0)70 123 4567
               </a>
-              <a href="mailto:sales@bouwborg.nl" className="flex items-center gap-2 hover:text-white/60 transition-colors">
-                <Mail size={16} />
+              <a href="mailto:sales@bouwborg.nl" className="flex items-center gap-2 hover:text-white/50 transition-colors">
+                <Mail size={14} />
                 sales@bouwborg.nl
               </a>
             </div>
           </AnimatedSection>
         </div>
-      </div>
+      </section>
 
-      {/* Footer */}
-      <footer className="text-white py-12 px-6 bg-[#06101f] border-t border-white/5">
-        <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
-          <div className="flex items-center gap-4">
-            <img src="/generated/og-logo.png" alt="Ooit Gedacht" className="h-8 brightness-0 invert opacity-60" />
-            <span className="text-white/30">×</span>
-            <span className="text-sm text-white/40">BouwBorg Platform</span>
-          </div>
-          <div className="flex items-center gap-6">
-            <button 
-              onClick={() => setAppState(AppState.LANDING)}
-              className="text-sm text-white/40 hover:text-white/60 transition-colors"
-            >
-              Voor Particulieren
-            </button>
-            <span className="text-white/20">|</span>
-            <span className="text-sm text-white/40">© 2025 Ooit Gedacht B.V.</span>
+      {/* ============================================ */}
+      {/* FOOTER */}
+      {/* ============================================ */}
+      <footer className="py-12 border-t border-white/5">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+            <div className="flex items-center gap-4">
+              <img src="/generated/og-logo.png" alt="" className="h-6 brightness-0 invert opacity-40" />
+              <span className="text-white/20">×</span>
+              <span className="text-xs text-white/30">BouwBorg B2B Platform</span>
+            </div>
+            <div className="flex items-center gap-6 text-sm text-white/30">
+              <button onClick={() => setAppState(AppState.LANDING)} className="hover:text-white/50 transition-colors">
+                Voor Particulieren →
+              </button>
+              <span>© 2025 Ooit Gedacht B.V.</span>
+            </div>
           </div>
         </div>
       </footer>
     </div>
   );
 };
-
