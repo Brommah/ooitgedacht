@@ -156,7 +156,7 @@ export const Preferences: React.FC<PreferencesProps> = ({ initialPrefs, onNext, 
               </div>
               <div className="text-left">
                 <div className="text-blue-200 font-medium">Nauwkeuriger resultaat?</div>
-                <div className="text-blue-400/50 text-xs font-mono">Swipe meer stijlen</div>
+                <div className="text-blue-400/50 text-xs font-mono">Kies meer stijlen</div>
               </div>
               <ArrowRight size={16} className="text-blue-400/30 group-hover:text-blue-400 ml-auto transition-colors" />
             </motion.button>

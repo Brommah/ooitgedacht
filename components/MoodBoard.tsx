@@ -66,7 +66,7 @@ export const MoodBoard: React.FC<MoodBoardProps> = ({ images, onComplete }) => {
             className="max-w-6xl mx-auto"
           >
             <p className="text-blue-400/60 font-mono text-xs lg:text-sm uppercase tracking-wider mb-2">
-              Stap 1 van 3
+              Stap 2 van 5
             </p>
             <h1 className="text-3xl lg:text-5xl font-light tracking-tight text-white mb-2" style={{ fontFamily: 'system-ui, -apple-system, sans-serif', letterSpacing: '-0.02em' }}>
               Welke stijl past bij <span className="text-blue-400">jou</span>?

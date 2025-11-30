@@ -308,7 +308,7 @@ export const LocationStep: React.FC<LocationStepProps> = ({ initialPrefs, onNext
               <div>
                 <div className="text-blue-100 font-medium">Kavels in je regio</div>
                 <div className="text-sm text-blue-400/60 mt-1">
-                  Na het genereren van je droomhuis tonen we beschikbare kavels in {searchQuery || 'je gekozen regio'}.
+                  Na het ontvangen van je ontwerp tonen we beschikbare kavels in {searchQuery || 'je gekozen regio'}.
                 </div>
               </div>
             </div>

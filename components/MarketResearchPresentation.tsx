@@ -635,7 +635,7 @@ export const MarketResearchPresentation: React.FC<MarketResearchPresentationProp
           <div className="text-center mb-16">
             <span className="text-blue-400 text-sm font-mono uppercase tracking-widest">De Oplossing</span>
             <h2 className="text-4xl md:text-6xl font-serif mt-4">
-              Bouw <span className="text-blue-400">Operating System</span>
+              Bouw <span className="text-blue-400">Besturingssysteem</span>
             </h2>
           </div>
 
@@ -643,43 +643,43 @@ export const MarketResearchPresentation: React.FC<MarketResearchPresentationProp
             {[
               { 
                 icon: MapPin, 
-                title: 'Crowdsourced Kavels', 
+                title: 'Collectief kavelzoeken', 
                 desc: 'Community scant bestemmingsplannen. AI matcht jouw wensen met beschikbare grond.',
                 color: 'text-green-400',
                 border: 'border-green-500/20'
               },
               { 
                 icon: Shield, 
-                title: 'Expert Validatie', 
-                desc: 'Bureau Broersma (90+ jaar, 10K+ projecten) valideert elk ontwerp en elke milestone.',
+                title: 'Expertvalidatie', 
+                desc: 'Bureau Broersma (90+ jaar, 10K+ projecten) valideert elk ontwerp en elke mijlpaal.',
                 color: 'text-blue-400',
                 border: 'border-blue-500/20'
               },
               { 
                 icon: Zap, 
-                title: 'Mijlpaal Betalingen', 
-                desc: 'Betaal alleen bij goedgekeurd werk. Geen black box, volledige transparantie.',
+                title: 'Mijlpaalbetalingen', 
+                desc: 'Betaal alleen bij goedgekeurd werk. Geen zwarte doos, volledige transparantie.',
                 color: 'text-amber-400',
                 border: 'border-amber-500/20'
               },
               { 
                 icon: Bot, 
-                title: 'AI Co-Pilot (Homie)', 
+                title: 'AI Assistent (Homie)', 
                 desc: 'Altijd één stap voor. Beantwoordt al je vragen in normale taal.',
                 color: 'text-purple-400',
                 border: 'border-purple-500/20'
               },
               { 
                 icon: FileText, 
-                title: 'Documenten Kluis', 
+                title: 'Documentenkluis', 
                 desc: 'Alle documenten op één plek. Van ontwerp tot oplevering.',
                 color: 'text-cyan-400',
                 border: 'border-cyan-500/20'
               },
               { 
                 icon: Activity, 
-                title: 'Realtime Dashboard', 
-                desc: 'Gestructureerde workflows. Altijd weten waar je staat.',
+                title: 'Realtime Overzicht', 
+                desc: 'Gestructureerde werkstromen. Altijd weten waar je staat.',
                 color: 'text-pink-400',
                 border: 'border-pink-500/20'
               },
@@ -709,9 +709,9 @@ export const MarketResearchPresentation: React.FC<MarketResearchPresentationProp
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {[
               { icon: AlertTriangle, title: 'Woningcrisis op piek', desc: 'Maximale urgentie, politieke wil voor verandering', color: 'text-red-400' },
-              { icon: Sparkles, title: 'AI technologie mature', desc: 'Design generatie en guidance automatisering nu haalbaar', color: 'text-purple-400' },
+              { icon: Sparkles, title: 'AI-technologie volwassen', desc: 'Ontwerpgeneratie en begeleiding via automatisering nu haalbaar', color: 'text-purple-400' },
               { icon: FileText, title: 'Omgevingswet transitie', desc: 'Verwarring creëert behoefte aan begeleiding', color: 'text-blue-400' },
-              { icon: Euro, title: 'Digitale betalingen', desc: 'Milestone-based escrow nu mainstream', color: 'text-green-400' },
+              { icon: Euro, title: 'Digitale betalingen', desc: 'Mijlpaalgerichte betalingen nu gemeengoed', color: 'text-green-400' },
               { icon: Home, title: 'Thuiswerk trend', desc: 'Meer mensen bouwen buiten steden', color: 'text-amber-400' },
               { icon: Shield, title: 'Wkb implementatie', desc: 'Kwaliteitsborging vereist onze documentatie-aanpak', color: 'text-cyan-400' },
             ].map((item, i) => (
@@ -763,8 +763,8 @@ export const MarketResearchPresentation: React.FC<MarketResearchPresentationProp
 
           <div className="p-8 bg-gradient-to-r from-green-500/10 to-emerald-500/10 border border-green-500/20 rounded-xl">
             <p className="text-2xl text-white/80 italic">
-              "Een Construction Operating System dat elke stap digitaal valideert, 
-              betalingen alleen vrijgeeft bij geverifieerd werk, en de 'black box' 
+              "Een Bouwbesturingssysteem dat elke stap digitaal valideert, 
+              betalingen alleen vrijgeeft bij geverifieerd werk, en de 'zwarte doos' 
               van traditionele bouw elimineert."
             </p>
           </div>

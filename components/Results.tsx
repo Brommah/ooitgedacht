@@ -106,7 +106,7 @@ export const Results: React.FC<ResultsProps> = ({ image, locked, onUnlock, onDas
         <img 
           src={image} 
           className="absolute inset-0 w-full h-full object-cover" 
-          alt="Your Dream Home"
+          alt="Je droomhuis"
         />
         
         {/* Gradient overlay */}
@@ -120,7 +120,7 @@ export const Results: React.FC<ResultsProps> = ({ image, locked, onUnlock, onDas
           </div>
           <div className="flex items-center gap-1.5 px-3 py-1.5 bg-gradient-to-r from-blue-500 to-blue-600 text-white text-[10px] font-bold uppercase tracking-wider rounded-full">
             <Sparkles size={12} />
-            AI Generated
+            AI Gegenereerd
           </div>
         </div>
 
@@ -145,7 +145,7 @@ export const Results: React.FC<ResultsProps> = ({ image, locked, onUnlock, onDas
           <div className="bg-black/80 backdrop-blur-xl border-t border-white/10 p-6 md:p-8">
             <div className="max-w-lg mx-auto text-center">
               <h1 className="text-2xl md:text-3xl font-bold text-white mb-1">
-                The {locationName} Residence
+                De {locationName} Woning
               </h1>
               <p className="text-white/50 text-sm mb-4">
                 {preferences.style.moodBoardSelections[0]} • {materialDesc}
@@ -178,7 +178,7 @@ export const Results: React.FC<ResultsProps> = ({ image, locked, onUnlock, onDas
                 disabled={!email.includes('@')}
                 className="w-full bg-gradient-to-r from-[#1e3a5f] to-[#0d1f3c] disabled:bg-white/10 disabled:text-white/30 text-white py-3 font-semibold rounded-full flex items-center justify-center gap-2 shadow-lg shadow-[#0a1628]/40 border border-[#2a4a73]/30 hover:from-[#2a4a73] hover:to-[#1e3a5f]"
               >
-                Bekijk Volledig Passport
+                Bekijk Volledig Paspoort
                 <ArrowRight size={18} />
               </motion.button>
 
@@ -239,7 +239,7 @@ export const Results: React.FC<ResultsProps> = ({ image, locked, onUnlock, onDas
       >
       <motion.img 
         src={image} 
-        alt="Your Dream Home" 
+        alt="Je droomhuis" 
           className="w-full h-full object-cover select-none pointer-events-none"
           style={{ scale: imageScale }}
         initial={{ scale: 1.05 }}
@@ -284,7 +284,7 @@ export const Results: React.FC<ResultsProps> = ({ image, locked, onUnlock, onDas
         </div>
         <div className="flex items-center gap-1.5 px-3 py-1.5 bg-gradient-to-r from-blue-500 to-blue-600 text-white text-[10px] font-bold uppercase tracking-wider rounded-full shadow-lg">
           <Sparkles size={12} />
-          AI Generated
+          AI Gegenereerd
         </div>
       </div>
 
@@ -318,7 +318,7 @@ export const Results: React.FC<ResultsProps> = ({ image, locked, onUnlock, onDas
       {/* Title overlay - different position for mobile */}
       <div className={`absolute z-10 ${isMobile ? 'bottom-[200px] left-4 text-left' : 'top-4 right-4 text-right'}`}>
         <h1 className="text-white text-xl md:text-2xl font-bold drop-shadow-lg">
-          The {locationName} Residence
+          De {locationName} Woning
         </h1>
         <p className="text-white/70 text-sm drop-shadow-md">
           {preferences.style.moodBoardSelections[0]} • {materialDesc}
@@ -387,7 +387,7 @@ export const Results: React.FC<ResultsProps> = ({ image, locked, onUnlock, onDas
                   className="bg-gradient-to-r from-[#1e3a5f] to-[#0d1f3c] text-white px-5 py-2.5 font-semibold rounded-full flex items-center gap-2 shadow-lg shadow-[#0a1628]/40 border border-[#2a4a73]/30 hover:from-[#2a4a73] hover:to-[#1e3a5f]"
                 >
                   <MessageSquare size={16} />
-                  Dashboard
+                  Overzicht
                 </motion.button>
               </div>
 
@@ -604,7 +604,7 @@ export const Results: React.FC<ResultsProps> = ({ image, locked, onUnlock, onDas
                         className="flex-1 bg-gradient-to-r from-[#1e3a5f] to-[#0d1f3c] hover:from-[#2a4a73] hover:to-[#1e3a5f] text-white py-3 font-semibold rounded-full flex items-center justify-center gap-2 shadow-lg shadow-[#0a1628]/40 border border-[#2a4a73]/30 transition-colors"
                       >
                         <MessageSquare size={16} />
-                        Open Dashboard
+                        Open Overzicht
                       </motion.button>
                       
                       <button className="px-4 py-3 bg-white/5 hover:bg-white/10 text-white/70 rounded-xl transition-colors border border-white/10">
@@ -639,7 +639,7 @@ export const Results: React.FC<ResultsProps> = ({ image, locked, onUnlock, onDas
                 className="bg-gradient-to-r from-[#1e3a5f] to-[#0d1f3c] text-white px-6 py-2 font-semibold rounded-full flex items-center gap-2 shadow-lg shadow-[#0a1628]/40 border border-[#2a4a73]/30 hover:from-[#2a4a73] hover:to-[#1e3a5f]"
               >
                 <MessageSquare size={16} />
-                Dashboard
+                Overzicht
               </motion.button>
             </div>
           </div>

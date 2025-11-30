@@ -122,7 +122,7 @@ export const Hero: React.FC<HeroProps> = ({ setAppState }) => {
     },
     {
       question: "Hoe lang duurt het hele traject van ontwerp tot sleutel?",
-      answer: "Gemiddeld 10-14 maanden van eerste ontwerp tot oplevering. Dit is significant sneller dan traditioneel bouwen (18-24 maanden) dankzij onze pre-gevalideerde processen en gestroomlijnde vergunningsaanvraag."
+      answer: "Gemiddeld 10-14 maanden van eerste ontwerp tot sleuteloverdracht. Dit is significant sneller dan traditioneel bouwen (18-24 maanden) dankzij onze voorgevalideerde processen en gestroomlijnde vergunningsaanvraag."
     },
     {
       question: "Werkt dit ook als ik nog geen kavel heb?",
@@ -199,7 +199,7 @@ export const Hero: React.FC<HeroProps> = ({ setAppState }) => {
                   >
                     <span className="relative z-10 flex items-center gap-1.5">
                       <Home size={14} />
-                      Dashboard
+                      Overzicht
                     </span>
                   </button>
                   <button 
@@ -209,6 +209,15 @@ export const Hero: React.FC<HeroProps> = ({ setAppState }) => {
                     <span className="relative z-10 flex items-center gap-1.5">
                       <BarChart3 size={14} />
                       Markt
+                    </span>
+                  </button>
+                  <button 
+                    onClick={() => setAppState(AppState.B2B_BUILDERS)}
+                    className="relative px-5 py-2 text-[13px] text-white/70 hover:text-white transition-all duration-300 rounded-full hover:bg-white/[0.08] group"
+                  >
+                    <span className="relative z-10 flex items-center gap-1.5">
+                      <Hammer size={14} />
+                      Voor Aannemers
                     </span>
                   </button>
                 </div>
@@ -314,6 +323,16 @@ export const Hero: React.FC<HeroProps> = ({ setAppState }) => {
                     color: 'from-amber-400 to-orange-400',
                     onClick: () => {
                       setAppState(AppState.STATE_OF_MARKET);
+                      setMobileMenuOpen(false);
+                    }
+                  },
+                  { 
+                    icon: <Hammer size={22} />, 
+                    label: 'Voor Aannemers', 
+                    sublabel: 'BouwBorg B2B Platform',
+                    color: 'from-orange-400 to-red-400',
+                    onClick: () => {
+                      setAppState(AppState.B2B_BUILDERS);
                       setMobileMenuOpen(false);
                     }
                   },
@@ -479,7 +498,7 @@ export const Hero: React.FC<HeroProps> = ({ setAppState }) => {
         </div>
       </div>
 
-      {/* 3. DASHBOARD WORKFLOW PREVIEW - Jouw Construction OS */}
+      {/* 3. DASHBOARD WORKFLOW PREVIEW - Jouw Bouwbesturingssysteem */}
       <div className="bg-[#0d1f3c] py-24 md:py-32 px-6 relative overflow-hidden">
           {/* Tinted background image */}
           <div className="absolute inset-0">
@@ -498,7 +517,7 @@ export const Hero: React.FC<HeroProps> = ({ setAppState }) => {
           <div className="max-w-5xl mx-auto relative z-10">
              <AnimatedSection className="text-center mb-12 md:mb-16">
                <h2 className="text-3xl md:text-5xl font-semibold leading-tight mb-4 text-white tracking-[-0.02em]">
-                   Jouw Construction OS
+                   Jouw Bouwbesturingssysteem
                </h2>
                <div className="text-lg md:text-xl text-blue-200/60 font-light leading-relaxed max-w-2xl mx-auto">
                    <p>Volg elke fase van je bouwproject in realtime.</p>
@@ -571,7 +590,7 @@ export const Hero: React.FC<HeroProps> = ({ setAppState }) => {
                         onClick={() => setAppState(AppState.WORKSPACE)}
                         className="flex items-center gap-2 text-xs font-bold text-blue-400 hover:text-blue-300 transition-colors"
                     >
-                        Open Dashboard <ArrowRight size={12} />
+                        Open Overzicht <ArrowRight size={12} />
                     </button>
              </div>
              </AnimatedSection>
@@ -579,7 +598,7 @@ export const Hero: React.FC<HeroProps> = ({ setAppState }) => {
              {/* Powered by Broersma + CTA */}
              <AnimatedSection delay={200} className="flex flex-col items-center justify-center mt-12 md:mt-16 gap-6">
                  <div className="flex flex-col items-center gap-4">
-                 <span className="text-[10px] font-bold uppercase tracking-widest text-blue-300/50">Powered by</span>
+                 <span className="text-[10px] font-bold uppercase tracking-widest text-blue-300/50">Met ondersteuning van</span>
                  <a 
                    href="https://www.bureau-broersma.nl" 
                    target="_blank" 
@@ -805,7 +824,7 @@ export const Hero: React.FC<HeroProps> = ({ setAppState }) => {
                               </div>
                                           <div className="flex-1">
                                               <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-1 md:gap-4 mb-2">
-                                                  <span className="font-medium text-white text-sm md:text-base">Passport Afgegeven</span>
+                                                  <span className="font-medium text-white text-sm md:text-base">Paspoort Afgegeven</span>
                                                   <span className="font-mono text-[10px] md:text-xs text-blue-300/50">2024-11-15 • 14:34:18 CET</span>
                           </div>
                                               <p className="text-xs md:text-sm text-blue-200/50">Document cryptografisch ondertekend en opgeslagen. Geldig voor 90 dagen, automatisch verlengbaar.</p>
@@ -967,14 +986,14 @@ export const Hero: React.FC<HeroProps> = ({ setAppState }) => {
         <div className="max-w-[1200px] mx-auto">
           <AnimatedSection className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 md:mb-24 gap-4">
              <div>
-                <h2 className="text-3xl md:text-4xl font-semibold mb-2 md:mb-4 text-white tracking-[-0.02em]">De Factory Line.</h2>
+                <h2 className="text-3xl md:text-4xl font-semibold mb-2 md:mb-4 text-white tracking-[-0.02em]">Het Stappenplan.</h2>
                 <p className="text-blue-200/50 font-light">Van droom naar sleuteloverdracht in 4 stappen.</p>
              </div>
              <button 
                 onClick={() => setAppState(AppState.WIZARD_HOUSEHOLD)}
                 className="flex items-center gap-2 text-sm font-bold uppercase tracking-widest border-b border-blue-400 text-blue-400 pb-1 hover:opacity-70 transition-opacity"
              >
-                 Start de flow <ArrowRight size={14} />
+                 Start het proces <ArrowRight size={14} />
              </button>
           </AnimatedSection>
           
@@ -1031,7 +1050,7 @@ export const Hero: React.FC<HeroProps> = ({ setAppState }) => {
                  </div>
                    <h3 className="text-xl md:text-2xl font-medium mb-2 text-white group-hover:text-blue-400 transition-colors tracking-[-0.01em]">Het Paspoort</h3>
                  <p className="text-sm text-blue-200/50 font-light leading-relaxed">
-                     Je ontvangt een 'Feasibility Passport'. Kosten, materialen en duurzaamheid in één dossier.
+                     Je ontvangt een Woningpaspoort. Kosten, materialen en duurzaamheid in één dossier.
                  </p>
              </div>
              </AnimatedSection>
@@ -1040,7 +1059,7 @@ export const Hero: React.FC<HeroProps> = ({ setAppState }) => {
              <AnimatedSection delay={300}>
                <div className="group cursor-pointer" onClick={() => setAppState(AppState.WIZARD_HOUSEHOLD)}>
                    <div className="mb-4 md:mb-6 overflow-hidden aspect-[4/3] bg-blue-500/10 rounded-xl relative">
-                       <img src="/generated/steps/step-04-bouw-os.jpg" loading="lazy" className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-500" alt="De Bouw OS"/>
+                       <img src="/generated/steps/step-04-bouw-os.jpg" loading="lazy" className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-500" alt="Het Bouwsysteem"/>
                        <div className="absolute inset-0 bg-[#0a1628]/30 group-hover:bg-[#0a1628]/15 transition-colors flex items-center justify-center">
                          <Hammer size={40} strokeWidth={1} className="text-white group-hover:scale-110 transition-transform drop-shadow-lg" />
                        </div>
@@ -1049,7 +1068,7 @@ export const Hero: React.FC<HeroProps> = ({ setAppState }) => {
                      <span className="font-mono text-xs text-blue-400">04</span>
                      <div className="h-[1px] bg-blue-500/30 w-12"></div>
                  </div>
-                   <h3 className="text-xl md:text-2xl font-medium mb-2 text-white group-hover:text-blue-400 transition-colors tracking-[-0.01em]">De Bouw OS</h3>
+                   <h3 className="text-xl md:text-2xl font-medium mb-2 text-white group-hover:text-blue-400 transition-colors tracking-[-0.01em]">Het Bouwsysteem</h3>
                  <p className="text-sm text-blue-200/50 font-light leading-relaxed">
                      Geen gedoe. Volg de bouw via je dashboard. Betalingen gaan pas weg als het werk af is.
                  </p>
@@ -1188,7 +1207,7 @@ export const Hero: React.FC<HeroProps> = ({ setAppState }) => {
                 <ul className="space-y-2 text-sm text-white/70">
                   <li className="flex items-center gap-2">
                     <CheckCircle2 size={14} className="text-purple-400 flex-shrink-0" />
-                    Pre-validated dossiers
+                    Voorgevalideerde dossiers
                   </li>
                   <li className="flex items-center gap-2">
                     <CheckCircle2 size={14} className="text-purple-400 flex-shrink-0" />
@@ -1371,7 +1390,7 @@ export const Hero: React.FC<HeroProps> = ({ setAppState }) => {
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-3 group"
                   >
-                      <span className="text-[10px] uppercase tracking-widest text-gray-600 group-hover:text-gray-400 transition-colors">Powered by</span>
+                      <span className="text-[10px] uppercase tracking-widest text-gray-600 group-hover:text-gray-400 transition-colors">Met ondersteuning van</span>
                       <img src={BROERSMA_LOGO} alt="Bureau Broersma" className="h-5 md:h-6 brightness-0 invert opacity-60 group-hover:opacity-80 transition-opacity" />
                   </a>
               </div>
@@ -1414,6 +1433,14 @@ export const Hero: React.FC<HeroProps> = ({ setAppState }) => {
                             <a href="mailto:gemeenten@ooitgedacht.nl" className="hover:text-white transition-colors">
                               Voor Gemeenten
                             </a>
+                          </li>
+                          <li>
+                            <button 
+                              onClick={() => setAppState(AppState.B2B_BUILDERS)}
+                              className="hover:text-white transition-colors"
+                            >
+                              Voor Aannemers
+                            </button>
                           </li>
                       </ul>
                   </div>

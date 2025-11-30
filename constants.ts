@@ -363,7 +363,7 @@ export const ROOF_OPTIONS: Array<{
 
 export const VIBE_LABELS: Record<number, string> = {
   0: 'Strak & Minimalistisch',
-  25: 'Modern & Clean',
+  25: 'Modern & Strak',
   50: 'Gebalanceerd',
   75: 'Warm & Natuurlijk',
   100: 'Knus & Landelijk'
@@ -371,7 +371,7 @@ export const VIBE_LABELS: Record<number, string> = {
 
 export const getVibeLabel = (value: number): string => {
   if (value < 15) return 'Strak & Minimalistisch';
-  if (value < 35) return 'Modern & Clean';
+  if (value < 35) return 'Modern & Strak';
   if (value < 65) return 'Gebalanceerd';
   if (value < 85) return 'Warm & Natuurlijk';
   return 'Knus & Landelijk';

@@ -138,7 +138,7 @@ export const BuildersPage: React.FC<BuildersPageProps> = ({ setAppState }) => {
     },
     {
       icon: <Cpu size={32} />,
-      title: "Construction OS",
+      title: "Bouwbesturingssysteem",
       subtitle: "Software Platform",
       description: "Finite State Machine workflow die elke fase van de bouw bewaakt. Geen stap zonder validatie.",
       color: "from-blue-400 to-cyan-500",
@@ -529,7 +529,7 @@ export const BuildersPage: React.FC<BuildersPageProps> = ({ setAppState }) => {
                   <li className="flex items-center gap-2"><CheckCircle2 size={14} className="text-emerald-400" /> Alles van Klein +</li>
                   <li className="flex items-center gap-2"><CheckCircle2 size={14} className="text-emerald-400" /> Bureau Broersma validatie</li>
                   <li className="flex items-center gap-2"><CheckCircle2 size={14} className="text-emerald-400" /> Constructeur check</li>
-                  <li className="flex items-center gap-2"><CheckCircle2 size={14} className="text-emerald-400" /> Housing Passport</li>
+                  <li className="flex items-center gap-2"><CheckCircle2 size={14} className="text-emerald-400" /> Woningpaspoort</li>
                 </ul>
               </div>
             </AnimatedSection>

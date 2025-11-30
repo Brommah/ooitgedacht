@@ -82,7 +82,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ preferences, image }) => {
             <img src={image} alt="Project Render" className="w-full h-full object-cover" />
             <div className="absolute inset-0 bg-gradient-to-t from-[#0a1628] via-[#0a1628]/50 to-transparent" />
             <div className="absolute bottom-0 left-0 p-6">
-              <h1 className="text-3xl font-bold mb-1 text-blue-50">{styleName} Residence</h1>
+              <h1 className="text-3xl font-bold mb-1 text-blue-50">{styleName} Woning</h1>
               <p className="text-blue-300/70 flex items-center gap-2 text-sm">
                 <span className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"/>
                 Actief Project • {fullLocation}
@@ -103,14 +103,14 @@ export const Dashboard: React.FC<DashboardProps> = ({ preferences, image }) => {
           </div>
         </div>
 
-        {/* Left Column: Timeline & Construction OS */}
+        {/* Left Column: Timeline & Bouwbesturingssysteem */}
         <div className="md:col-span-2 space-y-6">
            
            {/* OS Card */}
            <div className="bg-blue-500/5 backdrop-blur-sm p-6 md:p-8 border border-blue-500/20 rounded-2xl">
               <div className="flex justify-between items-start mb-6">
                   <div>
-                      <h2 className="text-2xl font-bold mb-1 text-blue-50">Construction OS</h2>
+                      <h2 className="text-2xl font-bold mb-1 text-blue-50">Bouwbesturingssysteem</h2>
                       <p className="text-sm text-blue-300/60">Project Status: Fase 3 - Fundering</p>
                   </div>
                   <div className="flex flex-col items-end">
@@ -181,7 +181,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ preferences, image }) => {
            {/* Chat / Feed */}
            <div className="bg-blue-500/5 backdrop-blur-sm p-6 md:p-8 border border-blue-500/20 rounded-2xl">
                <h3 className="text-xl font-bold mb-6 flex items-center gap-2 text-blue-50">
-                   <MessageSquare size={20} className="text-blue-400" /> Project Feed
+                   <MessageSquare size={20} className="text-blue-400" /> Projectberichten
                </h3>
                
                <div className="space-y-6">
@@ -189,7 +189,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ preferences, image }) => {
                        <div className="w-10 h-10 bg-blue-400 text-[#0a1628] flex-shrink-0 flex items-center justify-center text-xs font-bold rounded-lg">BB</div>
                        <div className="flex-1">
                            <div className="text-sm font-bold mb-1 flex items-center gap-2 text-blue-100">
-                               Bureau Broersma <span className="px-2 py-0.5 bg-blue-500/10 text-blue-300 text-[10px] uppercase tracking-widest rounded-full font-normal border border-blue-500/20">Validator</span>
+                               Bureau Broersma <span className="px-2 py-0.5 bg-blue-500/10 text-blue-300 text-[10px] uppercase tracking-widest rounded-full font-normal border border-blue-500/20">Keurmeester</span>
                            </div>
                            <div className="bg-blue-500/10 p-4 text-sm text-blue-200 leading-relaxed border-l-2 border-blue-400 rounded-r-lg">
                                De wapeningsfoto's voldoen aan de specificaties. We hebben de betaling aan de aannemer (Tranche 2) vrijgegeven. Jullie kunnen morgen storten.
@@ -267,7 +267,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ preferences, image }) => {
                     <FileText size={18} className="text-blue-400" /> Documentenkluis
                 </h3>
                 <div className="space-y-3">
-                    <DocItem name="Feasibility_Passport_Signed.pdf" verified />
+                    <DocItem name="Woningpaspoort_Ondertekend.pdf" verified />
                     <DocItem name="Vergunning_Onherroepelijk.pdf" verified />
                     <DocItem name="Constructieberekening_BB_v4.pdf" verified />
                     <DocItem name="Sonderingsrapport_Gecontroleerd.pdf" verified />

@@ -174,7 +174,7 @@ const HomieChat: React.FC<{ isOpen: boolean; onClose: () => void; setAppState: (
       } else if (lowerInput.includes('vergunn') || lowerInput.includes('gemeente')) {
         response = 'Vergunningen zijn vaak een bottleneck. Wij pre-valideren je ontwerp tegen het bestemmingsplan, zodat je aanvraag in één keer goed is. Dat scheelt maanden wachttijd!';
       } else if (lowerInput.includes('start') || lowerInput.includes('begin')) {
-        response = 'Super! Begin met onze gratis Vibe Check — kies je stijl, en onze AI genereert een eerste ontwerp. Daarna krijg je een Feasibility Passport met kosten en haalbaarheid.';
+        response = 'Super! Begin met onze gratis Vibe Check — kies je stijl, en onze AI genereert een eerste ontwerp. Daarna krijg je een Woningpaspoort met kosten en haalbaarheid.';
       } else {
         response = 'Goede vraag! In het kort: wij begeleiden je van droom naar sleutel. AI-ontwerp, kavel-check, kostenraming, vergunning, en bouw — alles via één dashboard. Wil je starten met een gratis ontwerp?';
       }
@@ -376,7 +376,7 @@ export const StateOfMarket: React.FC<StateOfMarketProps> = ({ setAppState }) => 
         <div className="relative z-10 max-w-6xl mx-auto px-6 text-center">
           <div className="inline-flex items-center gap-2 px-4 py-2 bg-red-500/10 border border-red-500/20 rounded-full mb-8">
             <AlertTriangle size={14} className="text-red-400" />
-            <span className="text-xs font-bold uppercase tracking-widest text-red-400">Stand van de Markt 2025</span>
+            <span className="text-xs font-bold uppercase tracking-widest text-red-400">Stand van de Woningmarkt 2025</span>
           </div>
 
           <h1 className="text-5xl md:text-8xl font-serif font-medium leading-[0.9] mb-8">
@@ -776,8 +776,8 @@ export const StateOfMarket: React.FC<StateOfMarketProps> = ({ setAppState }) => 
               <div className="space-y-4">
                 {[
                   { icon: Users, label: 'Collectieve Datakracht', desc: 'Honderden ogen en slimme algoritmes analyseren bestemmingsplannen, kadasterdata en gemeentelijke notities. We zien wat een individu mist.' },
-                  { icon: Map, label: 'AI-Gedreven Potentieelscan', desc: 'Onze AI geeft een eerste, snelle indicatie van de bouwpotentie van een locatie. Geen garantie, wel een krachtig startpunt.' },
-                  { icon: UserCheck, label: 'Gevalideerd door Experts', desc: 'Elke serieuze kans wordt doorgelicht door de ingenieurs van Bureau Broersma. Zo weet je dat de basis solide is.' },
+                  { icon: Map, label: 'AI-gedreven potentieelscan', desc: 'Onze AI geeft een eerste, snelle indicatie van de bouwpotentie van een locatie. Geen garantie, wel een krachtig startpunt.' },
+                  { icon: UserCheck, label: 'Gevalideerd door experts', desc: 'Elke serieuze kans wordt doorgelicht door de ingenieurs van Bureau Broersma. Zo weet je dat de basis solide is.' },
                 ].map((item, i) => (
                   <div 
                     key={i}
@@ -802,7 +802,7 @@ export const StateOfMarket: React.FC<StateOfMarketProps> = ({ setAppState }) => 
                 
                 <div className="flex items-center gap-2 mb-8">
                   <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
-                  <span className="text-xs font-bold uppercase tracking-widest text-green-400">Community Stats (Q4 2025)</span>
+                  <span className="text-xs font-bold uppercase tracking-widest text-green-400">Community Statistieken (Q4 2025)</span>
                 </div>
                 
                 <div className="space-y-8 relative z-10">
@@ -951,10 +951,10 @@ export const StateOfMarket: React.FC<StateOfMarketProps> = ({ setAppState }) => 
 
               <div className="space-y-4 mb-10">
                 {[
-                  { icon: Zap, title: 'Proactief', desc: 'Weet wat je nodig hebt voordat jij het weet' },
+                  { icon: Zap, title: 'Proactief', desc: 'Weet wat je nodig hebt voordat je het zelf weet' },
                   { icon: MessageCircle, title: 'Jouw Taal', desc: 'Geen jargon. Gewoon duidelijke antwoorden.' },
-                  { icon: Shield, title: 'End-to-End', desc: 'Van kavel tot sleutel, altijd aan je zijde' },
-                  { icon: Lightbulb, title: 'Context-Aware', desc: 'Kent jouw project, jouw fase, jouw situatie' },
+                  { icon: Shield, title: 'Van A tot Z', desc: 'Van kavel tot sleutel, altijd aan je zijde' },
+                  { icon: Lightbulb, title: 'Contextbewust', desc: 'Kent jouw project, jouw fase, jouw situatie' },
                 ].map((item, i) => (
                   <div key={i} className="flex items-start gap-4 group">
                     <div className="p-2 bg-green-500/20 group-hover:bg-green-500/30 transition-colors rounded-lg">
