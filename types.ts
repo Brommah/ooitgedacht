@@ -34,7 +34,6 @@ export interface WorkspaceTask {
   verifiedAt?: string;
   verifiedBy?: string;
   rejectionReason?: string;
-  blockchainHash?: string;
   artifacts?: WorkspaceArtifact[];
   slaHours?: number;
   referenceImageUrl?: string;
