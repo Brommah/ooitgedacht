@@ -4,6 +4,8 @@ import { Hero } from './components/Hero';
 import { Wizard } from './components/Wizard';
 import { StateOfMarket } from './components/StateOfMarket';
 import { MarketResearchPresentation } from './components/MarketResearchPresentation';
+import { BuildersPage } from './components/BuildersPage';
+import { CollaborativeWorkspace } from './components/CollaborativeWorkspace';
 
 export default function App() {
   const [appState, setAppState] = useState<AppState>(AppState.LANDING);
@@ -16,6 +18,10 @@ export default function App() {
         <StateOfMarket setAppState={setAppState} />
       ) : appState === AppState.MARKET_RESEARCH ? (
         <MarketResearchPresentation setAppState={setAppState} />
+      ) : appState === AppState.WORKSPACE ? (
+        <CollaborativeWorkspace setAppState={setAppState} />
+      ) : appState === AppState.B2B_BUILDERS ? (
+        <BuildersPage setAppState={setAppState} />
       ) : (
         <Wizard appState={appState} setAppState={setAppState} />
       )}

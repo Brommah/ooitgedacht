@@ -2,6 +2,7 @@ export enum AppState {
   LANDING = 'LANDING',
   STATE_OF_MARKET = 'STATE_OF_MARKET',
   MARKET_RESEARCH = 'MARKET_RESEARCH',
+  B2B_BUILDERS = 'B2B_BUILDERS',
   // New comprehensive wizard flow
   WIZARD_HOUSEHOLD = 'WIZARD_HOUSEHOLD',
   WIZARD_MOODBOARD = 'WIZARD_MOODBOARD',
@@ -12,6 +13,70 @@ export enum AppState {
   RESULTS_LOCKED = 'RESULTS_LOCKED',
   RESULTS_UNLOCKED = 'RESULTS_UNLOCKED',
   DASHBOARD = 'DASHBOARD',
+  // Collaborative Workspace (Construction OS)
+  WORKSPACE = 'WORKSPACE',
+}
+
+// ============================================
+// FSM (Finite State Machine) Types for Workspace
+// ============================================
+
+export type TaskStatus = 'locked' | 'active' | 'pending' | 'rejected' | 'verified';
+
+export interface WorkspaceTask {
+  id: string;
+  title: string;
+  description: string;
+  assignedRole: 'aannemer' | 'klant' | 'kwaliteitsborger';
+  status: TaskStatus;
+  artifactType: 'photo' | 'video' | 'document' | 'lidar';
+  uploadedAt?: string;
+  verifiedAt?: string;
+  verifiedBy?: string;
+  rejectionReason?: string;
+  blockchainHash?: string;
+  artifacts?: WorkspaceArtifact[];
+  slaHours?: number;
+  referenceImageUrl?: string;
+}
+
+export interface WorkspaceArtifact {
+  id: string;
+  type: 'photo' | 'video' | 'document' | 'lidar';
+  url: string;
+  uploadedAt: string;
+  metadata: {
+    geoHash?: string;
+    deviceId?: string;
+    compassDirection?: string;
+    gpsAccuracy?: string;
+  };
+  aiValidation?: {
+    confidence: number;
+    detected: string[];
+    issues: string[];
+  };
+}
+
+export interface WorkspacePhase {
+  id: string;
+  name: string;
+  icon: string;
+  description: string;
+  status: TaskStatus;
+  progress: number;
+  tasks: WorkspaceTask[];
+}
+
+export interface WorkspaceProject {
+  id: string;
+  name: string;
+  location: string;
+  overallProgress: number;
+  currentPhase: string;
+  phases: WorkspacePhase[];
+  isBlocked: boolean;
+  blockReason?: string;
 }
 
 // Household types

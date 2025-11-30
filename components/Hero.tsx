@@ -118,7 +118,7 @@ export const Hero: React.FC<HeroProps> = ({ setAppState }) => {
   const faqs = [
     {
       question: "Wat kost het om te starten?",
-      answer: "Het eerste ontwerp en je Housing Passport zijn volledig gratis. Je betaalt pas wanneer je besluit door te gaan met de bouw. Geen verborgen kosten, geen verplichtingen."
+      answer: "Het eerste ontwerp en je Woningpaspoort zijn volledig gratis. Je betaalt pas wanneer je besluit door te gaan met de bouw. Geen verborgen kosten, geen verplichtingen."
     },
     {
       question: "Hoe lang duurt het hele traject van ontwerp tot sleutel?",
@@ -194,14 +194,23 @@ export const Hero: React.FC<HeroProps> = ({ setAppState }) => {
                     <span className="relative z-10">Paspoort</span>
                   </button>
                   <button 
+                    onClick={() => setAppState(AppState.WORKSPACE)}
+                    className="relative px-5 py-2 text-[13px] text-white/70 hover:text-white transition-all duration-300 rounded-full hover:bg-white/[0.08] group"
+                  >
+                    <span className="relative z-10 flex items-center gap-1.5">
+                      <Home size={14} />
+                      Dashboard
+                    </span>
+                  </button>
+                  <button 
                     onClick={() => setAppState(AppState.STATE_OF_MARKET)}
                     className="relative px-5 py-2 text-[13px] text-white/70 hover:text-white transition-all duration-300 rounded-full hover:bg-white/[0.08] group"
                   >
                     <span className="relative z-10 flex items-center gap-1.5">
                       <BarChart3 size={14} />
                       Markt
-            </span>
-            </button>
+                    </span>
+                  </button>
                 </div>
               </div>
 
@@ -558,7 +567,10 @@ export const Hero: React.FC<HeroProps> = ({ setAppState }) => {
                 {/* Bottom action bar */}
                 <div className="bg-blue-500/5 px-6 py-4 border-t border-blue-500/20 flex justify-between items-center">
                     <div className="text-xs text-blue-300/50">Laatste update: Vandaag, 09:41</div>
-                    <button className="flex items-center gap-2 text-xs font-bold text-blue-400 hover:text-blue-300 transition-colors">
+                    <button 
+                        onClick={() => setAppState(AppState.WORKSPACE)}
+                        className="flex items-center gap-2 text-xs font-bold text-blue-400 hover:text-blue-300 transition-colors"
+                    >
                         Open Dashboard <ArrowRight size={12} />
                     </button>
              </div>
@@ -615,7 +627,7 @@ export const Hero: React.FC<HeroProps> = ({ setAppState }) => {
                       <Shield size={12} /> Certificaat van Authenticiteit
                   </div>
                   <h2 className="text-4xl md:text-6xl font-semibold leading-tight mb-6 text-white tracking-[-0.02em]">
-                      Het Housing Passport
+                      Het Woningpaspoort
              </h2>
                   <div className="text-lg md:text-xl text-blue-200/60 max-w-2xl mx-auto font-light">
                       <p>Elk ontwerp krijgt een uniek, geverifieerd document</p>
@@ -642,7 +654,7 @@ export const Hero: React.FC<HeroProps> = ({ setAppState }) => {
                                   </div>
                  <div>
                                       <div className="text-[10px] uppercase tracking-[0.3em] text-gray-400 mb-1">Ooit Gedacht × Bureau Broersma</div>
-                                      <div className="text-xl md:text-2xl font-medium tracking-[-0.01em]">Housing Passport</div>
+                                      <div className="text-xl md:text-2xl font-medium tracking-[-0.01em]">Woningpaspoort</div>
                  </div>
                               </div>
                               <div className="text-left md:text-right">
@@ -1089,7 +1101,7 @@ export const Hero: React.FC<HeroProps> = ({ setAppState }) => {
                 <ul className="space-y-2 text-sm text-white/70">
                   <li className="flex items-center gap-2">
                     <CheckCircle2 size={14} className="text-[#5b8ac7] flex-shrink-0" />
-                    Realtime kosteninsicht
+                    Realtime kosteninzicht
                   </li>
                   <li className="flex items-center gap-2">
                     <CheckCircle2 size={14} className="text-[#5b8ac7] flex-shrink-0" />
@@ -1118,7 +1130,7 @@ export const Hero: React.FC<HeroProps> = ({ setAppState }) => {
                 <ul className="space-y-2 text-sm text-white/70">
                   <li className="flex items-center gap-2">
                     <CheckCircle2 size={14} className="text-cyan-400 flex-shrink-0" />
-                    Instant feasibility check
+                    Directe haalbaarheidscheck
                   </li>
                   <li className="flex items-center gap-2">
                     <CheckCircle2 size={14} className="text-cyan-400 flex-shrink-0" />
@@ -1126,7 +1138,7 @@ export const Hero: React.FC<HeroProps> = ({ setAppState }) => {
                   </li>
                   <li className="flex items-center gap-2">
                     <CheckCircle2 size={14} className="text-cyan-400 flex-shrink-0" />
-                    Versiebeheer & audit trail
+                    Versiebeheer & wijzigingslog
                   </li>
                 </ul>
               </div>
@@ -1155,7 +1167,7 @@ export const Hero: React.FC<HeroProps> = ({ setAppState }) => {
                   </li>
                   <li className="flex items-center gap-2">
                     <CheckCircle2 size={14} className="text-amber-400 flex-shrink-0" />
-                    Liability tracking
+                    Aansprakelijkheid bijhouden
                   </li>
                 </ul>
               </div>
