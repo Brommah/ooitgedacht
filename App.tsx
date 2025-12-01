@@ -6,6 +6,7 @@ import { StateOfMarket } from './components/StateOfMarket';
 import { MarketResearchPresentation } from './components/MarketResearchPresentation';
 import { BuildersPage } from './components/BuildersPage';
 import { CollaborativeWorkspace } from './components/CollaborativeWorkspace';
+import { InvestorPitch } from './components/InvestorPitch';
 
 export default function App() {
   const [appState, setAppState] = useState<AppState>(AppState.LANDING);
@@ -22,6 +23,8 @@ export default function App() {
         <CollaborativeWorkspace setAppState={setAppState} />
       ) : appState === AppState.B2B_BUILDERS ? (
         <BuildersPage setAppState={setAppState} />
+      ) : appState === AppState.INVESTOR_PITCH ? (
+        <InvestorPitch setAppState={setAppState} />
       ) : (
         <Wizard appState={appState} setAppState={setAppState} />
       )}

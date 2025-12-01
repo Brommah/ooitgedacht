@@ -173,51 +173,34 @@ export const Hero: React.FC<HeroProps> = ({ setAppState }) => {
               </a>
               
               {/* Desktop Navigation Links - CENTERED */}
-              <div className="hidden lg:flex items-center absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+              <div className="hidden md:flex items-center absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
                 <div className="flex items-center bg-white/[0.04] rounded-full px-2 py-1.5 border border-white/[0.06]">
                   <button 
-                    onClick={() => {
-                      const el = document.getElementById('how-it-works');
-                      el?.scrollIntoView({ behavior: 'smooth' });
-                    }}
-                    className="relative px-5 py-2 text-[13px] text-white/70 hover:text-white transition-all duration-300 rounded-full hover:bg-white/[0.08] group"
-                  >
-                    <span className="relative z-10">Hoe het werkt</span>
-                  </button>
-                  <button 
-                    onClick={() => {
-                      const el = document.getElementById('passport-section');
-                      el?.scrollIntoView({ behavior: 'smooth' });
-                    }}
-                    className="relative px-5 py-2 text-[13px] text-white/70 hover:text-white transition-all duration-300 rounded-full hover:bg-white/[0.08] group"
-                  >
-                    <span className="relative z-10">Paspoort</span>
-                  </button>
-                  <button 
                     onClick={() => setAppState(AppState.WORKSPACE)}
-                    className="relative px-5 py-2 text-[13px] text-white/70 hover:text-white transition-all duration-300 rounded-full hover:bg-white/[0.08] group"
+                    className="relative px-4 md:px-5 py-2 text-[12px] md:text-[13px] text-white/70 hover:text-white transition-all duration-300 rounded-full hover:bg-white/[0.08] group"
                   >
                     <span className="relative z-10 flex items-center gap-1.5">
                       <Home size={14} />
-                      Overzicht
+                      <span className="hidden sm:inline">Overzicht</span>
                     </span>
                   </button>
                   <button 
                     onClick={() => setAppState(AppState.STATE_OF_MARKET)}
-                    className="relative px-5 py-2 text-[13px] text-white/70 hover:text-white transition-all duration-300 rounded-full hover:bg-white/[0.08] group"
+                    className="relative px-4 md:px-5 py-2 text-[12px] md:text-[13px] text-white/70 hover:text-white transition-all duration-300 rounded-full hover:bg-white/[0.08] group"
                   >
                     <span className="relative z-10 flex items-center gap-1.5">
                       <BarChart3 size={14} />
-                      Markt
+                      <span className="hidden sm:inline">Markt</span>
                     </span>
                   </button>
                   <button 
                     onClick={() => setAppState(AppState.B2B_BUILDERS)}
-                    className="relative px-5 py-2 text-[13px] text-white/70 hover:text-white transition-all duration-300 rounded-full hover:bg-white/[0.08] group"
+                    className="relative px-4 md:px-5 py-2 text-[12px] md:text-[13px] text-white/70 hover:text-white transition-all duration-300 rounded-full hover:bg-white/[0.08] group bg-amber-500/10 border border-amber-500/20"
                   >
-                    <span className="relative z-10 flex items-center gap-1.5">
+                    <span className="relative z-10 flex items-center gap-1.5 text-amber-400">
                       <Hammer size={14} />
-                      Voor Aannemers
+                      <span className="hidden sm:inline">Voor Aannemers</span>
+                      <span className="sm:hidden">B2B</span>
                     </span>
                   </button>
                 </div>
@@ -292,27 +275,38 @@ export const Hero: React.FC<HeroProps> = ({ setAppState }) => {
             
             {/* Navigation Links */}
             <nav className="flex-1">
-              <ul className="space-y-2">
+              <ul className="space-y-3">
+                {/* Voor Aannemers - Featured */}
+                <li>
+                  <button 
+                    onClick={() => {
+                      setAppState(AppState.B2B_BUILDERS);
+                      setMobileMenuOpen(false);
+                    }}
+                    className="group w-full flex items-center gap-5 p-5 rounded-3xl bg-gradient-to-r from-amber-500/20 to-orange-500/10 border border-amber-500/30 hover:from-amber-500/30 hover:to-orange-500/20 hover:border-amber-500/50 transition-all duration-300"
+                  >
+                    <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-amber-400 to-orange-500 p-[1px]">
+                      <div className="w-full h-full rounded-2xl bg-[#0a0f1a] flex items-center justify-center text-amber-400 group-hover:text-amber-300 transition-colors">
+                        <Hammer size={24} />
+                      </div>
+                    </div>
+                    <div className="text-left flex-1">
+                      <p className="text-lg font-bold text-amber-400 group-hover:text-amber-300 transition-colors">Voor Aannemers</p>
+                      <p className="text-sm text-amber-400/60 group-hover:text-amber-300/70 transition-colors">BouwBorg B2B Platform</p>
+                    </div>
+                    <ChevronRight size={20} className="text-amber-400/40 group-hover:text-amber-300/70 group-hover:translate-x-1 transition-all" />
+                  </button>
+                </li>
+                
+                {/* Other nav items */}
                 {[
                   { 
-                    icon: <Zap size={22} />, 
-                    label: 'Hoe het werkt', 
-                    sublabel: 'Van idee tot sleutel',
+                    icon: <Home size={22} />, 
+                    label: 'Overzicht', 
+                    sublabel: 'Dashboard & Status',
                     color: 'from-blue-400 to-cyan-400',
                     onClick: () => {
-                      const el = document.getElementById('how-it-works');
-                      el?.scrollIntoView({ behavior: 'smooth' });
-                      setMobileMenuOpen(false);
-                    }
-                  },
-                  { 
-                    icon: <FileText size={22} />, 
-                    label: 'Woningpaspoort', 
-                    sublabel: 'Volledige documentatie',
-                    color: 'from-blue-400 to-cyan-400',
-                    onClick: () => {
-                      const el = document.getElementById('passport-section');
-                      el?.scrollIntoView({ behavior: 'smooth' });
+                      setAppState(AppState.WORKSPACE);
                       setMobileMenuOpen(false);
                     }
                   },
@@ -320,19 +314,9 @@ export const Hero: React.FC<HeroProps> = ({ setAppState }) => {
                     icon: <BarChart3 size={22} />, 
                     label: 'Markt Analyse', 
                     sublabel: 'Actuele marktdata',
-                    color: 'from-amber-400 to-orange-400',
+                    color: 'from-emerald-400 to-teal-400',
                     onClick: () => {
                       setAppState(AppState.STATE_OF_MARKET);
-                      setMobileMenuOpen(false);
-                    }
-                  },
-                  { 
-                    icon: <Hammer size={22} />, 
-                    label: 'Voor Aannemers', 
-                    sublabel: 'BouwBorg B2B Platform',
-                    color: 'from-orange-400 to-red-400',
-                    onClick: () => {
-                      setAppState(AppState.B2B_BUILDERS);
                       setMobileMenuOpen(false);
                     }
                   },
@@ -1308,6 +1292,88 @@ export const Hero: React.FC<HeroProps> = ({ setAppState }) => {
         </div>
       </div>
 
+      {/* B2B SECTION - For Builders */}
+      <div className="bg-[#060a12] py-24 md:py-32 px-6 relative overflow-hidden">
+        {/* Background image */}
+        <div className="absolute inset-0">
+          <img 
+            src="/generated/b2b/smart-glasses-on-site.jpg" 
+            alt="" 
+            className="w-full h-full object-cover opacity-[0.15]"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#060a12] via-[#060a12]/95 to-[#060a12]/80" />
+        </div>
+        
+        <div className="max-w-6xl mx-auto relative z-10">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+            {/* Left content */}
+            <AnimatedSection>
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-amber-500/10 border border-amber-500/30 rounded-full text-xs font-bold uppercase tracking-[0.15em] mb-6 text-amber-400">
+                <Hammer size={14} />
+                Voor Aannemers & Bouwbedrijven
+              </div>
+              
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-semibold text-white leading-[1.1] tracking-[-0.02em] mb-6">
+                Bouwt u huizen?
+                <br />
+                <span className="text-white/40">Wij regelen het papierwerk.</span>
+              </h2>
+              
+              <p className="text-lg text-white/60 leading-relaxed mb-8 max-w-lg">
+                De Wkb maakt u 20 jaar aansprakelijk. Onze smart glasses + AI documenteren 
+                automatisch elke stap die u zet. Zodat u kunt focussen op wat u het beste doet: 
+                <strong className="text-white"> bouwen.</strong>
+              </p>
+
+              <div className="flex flex-col sm:flex-row gap-4 mb-8">
+                <button 
+                  onClick={() => setAppState(AppState.B2B_BUILDERS)}
+                  className="group bg-gradient-to-r from-amber-500 to-orange-500 text-white px-8 py-4 font-semibold rounded-full shadow-lg shadow-amber-500/20 hover:shadow-amber-500/30 transition-all flex items-center justify-center gap-2"
+                >
+                  Ontdek BouwBorg
+                  <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+                </button>
+              </div>
+
+              {/* Quick stats */}
+              <div className="flex flex-wrap gap-6 text-sm">
+                <div className="flex items-center gap-2 text-white/50">
+                  <CheckCircle2 size={16} className="text-amber-400" />
+                  80% minder administratie
+                </div>
+                <div className="flex items-center gap-2 text-white/50">
+                  <CheckCircle2 size={16} className="text-amber-400" />
+                  WKB compliant
+                </div>
+              </div>
+            </AnimatedSection>
+
+            {/* Right - Image showcase */}
+            <AnimatedSection delay={200} className="hidden lg:block">
+              <div className="relative">
+                <img 
+                  src="/generated/b2b/smart-glasses-workflow.jpg" 
+                  alt="BouwBorg smart glasses in actie" 
+                  className="rounded-2xl shadow-2xl shadow-black/50"
+                />
+                {/* Floating card */}
+                <div className="absolute -bottom-6 -left-6 bg-[#0a1628] border border-amber-500/20 rounded-xl p-4 shadow-xl">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 bg-amber-500/20 rounded-lg flex items-center justify-center">
+                      <Eye size={20} className="text-amber-400" />
+                    </div>
+                    <div>
+                      <div className="text-xs text-white/50">Automatische</div>
+                      <div className="text-sm font-semibold text-white">WKB Documentatie</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </AnimatedSection>
+          </div>
+        </div>
+      </div>
+
       {/* 7. NEWSLETTER / LEAD CAPTURE */}
       <div className="py-24 md:py-32 px-6 relative overflow-hidden" style={darkBluePattern}>
         {/* Background image */}
@@ -1401,24 +1467,18 @@ export const Hero: React.FC<HeroProps> = ({ setAppState }) => {
                       <ul className="space-y-3 text-sm text-gray-400 font-light">
                           <li>
                             <button 
-                              onClick={() => {
-                                const factorySection = document.querySelector('[class*="HOW IT WORKS"]');
-                                factorySection?.scrollIntoView({ behavior: 'smooth' });
-                              }}
+                              onClick={() => setAppState(AppState.WORKSPACE)}
                               className="hover:text-white transition-colors"
                             >
-                              Hoe het werkt
+                              Overzicht
                             </button>
                           </li>
                           <li>
                             <button 
-                              onClick={() => {
-                                const passportSection = document.getElementById('passport-section');
-                                passportSection?.scrollIntoView({ behavior: 'smooth' });
-                              }}
+                              onClick={() => setAppState(AppState.STATE_OF_MARKET)}
                               className="hover:text-white transition-colors"
                             >
-                              Prijzen & Kosten
+                              Markt Analyse
                             </button>
                           </li>
                           <li>
@@ -1426,7 +1486,7 @@ export const Hero: React.FC<HeroProps> = ({ setAppState }) => {
                               onClick={() => setAppState(AppState.WIZARD_HOUSEHOLD)}
                               className="hover:text-white transition-colors"
                             >
-                              Kavelzoeker
+                              Start Ontwerp
                             </button>
                           </li>
                           <li>
@@ -1437,7 +1497,7 @@ export const Hero: React.FC<HeroProps> = ({ setAppState }) => {
                           <li>
                             <button 
                               onClick={() => setAppState(AppState.B2B_BUILDERS)}
-                              className="hover:text-white transition-colors"
+                              className="hover:text-white transition-colors text-amber-400 hover:text-amber-300"
                             >
                               Voor Aannemers
                             </button>
@@ -1473,7 +1533,7 @@ export const Hero: React.FC<HeroProps> = ({ setAppState }) => {
                   <BarChart3 size={12} /> State of Market
                 </button>
                 <button 
-                  onClick={() => setAppState(AppState.MARKET_RESEARCH)}
+                  onClick={() => setAppState(AppState.INVESTOR_PITCH)}
                   className="hover:text-gray-400 transition-colors flex items-center gap-1"
                 >
                   <BarChart3 size={12} /> Investor Deck

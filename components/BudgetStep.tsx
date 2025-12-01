@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { ArrowRight, ArrowLeft, Check, Wallet, Clock, CreditCard, AlertCircle, CheckCircle } from 'lucide-react';
+import React, { useState } from 'react';
+import { ArrowRight, ArrowLeft, Check, Wallet, Clock, CreditCard, Info, CheckCircle, Home } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { UserPreferences, Timeline, FinancingStatus } from '../types';
-import { CURRENCY_SYMBOL, calculateBuildCost, estimateLandCost } from '../constants';
+import { CURRENCY_SYMBOL } from '../constants';
 
 interface BudgetStepProps {
   preferences: UserPreferences;
@@ -23,27 +23,22 @@ const FINANCING_OPTIONS: Array<{ value: FinancingStatus; label: string; icon: Re
   { value: 'cash', label: 'Eigen middelen', icon: <Wallet size={18} />, description: '(Deels) uit eigen zak' },
 ];
 
+// Budget ranges based on household type for guidance
+const BUDGET_GUIDANCE: Record<string, { min: number; typical: number; max: number }> = {
+  'single': { min: 250000, typical: 350000, max: 500000 },
+  'couple': { min: 300000, typical: 450000, max: 650000 },
+  'family': { min: 400000, typical: 550000, max: 800000 },
+  'multi_gen': { min: 500000, typical: 700000, max: 1000000 },
+  'empty_nest': { min: 350000, typical: 450000, max: 600000 },
+};
+
 export const BudgetStep: React.FC<BudgetStepProps> = ({ preferences, onNext, onBack }) => {
   const [totalBudget, setTotalBudget] = useState(preferences.budget.total);
   const [timeline, setTimeline] = useState<Timeline>(preferences.budget.timeline);
   const [financingStatus, setFinancingStatus] = useState<FinancingStatus>(preferences.budget.financingStatus);
 
-  // Calculate estimated costs based on preferences
-  const buildCost = calculateBuildCost(
-    preferences.config.sqm,
-    preferences.config.material,
-    preferences.config.energyLevel,
-    preferences.config.extras,
-    preferences.config.vibe
-  );
-
-  const landCost = preferences.location.hasLand === 'yes' 
-    ? 0 
-    : estimateLandCost(preferences.location.searchQuery, preferences.location.plotSize);
-
-  const totalEstimate = buildCost + landCost;
-  const budgetDiff = totalBudget - totalEstimate;
-  const isFeasible = budgetDiff >= -20000; // Allow 20k buffer
+  // Get guidance based on household type
+  const guidance = BUDGET_GUIDANCE[preferences.household.type] || BUDGET_GUIDANCE['couple'];
 
   // Format currency
   const formatCurrency = (amount: number): string => {
@@ -102,7 +97,7 @@ export const BudgetStep: React.FC<BudgetStepProps> = ({ preferences, onNext, onB
           
           <div className="flex items-center gap-2 text-blue-400/60 font-mono text-xs uppercase tracking-wider">
             <Wallet size={14} />
-            Stap 5 van 5
+            Stap 2 van 5
           </div>
         </div>
       </header>
@@ -120,7 +115,7 @@ export const BudgetStep: React.FC<BudgetStepProps> = ({ preferences, onNext, onB
             Budget & Planning
           </h1>
           <p className="text-blue-300/50 mt-3 lg:mt-4 lg:text-lg">
-            Laatste stap voor je droomhuis visualisatie
+            Stel je kaders zodat we realistische opties kunnen tonen
           </p>
         </motion.div>
 
@@ -133,7 +128,7 @@ export const BudgetStep: React.FC<BudgetStepProps> = ({ preferences, onNext, onB
         >
           <div className="flex items-baseline justify-between mb-4">
             <p className="text-xs lg:text-sm text-blue-400/60 font-mono uppercase tracking-wider">
-              Totaal budget {preferences.location.hasLand === 'yes' ? '(excl. kavel)' : '(incl. kavel)'}
+              Totaal budget (incl. bouw & kavel)
             </p>
             <motion.span 
               key={totalBudget}
@@ -175,51 +170,50 @@ export const BudgetStep: React.FC<BudgetStepProps> = ({ preferences, onNext, onB
           </div>
         </motion.section>
 
-        {/* Cost Breakdown */}
+        {/* Budget Guidance */}
         <motion.section
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
           className="mb-8"
         >
-          <div className={`rounded-2xl p-5 lg:p-6 border ${
-            isFeasible 
-              ? 'bg-emerald-500/10 border-emerald-500/20' 
-              : 'bg-amber-500/10 border-amber-500/20'
-          }`}>
+          <div className="rounded-2xl p-5 lg:p-6 border bg-blue-500/5 border-blue-500/10">
             <div className="flex items-start gap-3 mb-4">
-              {isFeasible ? (
-                <CheckCircle size={20} className="text-emerald-400 shrink-0 mt-0.5" />
-              ) : (
-                <AlertCircle size={20} className="text-amber-400 shrink-0 mt-0.5" />
-              )}
+              <Info size={20} className="text-blue-400 shrink-0 mt-0.5" />
               <div>
-                <div className={`font-medium ${isFeasible ? 'text-emerald-100' : 'text-amber-100'}`}>
-                  {isFeasible ? 'Past binnen budget' : 'Budget krap'}
+                <div className="font-medium text-blue-100">
+                  Indicatie voor jouw huishoudtype
                 </div>
-                <div className={`text-sm ${isFeasible ? 'text-emerald-400/60' : 'text-amber-400/60'}`}>
-                  {isFeasible 
-                    ? `Je houdt circa ${formatCurrency(Math.max(0, budgetDiff))} over voor onvoorzien`
-                    : `Je komt circa ${formatCurrency(Math.abs(budgetDiff))} tekort`
-                  }
+                <div className="text-sm text-blue-400/60">
+                  Gebaseerd op {preferences.household.bedrooms} slaapkamers
                 </div>
               </div>
             </div>
 
             <div className="space-y-3 pt-4 border-t border-white/10">
               <div className="flex justify-between text-sm">
-                <span className="text-blue-300/60">Bouwkosten ({preferences.config.sqm} m²)</span>
-                <span className="font-mono text-blue-100">{formatCurrency(buildCost)}</span>
+                <span className="text-blue-300/60 flex items-center gap-2">
+                  <Home size={14} />
+                  Compact
+                </span>
+                <span className="font-mono text-blue-100">{formatCurrency(guidance.min)}</span>
               </div>
-              {preferences.location.hasLand !== 'yes' && (
-                <div className="flex justify-between text-sm">
-                  <span className="text-blue-300/60">Geschatte kavelkosten</span>
-                  <span className="font-mono text-blue-100">{formatCurrency(landCost)}</span>
-                </div>
-              )}
-              <div className="flex justify-between text-sm pt-3 border-t border-white/10">
-                <span className="text-blue-200 font-medium">Totaal geschat</span>
-                <span className="font-mono text-blue-100 font-bold">{formatCurrency(totalEstimate)}</span>
+              <div className="flex justify-between text-sm">
+                <span className="text-blue-300/60 flex items-center gap-2">
+                  <Home size={16} />
+                  Typisch
+                </span>
+                <span className="font-mono text-blue-100 font-medium">{formatCurrency(guidance.typical)}</span>
+              </div>
+              <div className="flex justify-between text-sm">
+                <span className="text-blue-300/60 flex items-center gap-2">
+                  <Home size={18} />
+                  Ruim
+                </span>
+                <span className="font-mono text-blue-100">{formatCurrency(guidance.max)}</span>
+              </div>
+              <div className="text-xs text-blue-400/40 pt-3 border-t border-white/10">
+                We verfijnen de schatting na je stijl- en locatiekeuze
               </div>
             </div>
           </div>
@@ -320,9 +314,9 @@ export const BudgetStep: React.FC<BudgetStepProps> = ({ preferences, onNext, onB
             whileHover={{ scale: 1.01 }}
             whileTap={{ scale: 0.99 }}
             onClick={handleNext}
-            className="w-full bg-gradient-to-r from-[#1e3a5f] to-[#0d1f3c] text-white font-bold py-4 lg:py-5 rounded-full flex items-center justify-center gap-3 transition-all hover:from-[#2a4a73] hover:to-[#1e3a5f] text-base lg:text-lg shadow-lg shadow-[#0a1628]/40 border border-[#2a4a73]/30"
+            className="w-full bg-blue-400 hover:bg-blue-300 text-[#0a1628] font-bold py-4 lg:py-5 rounded-full flex items-center justify-center gap-3 transition-all text-base lg:text-lg shadow-lg shadow-blue-500/30"
           >
-            <span>Genereer Mijn Droomhuis</span>
+            <span>Verder naar locatie</span>
             <ArrowRight size={20} />
           </motion.button>
         </div>

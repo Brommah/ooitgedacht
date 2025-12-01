@@ -1,8 +1,111 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { UserPreferences } from '../types';
-import { MessageSquare, FileText, CheckCircle2, Clock, Bell, Leaf, Shield, ArrowRight, Home, Users, Zap, ChevronDown, ChevronUp, Lock, Camera } from 'lucide-react';
+import { MessageSquare, FileText, CheckCircle2, Clock, Bell, Leaf, Shield, ArrowRight, Home, Users, Zap, ChevronDown, ChevronUp, Lock, Camera, Send, X, AlertTriangle, HardHat, FileCheck, Sparkles, Award, QrCode, Building2, ThermometerSun, Droplets, Sun, Plug } from 'lucide-react';
 import { ENERGY_OPTIONS, CURRENCY_SYMBOL, calculateBuildCost } from '../constants';
 import { CONSTRUCTION_PHASES, MilestoneTask, getPhaseProgress, getOverallProgress } from '../constants/milestones';
+
+// Chat message types
+interface ChatMessage {
+  id: string;
+  sender: {
+    name: string;
+    initials: string;
+    role: 'keurmeester' | 'aannemer' | 'klant' | 'systeem';
+  };
+  content: string;
+  timestamp: string;
+  type: 'text' | 'verification' | 'payment' | 'milestone';
+  attachments?: { name: string; type: string }[];
+}
+
+// Notification types
+interface Notification {
+  id: string;
+  title: string;
+  description: string;
+  timestamp: string;
+  type: 'milestone' | 'document' | 'payment' | 'message' | 'alert';
+  read: boolean;
+  action?: string;
+}
+
+// Sample chat messages
+const SAMPLE_MESSAGES: ChatMessage[] = [
+  {
+    id: '1',
+    sender: { name: 'Systeem', initials: 'SY', role: 'systeem' },
+    content: '🎉 Fase 1 (Voorbereiding) is succesvol afgerond! Alle documenten zijn geverifieerd.',
+    timestamp: 'Gisteren, 16:30',
+    type: 'milestone',
+  },
+  {
+    id: '2',
+    sender: { name: 'Van der Berg Bouw', initials: 'VB', role: 'aannemer' },
+    content: 'De heipalen zijn aangekomen op de bouwplaats. We beginnen morgen met het heiwerk. Geschatte duur: 3 werkdagen.',
+    timestamp: 'Gisteren, 18:22',
+    type: 'text',
+  },
+  {
+    id: '3',
+    sender: { name: 'Bureau Broersma', initials: 'BB', role: 'keurmeester' },
+    content: 'De wapeningsfoto\'s voldoen aan de specificaties. We hebben de betaling aan de aannemer (Tranche 2) vrijgegeven. Jullie kunnen morgen storten.',
+    timestamp: 'Vandaag, 09:41',
+    type: 'verification',
+    attachments: [{ name: 'Wapening_Goedkeuring.pdf', type: 'document' }],
+  },
+  {
+    id: '4',
+    sender: { name: 'Systeem', initials: 'SY', role: 'systeem' },
+    content: '💰 Tranche 2 betaling (€34.500) is vrijgegeven naar Van der Berg Bouw.',
+    timestamp: 'Vandaag, 09:45',
+    type: 'payment',
+  },
+];
+
+// Sample notifications
+const SAMPLE_NOTIFICATIONS: Notification[] = [
+  {
+    id: '1',
+    title: 'Betaling Vrijgegeven',
+    description: 'Tranche 2 (€34.500) is overgemaakt',
+    timestamp: '2 uur geleden',
+    type: 'payment',
+    read: false,
+  },
+  {
+    id: '2',
+    title: 'Verificatie Voltooid',
+    description: 'Wapeningsstaal goedgekeurd door Bureau Broersma',
+    timestamp: '3 uur geleden',
+    type: 'milestone',
+    read: false,
+  },
+  {
+    id: '3',
+    title: 'Nieuw Document',
+    description: 'Wapening_Goedkeuring.pdf toegevoegd',
+    timestamp: '3 uur geleden',
+    type: 'document',
+    read: true,
+  },
+  {
+    id: '4',
+    title: 'Actie Vereist',
+    description: 'Upload betonbonnen voor verificatie',
+    timestamp: '5 uur geleden',
+    type: 'alert',
+    read: true,
+    action: 'upload',
+  },
+  {
+    id: '5',
+    title: 'Fase Update',
+    description: 'Voorbereiding 100% voltooid',
+    timestamp: 'Gisteren',
+    type: 'milestone',
+    read: true,
+  },
+];
 
 interface DashboardProps {
   preferences: UserPreferences;
@@ -15,11 +118,83 @@ export const Dashboard: React.FC<DashboardProps> = ({ preferences, image }) => {
   const [selectedTask, setSelectedTask] = useState<MilestoneTask | null>(
     CONSTRUCTION_PHASES[1].tasks[2] // Default to Wapeningsstaal
   );
+  
+  // Chat state
+  const [messages, setMessages] = useState<ChatMessage[]>(SAMPLE_MESSAGES);
+  const [newMessage, setNewMessage] = useState('');
+  const [isTyping, setIsTyping] = useState(false);
+  const chatContainerRef = useRef<HTMLDivElement>(null);
+  
+  // Notifications state
+  const [showNotifications, setShowNotifications] = useState(false);
+  const [notifications, setNotifications] = useState<Notification[]>(SAMPLE_NOTIFICATIONS);
+  const notificationRef = useRef<HTMLDivElement>(null);
+  
+  // Passport animation state
+  const [passportHovered, setPassportHovered] = useState(false);
 
   // Scroll to top on mount
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+  
+  // Close notifications when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (notificationRef.current && !notificationRef.current.contains(event.target as Node)) {
+        setShowNotifications(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+  
+  // Scroll chat to bottom when new messages arrive
+  useEffect(() => {
+    if (chatContainerRef.current) {
+      chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+    }
+  }, [messages]);
+  
+  // Send message handler
+  const handleSendMessage = () => {
+    if (!newMessage.trim()) return;
+    
+    const userMessage: ChatMessage = {
+      id: Date.now().toString(),
+      sender: { name: 'Jij', initials: 'JD', role: 'klant' },
+      content: newMessage,
+      timestamp: 'Nu',
+      type: 'text',
+    };
+    
+    setMessages(prev => [...prev, userMessage]);
+    setNewMessage('');
+    
+    // Simulate typing response
+    setIsTyping(true);
+    setTimeout(() => {
+      setIsTyping(false);
+      const response: ChatMessage = {
+        id: (Date.now() + 1).toString(),
+        sender: { name: 'Bureau Broersma', initials: 'BB', role: 'keurmeester' },
+        content: 'Bedankt voor uw bericht. We kijken ernaar en komen zo spoedig mogelijk bij u terug.',
+        timestamp: 'Nu',
+        type: 'text',
+      };
+      setMessages(prev => [...prev, response]);
+    }, 2000);
+  };
+  
+  // Mark notification as read
+  const markAsRead = (id: string) => {
+    setNotifications(prev => 
+      prev.map(n => n.id === id ? { ...n, read: true } : n)
+    );
+  };
+  
+  // Count unread notifications
+  const unreadCount = notifications.filter(n => !n.read).length;
 
   // Get location name - use Veluwse Heide as project name
   const projectName = 'Veluwse Heide Residence';
@@ -95,11 +270,86 @@ export const Dashboard: React.FC<DashboardProps> = ({ preferences, image }) => {
                 Constructie OK
             </div>
         </div>
-        <div className="flex gap-4">
-           <div className="w-8 h-8 rounded-full bg-blue-500/10 flex items-center justify-center cursor-pointer hover:bg-blue-500/20 transition-colors border border-blue-500/20">
-               <Bell size={16} className="text-blue-300" />
+        <div className="flex gap-4 items-center">
+           {/* Notifications Bell */}
+           <div className="relative" ref={notificationRef}>
+             <button 
+               onClick={() => setShowNotifications(!showNotifications)}
+               className={`w-10 h-10 rounded-xl flex items-center justify-center cursor-pointer transition-all border ${
+                 showNotifications 
+                   ? 'bg-blue-500/30 border-blue-400/50 ring-2 ring-blue-400/30' 
+                   : 'bg-blue-500/10 border-blue-500/20 hover:bg-blue-500/20'
+               }`}
+             >
+               <Bell size={18} className="text-blue-300" />
+               {unreadCount > 0 && (
+                 <span className="absolute -top-1 -right-1 w-5 h-5 bg-rose-500 text-white text-[10px] font-bold rounded-full flex items-center justify-center animate-pulse">
+                   {unreadCount}
+                 </span>
+               )}
+             </button>
+             
+             {/* Notifications Dropdown */}
+             {showNotifications && (
+               <div className="absolute right-0 top-full mt-2 w-80 bg-[#0d1f35] border border-blue-500/30 rounded-2xl shadow-2xl shadow-black/50 overflow-hidden z-50">
+                 <div className="p-4 border-b border-blue-500/20 flex justify-between items-center">
+                   <h3 className="font-bold text-blue-50">Meldingen</h3>
+                   <button 
+                     onClick={() => setNotifications(prev => prev.map(n => ({ ...n, read: true })))}
+                     className="text-xs text-blue-400 hover:text-blue-300 transition-colors"
+                   >
+                     Alles gelezen
+                   </button>
+                 </div>
+                 <div className="max-h-96 overflow-y-auto">
+                   {notifications.map((notification) => (
+                     <button
+                       key={notification.id}
+                       onClick={() => markAsRead(notification.id)}
+                       className={`w-full p-4 border-b border-blue-500/10 hover:bg-blue-500/10 transition-colors text-left ${
+                         !notification.read ? 'bg-blue-500/5' : ''
+                       }`}
+                     >
+                       <div className="flex gap-3">
+                         <div className={`w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 ${
+                           notification.type === 'payment' ? 'bg-emerald-500/20 text-emerald-400' :
+                           notification.type === 'milestone' ? 'bg-blue-500/20 text-blue-400' :
+                           notification.type === 'document' ? 'bg-amber-500/20 text-amber-400' :
+                           notification.type === 'alert' ? 'bg-rose-500/20 text-rose-400' :
+                           'bg-blue-500/20 text-blue-400'
+                         }`}>
+                           {notification.type === 'payment' && <Plug size={14} />}
+                           {notification.type === 'milestone' && <CheckCircle2 size={14} />}
+                           {notification.type === 'document' && <FileText size={14} />}
+                           {notification.type === 'alert' && <AlertTriangle size={14} />}
+                           {notification.type === 'message' && <MessageSquare size={14} />}
+                         </div>
+                         <div className="flex-1 min-w-0">
+                           <div className="flex items-center gap-2">
+                             <span className={`text-sm font-medium ${!notification.read ? 'text-blue-50' : 'text-blue-200'}`}>
+                               {notification.title}
+                             </span>
+                             {!notification.read && (
+                               <span className="w-2 h-2 bg-blue-400 rounded-full flex-shrink-0" />
+                             )}
+                           </div>
+                           <p className="text-xs text-blue-400/60 mt-0.5 truncate">{notification.description}</p>
+                           <span className="text-[10px] text-blue-500/50 mt-1 block">{notification.timestamp}</span>
+                         </div>
+                       </div>
+                     </button>
+                   ))}
+                 </div>
+                 <div className="p-3 border-t border-blue-500/20">
+                   <button className="w-full py-2 text-xs font-bold text-blue-400 hover:text-blue-300 transition-colors uppercase tracking-wider">
+                     Alle meldingen bekijken
+                   </button>
+                 </div>
+               </div>
+             )}
            </div>
-           <div className="w-8 h-8 rounded-full bg-blue-400 text-[#0a1628] flex items-center justify-center text-xs font-bold">
+           
+           <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-400 to-blue-500 text-[#0a1628] flex items-center justify-center text-sm font-bold shadow-lg shadow-blue-500/20">
                JD
            </div>
         </div>
@@ -333,69 +583,307 @@ export const Dashboard: React.FC<DashboardProps> = ({ preferences, image }) => {
               </div>
            </div>
 
-           {/* Sustainability Scorecard */}
-           <div className="bg-blue-500/5 backdrop-blur-sm p-6 md:p-8 border border-blue-500/20 rounded-2xl">
-                <h3 className="text-xl font-bold mb-6 flex items-center gap-2 text-blue-50">
-                   <Leaf size={20} className="text-emerald-400"/> Duurzaamheidspaspoort
-                </h3>
-                <div className="grid grid-cols-3 gap-4">
-                    <div className="p-4 bg-blue-500/10 border border-blue-500/20 rounded-xl text-center transition-all hover:border-emerald-500/30">
-                        <div className="text-2xl font-mono font-bold text-emerald-400">{energyLabel}</div>
-                        <div className="text-[10px] uppercase tracking-widest text-blue-300/50 mt-1">Energielabel</div>
-                    </div>
-                    <div className="p-4 bg-blue-500/10 border border-blue-500/20 rounded-xl text-center transition-all hover:border-emerald-500/30">
-                        <div className="text-2xl font-mono font-bold text-blue-100">0.48</div>
-                        <div className="text-[10px] uppercase tracking-widest text-blue-300/50 mt-1">MPG Score</div>
-                    </div>
-                    <div className="p-4 bg-blue-500/10 border border-blue-500/20 rounded-xl text-center transition-all hover:border-emerald-500/30">
-                        <div className="text-2xl font-mono font-bold text-blue-100">
-                          {preferences.config.energyLevel === 'neutral' || preferences.config.energyLevel === 'positive' ? '€0' : '~€50'}
-                        </div>
-                        <div className="text-[10px] uppercase tracking-widest text-blue-300/50 mt-1">
-                          {preferences.config.energyLevel === 'neutral' || preferences.config.energyLevel === 'positive' ? 'Op de meter' : '/maand'}
-                        </div>
-                    </div>
-                </div>
-                
-                {/* Energy features */}
-                {energyOpt && (
-                  <div className="mt-4 flex flex-wrap gap-2">
-                    {energyOpt.features.map((feature, i) => (
-                      <span key={i} className="px-3 py-1 bg-emerald-500/10 text-emerald-400 text-xs rounded-full border border-emerald-500/20">
-                        {feature}
-                      </span>
-                    ))}
-                  </div>
-                )}
-           </div>
-
-           {/* Chat / Feed */}
-           <div className="bg-blue-500/5 backdrop-blur-sm p-6 md:p-8 border border-blue-500/20 rounded-2xl">
-               <h3 className="text-xl font-bold mb-6 flex items-center gap-2 text-blue-50">
-                   <MessageSquare size={20} className="text-blue-400" /> Projectberichten
-               </h3>
-               
-               <div className="space-y-6">
-                   <div className="flex gap-4">
-                       <div className="w-10 h-10 bg-blue-400 text-[#0a1628] flex-shrink-0 flex items-center justify-center text-xs font-bold rounded-lg">BB</div>
-                       <div className="flex-1">
-                           <div className="text-sm font-bold mb-1 flex items-center gap-2 text-blue-100">
-                               Bureau Broersma <span className="px-2 py-0.5 bg-blue-500/10 text-blue-300 text-[10px] uppercase tracking-widest rounded-full font-normal border border-blue-500/20">Keurmeester</span>
-                           </div>
-                           <div className="bg-blue-500/10 p-4 text-sm text-blue-200 leading-relaxed border-l-2 border-blue-400 rounded-r-lg">
-                               De wapeningsfoto's voldoen aan de specificaties. We hebben de betaling aan de aannemer (Tranche 2) vrijgegeven. Jullie kunnen morgen storten.
-                           </div>
-                           <div className="text-xs text-blue-400/50 mt-2 font-mono">Vandaag, 09:41</div>
+           {/* WONING PASSPORT - HIGHLIGHTED */}
+           <div 
+             className="relative overflow-hidden rounded-2xl"
+             onMouseEnter={() => setPassportHovered(true)}
+             onMouseLeave={() => setPassportHovered(false)}
+           >
+             {/* Animated gradient border */}
+             <div className={`absolute inset-0 bg-gradient-to-r from-emerald-500 via-teal-400 to-emerald-500 rounded-2xl transition-opacity duration-500 ${passportHovered ? 'opacity-100' : 'opacity-70'}`} 
+               style={{ 
+                 backgroundSize: '200% 100%',
+                 animation: 'gradient-x 3s ease infinite',
+               }} 
+             />
+             
+             <div className="relative m-[2px] bg-gradient-to-br from-[#0a1628] via-[#0d1f35] to-[#0a1628] rounded-2xl overflow-hidden">
+               {/* Header with official badge */}
+               <div className="bg-gradient-to-r from-emerald-600/30 via-teal-500/20 to-emerald-600/30 p-6 border-b border-emerald-500/30">
+                 <div className="flex items-start justify-between">
+                   <div className="flex items-center gap-4">
+                     <div className="w-16 h-16 bg-gradient-to-br from-emerald-500 to-teal-400 rounded-2xl flex items-center justify-center shadow-lg shadow-emerald-500/30 relative">
+                       <Home size={28} className="text-white" />
+                       <div className="absolute -bottom-1 -right-1 w-6 h-6 bg-white rounded-full flex items-center justify-center">
+                         <CheckCircle2 size={14} className="text-emerald-500" />
                        </div>
+                     </div>
+                     <div>
+                       <div className="flex items-center gap-2">
+                         <h3 className="text-2xl font-bold text-white">Woning Paspoort</h3>
+                         <span className="px-2 py-0.5 bg-emerald-500 text-white text-[10px] font-bold uppercase tracking-widest rounded-full flex items-center gap-1">
+                           <Sparkles size={10} />
+                           Gecertificeerd
+                         </span>
+                       </div>
+                       <p className="text-emerald-300/70 text-sm mt-1">Officieel geverifieerd door Bureau Broersma</p>
+                     </div>
                    </div>
+                   <div className="text-right hidden md:block">
+                     <div className="w-16 h-16 bg-white/10 rounded-lg p-2 backdrop-blur-sm border border-white/20 flex items-center justify-center">
+                       <QrCode size={40} className="text-emerald-400" />
+                     </div>
+                     <span className="text-[10px] text-emerald-400/60 mt-1 block">WP-2024-8847</span>
+                   </div>
+                 </div>
                </div>
                
-               <div className="mt-6 pt-6 border-t border-blue-500/20">
-                   <input 
-                    type="text" 
-                    placeholder="Stuur een bericht..." 
-                    className="w-full bg-blue-500/10 p-4 rounded-xl outline-none focus:ring-1 focus:ring-blue-400 transition-all placeholder:text-blue-400/30 text-sm border border-blue-500/20"
-                   />
+               <div className="p-6">
+                 {/* Energy Classification - HERO */}
+                 <div className="flex items-center gap-6 mb-6">
+                   <div className="relative">
+                     <div className={`w-24 h-24 rounded-2xl bg-gradient-to-br from-emerald-500 to-emerald-600 flex items-center justify-center shadow-2xl shadow-emerald-500/40 transition-transform duration-300 ${passportHovered ? 'scale-110' : ''}`}>
+                       <span className="text-4xl font-black text-white">{energyLabel}</span>
+                     </div>
+                     <div className="absolute -bottom-2 -right-2 w-10 h-10 bg-yellow-400 rounded-full flex items-center justify-center shadow-lg">
+                       <Award size={20} className="text-yellow-900" />
+                     </div>
+                   </div>
+                   <div className="flex-1">
+                     <div className="text-lg font-bold text-white mb-1">
+                       {preferences.config.energyLevel === 'positive' ? 'Energieleverend' :
+                        preferences.config.energyLevel === 'neutral' ? 'Energieneutraal' :
+                        preferences.config.energyLevel === 'aplus' ? 'Bijna Energieneutraal' : 'Energiezuinig'}
+                     </div>
+                     <p className="text-sm text-blue-300/60">
+                       {preferences.config.energyLevel === 'neutral' || preferences.config.energyLevel === 'positive' 
+                         ? 'Deze woning produceert evenveel of meer energie dan het verbruikt'
+                         : 'Deze woning voldoet aan de hoogste energie-eisen'
+                       }
+                     </p>
+                     <div className="flex items-center gap-4 mt-3">
+                       <div className="flex items-center gap-1.5 text-emerald-400 text-sm">
+                         <ThermometerSun size={14} />
+                         <span className="font-mono">Rc 8.0</span>
+                       </div>
+                       <div className="flex items-center gap-1.5 text-blue-400 text-sm">
+                         <Droplets size={14} />
+                         <span className="font-mono">Qv10 0.4</span>
+                       </div>
+                       <div className="flex items-center gap-1.5 text-amber-400 text-sm">
+                         <Sun size={14} />
+                         <span className="font-mono">TO ≤ 0.45</span>
+                       </div>
+                     </div>
+                   </div>
+                 </div>
+                 
+                 {/* Stats Grid */}
+                 <div className="grid grid-cols-3 gap-4 mb-6">
+                   <div className="p-4 bg-gradient-to-br from-emerald-500/20 to-emerald-500/5 border border-emerald-500/30 rounded-xl text-center group hover:border-emerald-400/50 transition-all hover:scale-[1.02]">
+                     <div className="text-3xl font-mono font-bold text-emerald-400">{energyLabel}</div>
+                     <div className="text-[10px] uppercase tracking-widest text-emerald-300/60 mt-1">Energielabel</div>
+                     <div className="w-full h-1 bg-emerald-500/20 rounded-full mt-2 overflow-hidden">
+                       <div className="h-full bg-emerald-400 rounded-full" style={{ width: '95%' }} />
+                     </div>
+                   </div>
+                   <div className="p-4 bg-gradient-to-br from-teal-500/20 to-teal-500/5 border border-teal-500/30 rounded-xl text-center group hover:border-teal-400/50 transition-all hover:scale-[1.02]">
+                     <div className="text-3xl font-mono font-bold text-teal-400">0.48</div>
+                     <div className="text-[10px] uppercase tracking-widest text-teal-300/60 mt-1">MPG Score</div>
+                     <div className="w-full h-1 bg-teal-500/20 rounded-full mt-2 overflow-hidden">
+                       <div className="h-full bg-teal-400 rounded-full" style={{ width: '85%' }} />
+                     </div>
+                   </div>
+                   <div className="p-4 bg-gradient-to-br from-blue-500/20 to-blue-500/5 border border-blue-500/30 rounded-xl text-center group hover:border-blue-400/50 transition-all hover:scale-[1.02]">
+                     <div className="text-3xl font-mono font-bold text-blue-400">
+                       {preferences.config.energyLevel === 'neutral' || preferences.config.energyLevel === 'positive' ? '€0' : '~€50'}
+                     </div>
+                     <div className="text-[10px] uppercase tracking-widest text-blue-300/60 mt-1">
+                       {preferences.config.energyLevel === 'neutral' || preferences.config.energyLevel === 'positive' ? 'Per maand' : '/maand'}
+                     </div>
+                     <div className="w-full h-1 bg-blue-500/20 rounded-full mt-2 overflow-hidden">
+                       <div className="h-full bg-blue-400 rounded-full" style={{ width: preferences.config.energyLevel === 'neutral' || preferences.config.energyLevel === 'positive' ? '100%' : '60%' }} />
+                     </div>
+                   </div>
+                 </div>
+                 
+                 {/* Energy features */}
+                 {energyOpt && (
+                   <div className="p-4 bg-emerald-500/5 rounded-xl border border-emerald-500/20">
+                     <div className="text-xs uppercase tracking-widest text-emerald-400/70 mb-3 font-bold flex items-center gap-2">
+                       <Leaf size={12} />
+                       Duurzame Kenmerken
+                     </div>
+                     <div className="flex flex-wrap gap-2">
+                       {energyOpt.features.map((feature, i) => (
+                         <span key={i} className="px-3 py-1.5 bg-gradient-to-r from-emerald-500/20 to-teal-500/20 text-emerald-300 text-xs rounded-lg border border-emerald-500/30 flex items-center gap-1.5 hover:bg-emerald-500/30 transition-colors cursor-default">
+                           <CheckCircle2 size={12} className="text-emerald-400" />
+                           {feature}
+                         </span>
+                       ))}
+                     </div>
+                   </div>
+                 )}
+                 
+                 {/* Certification Footer */}
+                 <div className="mt-4 pt-4 border-t border-emerald-500/20 flex items-center justify-between">
+                   <div className="flex items-center gap-3">
+                     <Shield size={18} className="text-emerald-400" />
+                     <div>
+                       <span className="text-xs text-emerald-300/70">Geverifieerd op</span>
+                       <span className="text-sm text-white ml-2 font-mono">28 Nov 2024</span>
+                     </div>
+                   </div>
+                   <button className="px-4 py-2 bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-400 text-xs font-bold uppercase tracking-wider rounded-lg border border-emerald-500/30 transition-colors flex items-center gap-2">
+                     <FileText size={12} />
+                     Download PDF
+                   </button>
+                 </div>
+               </div>
+             </div>
+           </div>
+           
+           {/* Add CSS animation */}
+           <style>{`
+             @keyframes gradient-x {
+               0%, 100% { background-position: 0% 50%; }
+               50% { background-position: 100% 50%; }
+             }
+           `}</style>
+
+           {/* Chat / Feed - Enhanced */}
+           <div className="bg-gradient-to-br from-blue-500/10 to-blue-600/5 backdrop-blur-sm border border-blue-500/20 rounded-2xl overflow-hidden">
+               {/* Chat Header */}
+               <div className="p-4 md:p-6 border-b border-blue-500/20 bg-blue-500/5">
+                 <div className="flex items-center justify-between">
+                   <h3 className="text-xl font-bold flex items-center gap-3 text-blue-50">
+                     <div className="w-10 h-10 bg-blue-500/20 rounded-xl flex items-center justify-center">
+                       <MessageSquare size={20} className="text-blue-400" />
+                     </div>
+                     <div>
+                       <span>Project Chat</span>
+                       <p className="text-xs text-blue-400/60 font-normal mt-0.5">4 deelnemers online</p>
+                     </div>
+                   </h3>
+                   <div className="flex -space-x-2">
+                     <div className="w-8 h-8 rounded-full bg-blue-400 text-[#0a1628] flex items-center justify-center text-xs font-bold border-2 border-[#0d1f35]">JD</div>
+                     <div className="w-8 h-8 rounded-full bg-emerald-500 text-white flex items-center justify-center text-xs font-bold border-2 border-[#0d1f35]">BB</div>
+                     <div className="w-8 h-8 rounded-full bg-amber-500 text-white flex items-center justify-center text-xs font-bold border-2 border-[#0d1f35]">VB</div>
+                     <div className="w-8 h-8 rounded-full bg-blue-500/30 text-blue-300 flex items-center justify-center text-xs font-bold border-2 border-[#0d1f35]">+1</div>
+                   </div>
+                 </div>
+               </div>
+               
+               {/* Messages Container */}
+               <div 
+                 ref={chatContainerRef}
+                 className="p-4 md:p-6 space-y-4 max-h-[400px] overflow-y-auto"
+                 style={{ scrollbarWidth: 'thin', scrollbarColor: 'rgba(59, 130, 246, 0.3) transparent' }}
+               >
+                 {messages.map((msg) => (
+                   <div key={msg.id} className={`flex gap-3 ${msg.sender.role === 'klant' ? 'flex-row-reverse' : ''}`}>
+                     {/* Avatar */}
+                     <div className={`w-10 h-10 flex-shrink-0 flex items-center justify-center text-xs font-bold rounded-xl ${
+                       msg.sender.role === 'keurmeester' ? 'bg-emerald-500 text-white' :
+                       msg.sender.role === 'aannemer' ? 'bg-amber-500 text-white' :
+                       msg.sender.role === 'klant' ? 'bg-blue-400 text-[#0a1628]' :
+                       'bg-gradient-to-br from-violet-500 to-purple-500 text-white'
+                     }`}>
+                       {msg.sender.role === 'systeem' ? <Zap size={16} /> : msg.sender.initials}
+                     </div>
+                     
+                     {/* Message Content */}
+                     <div className={`flex-1 max-w-[80%] ${msg.sender.role === 'klant' ? 'text-right' : ''}`}>
+                       {/* Sender info - hide for klant messages */}
+                       {msg.sender.role !== 'klant' && (
+                         <div className="text-sm font-bold mb-1 flex items-center gap-2 text-blue-100">
+                           {msg.sender.name}
+                           <span className={`px-2 py-0.5 text-[10px] uppercase tracking-widest rounded-full font-medium border ${
+                             msg.sender.role === 'keurmeester' ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/30' :
+                             msg.sender.role === 'aannemer' ? 'bg-amber-500/10 text-amber-400 border-amber-500/30' :
+                             'bg-violet-500/10 text-violet-400 border-violet-500/30'
+                           }`}>
+                             {msg.sender.role === 'keurmeester' ? 'Keurmeester' :
+                              msg.sender.role === 'aannemer' ? 'Aannemer' : 'Systeem'}
+                           </span>
+                         </div>
+                       )}
+                       
+                       {/* Message Bubble */}
+                       <div className={`p-4 text-sm leading-relaxed rounded-2xl ${
+                         msg.sender.role === 'klant' 
+                           ? 'bg-blue-500 text-white rounded-tr-none' 
+                           : msg.type === 'milestone' || msg.type === 'payment'
+                             ? 'bg-gradient-to-r from-violet-500/20 to-purple-500/20 text-violet-200 border border-violet-500/30'
+                             : msg.type === 'verification'
+                               ? 'bg-emerald-500/10 text-emerald-200 border-l-2 border-emerald-400'
+                               : 'bg-blue-500/10 text-blue-200 border-l-2 border-blue-400/50 rounded-tl-none'
+                       }`}>
+                         {msg.content}
+                         
+                         {/* Attachments */}
+                         {msg.attachments && msg.attachments.length > 0 && (
+                           <div className="mt-3 pt-3 border-t border-white/10">
+                             {msg.attachments.map((att, i) => (
+                               <div key={i} className="flex items-center gap-2 p-2 bg-black/20 rounded-lg cursor-pointer hover:bg-black/30 transition-colors">
+                                 <FileText size={14} className="text-emerald-400" />
+                                 <span className="text-xs truncate">{att.name}</span>
+                               </div>
+                             ))}
+                           </div>
+                         )}
+                       </div>
+                       
+                       <div className={`text-xs text-blue-400/50 mt-2 font-mono ${msg.sender.role === 'klant' ? 'text-right' : ''}`}>
+                         {msg.timestamp}
+                       </div>
+                     </div>
+                   </div>
+                 ))}
+                 
+                 {/* Typing Indicator */}
+                 {isTyping && (
+                   <div className="flex gap-3">
+                     <div className="w-10 h-10 bg-emerald-500 flex-shrink-0 flex items-center justify-center text-xs font-bold rounded-xl text-white">
+                       BB
+                     </div>
+                     <div className="bg-blue-500/10 px-4 py-3 rounded-2xl rounded-tl-none">
+                       <div className="flex gap-1">
+                         <span className="w-2 h-2 bg-blue-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
+                         <span className="w-2 h-2 bg-blue-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
+                         <span className="w-2 h-2 bg-blue-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
+                       </div>
+                     </div>
+                   </div>
+                 )}
+               </div>
+               
+               {/* Message Input */}
+               <div className="p-4 md:p-6 pt-0">
+                 <div className="flex gap-3 items-end">
+                   <div className="flex-1 relative">
+                     <textarea 
+                       value={newMessage}
+                       onChange={(e) => setNewMessage(e.target.value)}
+                       onKeyDown={(e) => {
+                         if (e.key === 'Enter' && !e.shiftKey) {
+                           e.preventDefault();
+                           handleSendMessage();
+                         }
+                       }}
+                       placeholder="Stuur een bericht..." 
+                       rows={1}
+                       className="w-full bg-blue-500/10 p-4 pr-12 rounded-xl outline-none focus:ring-2 focus:ring-blue-400/50 transition-all placeholder:text-blue-400/30 text-sm border border-blue-500/20 resize-none"
+                     />
+                     <button className="absolute right-3 top-1/2 -translate-y-1/2 p-2 hover:bg-blue-500/20 rounded-lg transition-colors">
+                       <Camera size={18} className="text-blue-400" />
+                     </button>
+                   </div>
+                   <button 
+                     onClick={handleSendMessage}
+                     disabled={!newMessage.trim()}
+                     className={`w-12 h-12 rounded-xl flex items-center justify-center transition-all ${
+                       newMessage.trim() 
+                         ? 'bg-blue-500 text-white hover:bg-blue-400 shadow-lg shadow-blue-500/30' 
+                         : 'bg-blue-500/20 text-blue-400/50 cursor-not-allowed'
+                     }`}
+                   >
+                     <Send size={18} />
+                   </button>
+                 </div>
+                 <p className="text-[10px] text-blue-400/40 mt-2 ml-1">
+                   Enter om te versturen • Shift+Enter voor nieuwe regel
+                 </p>
                </div>
            </div>
         </div>

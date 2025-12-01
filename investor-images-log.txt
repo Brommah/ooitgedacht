@@ -1,0 +1,285 @@
+
+> ooit-gedacht@0.0.0 generate:investor-images
+> npx tsx scripts/generate-investor-pitch-images.ts
+
+[dotenv@17.2.3] injecting env (1) from .env.local -- tip: 🗂️ backup and recover secrets: https://dotenvx.com/ops
+
+╔══════════════════════════════════════════════════════════════════════╗
+║  🎯  OOIT GEDACHT - Investor Pitch Image Generator  🎯                ║
+╚══════════════════════════════════════════════════════════════════════╝
+
+📊 Total images to generate: 29
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  📁 Section: HERO
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+[1/1] Hero - Construction OS Vision
+
+🎨 Generating: Hero - Construction OS Vision...
+   Type: photo
+   ✅ Saved: investor-pitch/hero/hero-title.png
+
+   ⏳ Section complete. Waiting 8 seconds before next section...
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  📁 Section: VISION
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+[1/2] Vision - Broersma Partnership
+
+🎨 Generating: Vision - Broersma Partnership...
+   Type: photo
+   ✅ Saved: investor-pitch/vision/vision-partnership.png
+   ⏳ Waiting 5 seconds (rate limit)...
+
+[2/2] Vision - Two Brands Positioning
+
+🎨 Generating: Vision - Two Brands Positioning...
+   Type: infographic
+   ✅ Saved: investor-pitch/vision/vision-positioning.png
+
+   ⏳ Section complete. Waiting 8 seconds before next section...
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  📁 Section: B2C
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+[1/3] B2C - Dream Home Lifestyle
+
+🎨 Generating: B2C - Dream Home Lifestyle...
+   Type: photo
+   ✅ Saved: investor-pitch/b2c/b2c-lifestyle-hero.png
+   ⏳ Waiting 5 seconds (rate limit)...
+
+[2/3] B2C - Digital Wizard Interface
+
+🎨 Generating: B2C - Digital Wizard Interface...
+   Type: infographic
+   ✅ Saved: investor-pitch/b2c/b2c-wizard-flow.png
+   ⏳ Waiting 5 seconds (rate limit)...
+
+[3/3] B2C - Young Urban Professional
+
+🎨 Generating: B2C - Young Urban Professional...
+   Type: photo
+   ✅ Saved: investor-pitch/b2c/b2c-yup-target.png
+
+   ⏳ Section complete. Waiting 8 seconds before next section...
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  📁 Section: B2B
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+[1/4] B2B - Smart Safety Glasses
+
+🎨 Generating: B2B - Smart Safety Glasses...
+   Type: photo
+   ✅ Saved: investor-pitch/b2b/b2b-smart-glasses.png
+   ⏳ Waiting 5 seconds (rate limit)...
+
+[2/4] B2B - Quality Borger Dashboard
+
+🎨 Generating: B2B - Quality Borger Dashboard...
+   Type: infographic
+   ✅ Saved: investor-pitch/b2b/b2b-dashboard.png
+   ⏳ Waiting 5 seconds (rate limit)...
+
+[3/4] B2B - FSM Workflow Diagram
+
+🎨 Generating: B2B - FSM Workflow Diagram...
+   Type: infographic
+   ✅ Saved: investor-pitch/b2b/b2b-fsm-workflow.png
+   ⏳ Waiting 5 seconds (rate limit)...
+
+[4/4] B2B - Builder Pain Points
+
+🎨 Generating: B2B - Builder Pain Points...
+   Type: photo
+   ✅ Saved: investor-pitch/b2b/b2b-wkb-pain.png
+
+   ⏳ Section complete. Waiting 8 seconds before next section...
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  📁 Section: TECH
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+[1/3] Tech - System Architecture
+
+🎨 Generating: Tech - System Architecture...
+   Type: infographic
+   ✅ Saved: investor-pitch/tech/tech-architecture.png
+   ⏳ Waiting 5 seconds (rate limit)...
+
+[2/3] Tech - Multi-Agent AI System
+
+🎨 Generating: Tech - Multi-Agent AI System...
+   Type: infographic
+   ✅ Saved: investor-pitch/tech/tech-ai-agents.png
+   ⏳ Waiting 5 seconds (rate limit)...
+
+[3/3] Tech - Housing Passport Blockchain
+
+🎨 Generating: Tech - Housing Passport Blockchain...
+   Type: infographic
+   ✅ Saved: investor-pitch/tech/tech-blockchain-passport.png
+
+   ⏳ Section complete. Waiting 8 seconds before next section...
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  📁 Section: MARKET
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+[1/3] Market - Wkb as Leverage
+
+🎨 Generating: Market - Wkb as Leverage...
+   Type: infographic
+   ✅ Saved: investor-pitch/market/market-wkb-leverage.png
+   ⏳ Waiting 5 seconds (rate limit)...
+
+[2/3] Market - Two-Sided Mirror
+
+🎨 Generating: Market - Two-Sided Mirror...
+   Type: infographic
+   ✅ Saved: investor-pitch/market/market-two-sided.png
+   ⏳ Waiting 5 seconds (rate limit)...
+
+[3/3] Market - Business Opportunity Rating
+
+🎨 Generating: Market - Business Opportunity Rating...
+   Type: infographic
+   ✅ Saved: investor-pitch/market/market-opportunity-score.png
+
+   ⏳ Section complete. Waiting 8 seconds before next section...
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  📁 Section: TEAM
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+[1/3] Team - 70 Years of Engineering
+
+🎨 Generating: Team - 70 Years of Engineering...
+   Type: photo
+   ✅ Saved: investor-pitch/team/team-broersma-legacy.png
+   ⏳ Waiting 5 seconds (rate limit)...
+
+[2/3] Team - Unfair Advantage Venn
+
+🎨 Generating: Team - Unfair Advantage Venn...
+   Type: infographic
+   ✅ Saved: investor-pitch/team/team-unfair-advantage.png
+   ⏳ Waiting 5 seconds (rate limit)...
+
+[3/3] Team - Network & Rolodex
+
+🎨 Generating: Team - Network & Rolodex...
+   Type: infographic
+   ✅ Saved: investor-pitch/team/team-network.png
+
+   ⏳ Section complete. Waiting 8 seconds before next section...
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  📁 Section: BUSINESS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+[1/3] Business - Demand Heatmap
+
+🎨 Generating: Business - Demand Heatmap...
+   Type: infographic
+   ✅ Saved: investor-pitch/business/business-demand-aggregation.png
+   ⏳ Waiting 5 seconds (rate limit)...
+
+[2/3] Business - Revenue Streams
+
+🎨 Generating: Business - Revenue Streams...
+   Type: infographic
+   ❌ Error generating Business - Revenue Streams: exception TypeError: fetch failed sending request
+   ⏳ Waiting 5 seconds (rate limit)...
+
+[3/3] Business - Bouwpaspoort as Asset
+
+🎨 Generating: Business - Bouwpaspoort as Asset...
+   Type: infographic
+   ✅ Saved: investor-pitch/business/business-passport-product.png
+
+   ⏳ Section complete. Waiting 8 seconds before next section...
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  📁 Section: ROADMAP
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+[1/2] Roadmap - 12 Month Timeline
+
+🎨 Generating: Roadmap - 12 Month Timeline...
+   Type: infographic
+   ✅ Saved: investor-pitch/roadmap/roadmap-timeline.png
+   ⏳ Waiting 5 seconds (rate limit)...
+
+[2/2] Roadmap - MVP to Scale Vision
+
+🎨 Generating: Roadmap - MVP to Scale Vision...
+   Type: infographic
+   ✅ Saved: investor-pitch/roadmap/roadmap-mvp-vision.png
+
+   ⏳ Section complete. Waiting 8 seconds before next section...
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  📁 Section: INTERNATIONAL
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+[1/2] International - Expansion Map
+
+🎨 Generating: International - Expansion Map...
+   Type: infographic
+   ✅ Saved: investor-pitch/international/international-expansion-map.png
+   ⏳ Waiting 5 seconds (rate limit)...
+
+[2/2] International - UK Self-Build Market
+
+🎨 Generating: International - UK Self-Build Market...
+   Type: photo
+   ✅ Saved: investor-pitch/international/international-uk-opportunity.png
+
+   ⏳ Section complete. Waiting 8 seconds before next section...
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  📁 Section: ASK
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+[1/3] The Ask - Partnership Handshake
+
+🎨 Generating: The Ask - Partnership Handshake...
+   Type: photo
+   ✅ Saved: investor-pitch/ask/ask-partnership.png
+   ⏳ Waiting 5 seconds (rate limit)...
+
+[2/3] The Ask - Capital, Authority, Data
+
+🎨 Generating: The Ask - Capital, Authority, Data...
+   Type: infographic
+   ✅ Saved: investor-pitch/ask/ask-three-pillars.png
+   ⏳ Waiting 5 seconds (rate limit)...
+
+[3/3] The Ask - Future Vision
+
+🎨 Generating: The Ask - Future Vision...
+   Type: photo
+   ✅ Saved: investor-pitch/ask/ask-future-vision.png
+
+══════════════════════════════════════════════════════════════════════
+✨ All investor pitch images generated!
+   📁 Location: public/generated/investor-pitch/
+
+   Sections created:
+   • hero/ (1 images)
+   • vision/ (2 images)
+   • b2c/ (3 images)
+   • b2b/ (4 images)
+   • tech/ (3 images)
+   • market/ (3 images)
+   • team/ (3 images)
+   • business/ (3 images)
+   • roadmap/ (2 images)
+   • international/ (2 images)
+   • ask/ (3 images)
+

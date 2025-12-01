@@ -47,7 +47,7 @@ export const HouseholdStep: React.FC<HouseholdStepProps> = ({ initialPrefs, onNe
         <div className="max-w-5xl mx-auto px-6 h-12 flex items-center justify-between">
           <div className="flex items-center gap-2 text-blue-400/60 font-mono text-xs uppercase tracking-wider">
             <Home size={14} />
-            Stap 1/5
+            Stap 1 van 5
           </div>
           <img src="/generated/og-logo.png" alt="OoitGedacht" className="h-6 opacity-40 brightness-0 invert" />
           <div className="text-blue-400/40 font-mono text-xs">~15s</div>
@@ -206,7 +206,7 @@ export const HouseholdStep: React.FC<HouseholdStepProps> = ({ initialPrefs, onNe
             onClick={handleNext}
             className="w-full bg-gradient-to-r from-[#1e3a5f] to-[#0d1f3c] text-white font-semibold py-4 sm:py-3 rounded-full flex items-center justify-center gap-2 transition-all hover:from-[#2a4a73] hover:to-[#1e3a5f] text-base sm:text-sm shadow-lg shadow-[#0a1628]/40 border border-[#2a4a73]/30"
           >
-            Kies je stijl <ArrowRight size={18} className="sm:w-4 sm:h-4" />
+            Verder naar budget <ArrowRight size={18} className="sm:w-4 sm:h-4" />
           </motion.button>
         </div>
       </main>

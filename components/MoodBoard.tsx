@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
 import { MoodImage } from '../types';
-import { Check, ArrowRight, Sparkles } from 'lucide-react';
+import { Check, ArrowRight, ArrowLeft, Sparkles } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 interface MoodBoardProps {
   images: MoodImage[];
   onComplete: (tags: string[]) => void;
   initialSwipes?: number;
+  onBack?: () => void;
 }
 
-export const MoodBoard: React.FC<MoodBoardProps> = ({ images, onComplete }) => {
+export const MoodBoard: React.FC<MoodBoardProps> = ({ images, onComplete, onBack }) => {
   const [selectedStyles, setSelectedStyles] = useState<string[]>([]);
 
   // Show all 8 images in grid layout
@@ -65,9 +66,21 @@ export const MoodBoard: React.FC<MoodBoardProps> = ({ images, onComplete }) => {
             animate={{ opacity: 1, y: 0 }}
             className="max-w-6xl mx-auto"
           >
-            <p className="text-blue-400/60 font-mono text-xs lg:text-sm uppercase tracking-wider mb-2">
-              Stap 2 van 5
-            </p>
+            <div className="flex items-center gap-4 mb-2">
+              {onBack && (
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={onBack}
+                  className="p-2 -ml-2 rounded-xl hover:bg-white/5 text-blue-400/60 hover:text-blue-400 transition-colors"
+                >
+                  <ArrowLeft size={20} />
+                </motion.button>
+              )}
+              <p className="text-blue-400/60 font-mono text-xs lg:text-sm uppercase tracking-wider">
+                Stap 4 van 5
+              </p>
+            </div>
             <h1 className="text-3xl lg:text-5xl font-light tracking-tight text-white mb-2" style={{ fontFamily: 'system-ui, -apple-system, sans-serif', letterSpacing: '-0.02em' }}>
               Welke stijl past bij <span className="text-blue-400">jou</span>?
             </h1>
@@ -155,7 +168,7 @@ export const MoodBoard: React.FC<MoodBoardProps> = ({ images, onComplete }) => {
                   : 'bg-blue-500/10 text-blue-400/30 cursor-not-allowed border border-blue-500/10'
               }`}
             >
-              <span>Verder</span>
+              <span>Verder naar configuratie</span>
               <ArrowRight size={20} />
             </motion.button>
           </div>

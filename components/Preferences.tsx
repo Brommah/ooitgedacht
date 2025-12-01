@@ -135,7 +135,7 @@ export const Preferences: React.FC<PreferencesProps> = ({ initialPrefs, onNext, 
         <div className="mb-6 lg:mb-12">
           <div className="flex items-center gap-2 text-blue-400/60 font-mono text-xs uppercase tracking-wider mb-2">
             <Zap size={14} />
-            Stap 3 van 5
+            Stap 5 van 5
           </div>
           <h1 className="text-2xl lg:text-5xl font-medium tracking-tight text-blue-50">Configureer</h1>
           <p className="text-blue-300/50 mt-2 lg:mt-4 lg:text-lg font-mono">
@@ -415,16 +415,17 @@ export const Preferences: React.FC<PreferencesProps> = ({ initialPrefs, onNext, 
         </motion.section>
       </main>
 
-      {/* Fixed CTA */}
+      {/* Fixed CTA - Final step before generation */}
       <div className="fixed bottom-0 inset-x-0 z-50 p-4 lg:p-6 bg-gradient-to-t from-[#0a1628] via-[#0a1628]/95 to-transparent pointer-events-none">
         <div className="max-w-7xl mx-auto flex justify-center lg:justify-end pointer-events-auto">
           <motion.button 
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
             onClick={handleNext}
-            className="w-full lg:w-auto bg-gradient-to-r from-[#1e3a5f] to-[#0d1f3c] text-white font-semibold py-4 lg:py-5 px-8 lg:px-16 rounded-full flex items-center justify-center gap-3 transition-all hover:from-[#2a4a73] hover:to-[#1e3a5f] text-base lg:text-lg shadow-lg shadow-[#0a1628]/40 border border-[#2a4a73]/30"
+            className="w-full lg:w-auto bg-gradient-to-r from-blue-500 to-emerald-500 text-white font-bold py-4 lg:py-5 px-8 lg:px-16 rounded-full flex items-center justify-center gap-3 transition-all hover:from-blue-400 hover:to-emerald-400 text-base lg:text-lg shadow-lg shadow-blue-500/40"
           >
-            <span>Locatie kiezen</span>
+            <Sparkles size={20} />
+            <span>Genereer Mijn Droomhuis</span>
             <ArrowRight size={20} />
           </motion.button>
         </div>

@@ -93,7 +93,7 @@ export const LocationStep: React.FC<LocationStepProps> = ({ initialPrefs, onNext
           
           <div className="flex items-center gap-2 text-blue-400/60 font-mono text-xs uppercase tracking-wider">
             <MapPin size={14} />
-            Stap 4 van 5
+            Stap 3 van 5
           </div>
         </div>
       </header>
@@ -136,7 +136,7 @@ export const LocationStep: React.FC<LocationStepProps> = ({ initialPrefs, onNext
           </div>
         </motion.div>
 
-        {/* Popular Locations */}
+        {/* Popular Locations with Images */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -146,31 +146,64 @@ export const LocationStep: React.FC<LocationStepProps> = ({ initialPrefs, onNext
           <p className="text-xs lg:text-sm text-blue-400/60 font-mono uppercase tracking-wider mb-4">
             Populaire locaties
           </p>
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 lg:gap-3">
-            {POPULAR_LOCATIONS.slice(0, 8).map((location) => {
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 lg:gap-4">
+            {POPULAR_LOCATIONS.slice(0, 8).map((location, index) => {
               const fullName = `${location.name}, ${location.region}`;
               const isSelected = searchQuery === fullName;
               return (
                 <motion.button
                   key={location.name}
                   onClick={() => handleLocationSelect(fullName)}
+                  whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
-                  className={`p-3 lg:p-4 rounded-xl text-left transition-all ${
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.15 + index * 0.05 }}
+                  className={`relative rounded-xl lg:rounded-2xl overflow-hidden group transition-all ${
                     isSelected 
-                      ? 'bg-blue-400 text-[#0a1628]' 
-                      : 'bg-blue-500/5 hover:bg-blue-500/10 border border-blue-500/10'
+                      ? 'ring-2 ring-blue-400 ring-offset-2 ring-offset-[#0a1628]' 
+                      : 'hover:ring-1 hover:ring-blue-500/30'
                   }`}
                 >
-                  <div className="flex items-center gap-2">
-                    <MapPin size={14} className={isSelected ? 'text-[#0a1628]/60' : 'text-blue-400/40'} />
-                    <div>
-                      <div className={`font-medium text-sm ${isSelected ? '' : 'text-blue-100'}`}>
-                        {location.name}
-                      </div>
-                      <div className={`text-xs font-mono ${isSelected ? 'text-[#0a1628]/60' : 'text-blue-400/40'}`}>
-                        ~€{location.avgLandPrice}/m²
+                  {/* Background Image */}
+                  <div className="aspect-[4/3] relative">
+                    <img 
+                      src={location.image} 
+                      alt={location.name}
+                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                    {/* Gradient Overlay */}
+                    <div className={`absolute inset-0 transition-all duration-300 ${
+                      isSelected 
+                        ? 'bg-gradient-to-t from-blue-900/90 via-blue-900/50 to-blue-400/20' 
+                        : 'bg-gradient-to-t from-[#0a1628]/90 via-[#0a1628]/40 to-transparent'
+                    }`} />
+                    
+                    {/* Content */}
+                    <div className="absolute bottom-0 left-0 right-0 p-3 lg:p-4">
+                      <div className="flex items-center gap-2">
+                        <MapPin size={14} className={isSelected ? 'text-blue-200' : 'text-blue-400/60'} />
+                        <div className="text-left">
+                          <div className={`font-medium text-sm ${isSelected ? 'text-blue-50' : 'text-blue-100'}`}>
+                            {location.name}
+                          </div>
+                          <div className={`text-xs font-mono ${isSelected ? 'text-blue-200/80' : 'text-blue-400/50'}`}>
+                            ~€{location.avgLandPrice}/m²
+                          </div>
+                        </div>
                       </div>
                     </div>
+
+                    {/* Selection indicator */}
+                    {isSelected && (
+                      <motion.div
+                        initial={{ scale: 0 }}
+                        animate={{ scale: 1 }}
+                        className="absolute top-2 right-2 w-6 h-6 bg-blue-400 rounded-full flex items-center justify-center"
+                      >
+                        <Check size={14} className="text-[#0a1628]" strokeWidth={3} />
+                      </motion.div>
+                    )}
                   </div>
                 </motion.button>
               );
@@ -330,7 +363,7 @@ export const LocationStep: React.FC<LocationStepProps> = ({ initialPrefs, onNext
                 : 'bg-blue-500/10 text-blue-400/30 cursor-not-allowed border border-blue-500/10 shadow-none'
             }`}
           >
-            <span>Budget bepalen</span>
+            <span>Verder naar stijl</span>
             <ArrowRight size={20} />
           </motion.button>
         </div>
