@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import { WizardProgress } from './WizardProgress';
 import { LanguageToggle } from '../LanguageToggle';
@@ -98,55 +98,46 @@ export const WizardLayout: React.FC<WizardLayoutProps> = ({
 
       {/* Main Content */}
       <main className="relative z-10 flex-1 flex flex-col max-w-lg mx-auto px-5 w-full pt-8 pb-32">
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={step}
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -20 }}
-            transition={{ duration: 0.25, ease: 'easeOut' }}
-            className="flex-1 flex flex-col"
-          >
-            {/* Title Section */}
-            <div className="mb-8">
-              {icon && (
-                <motion.div
-                  initial={{ scale: 0.8, opacity: 0 }}
-                  animate={{ scale: 1, opacity: 1 }}
-                  transition={{ delay: 0.1 }}
-                  className="w-12 h-12 rounded-2xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center mb-4 text-blue-400"
-                >
-                  {icon}
-                </motion.div>
-              )}
-              
-              <motion.h1
+        <div className="flex-1 flex flex-col">
+          {/* Title Section */}
+          <div className="mb-8">
+            {icon && (
+              <motion.div
+                initial={{ scale: 0.8, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{ delay: 0.1 }}
+                className="w-12 h-12 rounded-2xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center mb-4 text-blue-400"
+              >
+                {icon}
+              </motion.div>
+            )}
+            
+            <motion.h1
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.05 }}
+              className="text-2xl sm:text-3xl font-medium tracking-tight text-white"
+            >
+              {title}
+            </motion.h1>
+            
+            {subtitle && (
+              <motion.p
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.05 }}
-                className="text-2xl sm:text-3xl font-medium tracking-tight text-white"
+                transition={{ delay: 0.1 }}
+                className="text-white/40 mt-2 text-base"
               >
-                {title}
-              </motion.h1>
-              
-              {subtitle && (
-                <motion.p
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.1 }}
-                  className="text-white/40 mt-2 text-base"
-                >
-                  {subtitle}
-                </motion.p>
-              )}
-            </div>
+                {subtitle}
+              </motion.p>
+            )}
+          </div>
 
-            {/* Step Content */}
-            <div className="flex-1">
-              {children}
-            </div>
-          </motion.div>
-        </AnimatePresence>
+          {/* Step Content */}
+          <div className="flex-1">
+            {children}
+          </div>
+        </div>
       </main>
 
       {/* Fixed Bottom CTA */}

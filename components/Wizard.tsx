@@ -537,16 +537,9 @@ export const Wizard: React.FC<WizardProps> = ({ appState, setAppState }) => {
   }
 
   return (
-    <AnimatePresence mode="wait">
-      <motion.div
-        key={appState}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        transition={{ duration: 0.15 }}
-      >
-        {/* Step 1: Type */}
-        {appState === AppState.WIZARD_STEP_TYPE && (
+    <>
+      {/* Step 1: Type */}
+      {appState === AppState.WIZARD_STEP_TYPE && (
           <WizardStepType
             initialValue={preferences.household.type}
             onNext={handleTypeComplete}
@@ -673,7 +666,6 @@ export const Wizard: React.FC<WizardProps> = ({ appState, setAppState }) => {
               preferences={preferences}
             />
           )}
-      </motion.div>
-    </AnimatePresence>
+    </>
   );
 };
