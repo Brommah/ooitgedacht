@@ -354,7 +354,8 @@ const HeroSection: React.FC<{ setAppState: (state: AppState) => void }> = ({ set
         <img 
           src="/generated/hero-windmill-sunset.jpeg" 
           alt="Modern Dutch house with windmill at sunset" 
-          className="w-full h-full object-cover object-top"
+          className="w-full h-full object-cover"
+          style={{ objectPosition: '75% 70%' }}
         />
         <div 
           className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/45 to-black/65 md:bg-gradient-to-r md:from-black/70 md:via-black/45 md:via-40% md:to-transparent md:to-75%"
