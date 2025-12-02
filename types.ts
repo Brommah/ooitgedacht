@@ -4,12 +4,29 @@ export enum AppState {
   MARKET_RESEARCH = 'MARKET_RESEARCH',
   B2B_BUILDERS = 'B2B_BUILDERS',
   INVESTOR_PITCH = 'INVESTOR_PITCH',
-  // New comprehensive wizard flow
+  
+  // Single-screen wizard flow (13 steps)
+  WIZARD_STEP_TYPE = 'WIZARD_STEP_TYPE',
+  WIZARD_STEP_BEDROOMS = 'WIZARD_STEP_BEDROOMS',
+  WIZARD_STEP_BUDGET = 'WIZARD_STEP_BUDGET',
+  WIZARD_STEP_TIMELINE = 'WIZARD_STEP_TIMELINE',
+  WIZARD_STEP_LOCATION = 'WIZARD_STEP_LOCATION',
+  WIZARD_STEP_STYLE = 'WIZARD_STEP_STYLE',
+  WIZARD_STEP_SIZE = 'WIZARD_STEP_SIZE',
+  WIZARD_STEP_MATERIAL = 'WIZARD_STEP_MATERIAL',
+  WIZARD_STEP_ENERGY = 'WIZARD_STEP_ENERGY',
+  WIZARD_STEP_EXTRAS_ENERGY = 'WIZARD_STEP_EXTRAS_ENERGY',
+  WIZARD_STEP_EXTRAS_OUTDOOR = 'WIZARD_STEP_EXTRAS_OUTDOOR',
+  WIZARD_STEP_EXTRAS_COMFORT = 'WIZARD_STEP_EXTRAS_COMFORT',
+  WIZARD_STEP_VIBE = 'WIZARD_STEP_VIBE',
+  
+  // Legacy wizard states (deprecated - kept for compatibility)
   WIZARD_HOUSEHOLD = 'WIZARD_HOUSEHOLD',
   WIZARD_MOODBOARD = 'WIZARD_MOODBOARD',
   WIZARD_PREFERENCES = 'WIZARD_PREFERENCES',
   WIZARD_LOCATION = 'WIZARD_LOCATION',
   WIZARD_BUDGET = 'WIZARD_BUDGET',
+  
   GENERATING = 'GENERATING',
   RESULTS_LOCKED = 'RESULTS_LOCKED',
   RESULTS_UNLOCKED = 'RESULTS_UNLOCKED',
@@ -126,23 +143,20 @@ export type ExtraFeature =
 
 // Comprehensive user profile
 export interface UserPreferences {
-  // Step 1: Household Profile
+  // Step 1-2: Household Profile
   household: {
     type: HouseholdType;
     bedrooms: number;
-    workFromHome: boolean;
-    pets: boolean;
-    accessibility: boolean;
   };
   
-  // Step 2: Style (from MoodBoard)
+  // Step 6: Style (from MoodBoard)
   style: {
     moodBoardSelections: string[];
     inferredRoofStyle: RoofStyle;
     inferredMaterialAffinity: MaterialType;
   };
   
-  // Step 3: Configuration
+  // Step 7-13: Configuration
   config: {
     size: SizeCategory;
     sqm: number;
@@ -152,20 +166,16 @@ export interface UserPreferences {
     vibe: number; // 0-100 slider (cold/minimalist to warm/cozy)
   };
   
-  // Step 4: Location & Land
+  // Step 5: Location
   location: {
     searchQuery: string;
     coordinates: { lat: number; lng: number } | null;
-    hasLand: LandStatus;
-    plotSize: PlotSize | null;
-    gardenOrientation: GardenOrientation;
   };
   
-  // Step 5: Budget & Timeline
+  // Step 3-4: Budget & Timeline
   budget: {
     total: number;
     timeline: Timeline;
-    financingStatus: FinancingStatus;
   };
 }
 
@@ -211,9 +221,6 @@ export const createDefaultPreferences = (): UserPreferences => ({
   household: {
     type: 'couple',
     bedrooms: 3,
-    workFromHome: false,
-    pets: false,
-    accessibility: false,
   },
   style: {
     moodBoardSelections: [],
@@ -231,13 +238,9 @@ export const createDefaultPreferences = (): UserPreferences => ({
   location: {
     searchQuery: '',
     coordinates: null,
-    hasLand: 'searching',
-    plotSize: null,
-    gardenOrientation: 'unknown',
   },
   budget: {
     total: 450000,
     timeline: '1-2_years',
-    financingStatus: 'exploring',
   },
 });

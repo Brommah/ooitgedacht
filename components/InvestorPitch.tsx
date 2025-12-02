@@ -7,6 +7,7 @@ import {
   Rocket, Award, BarChart3, Calendar, MapPin, Sparkles, Network, Box, Hammer
 } from 'lucide-react';
 import { AppState } from '../types';
+import { PrimaryButton } from './PrimaryButton';
 
 const BROERSMA_LOGO = "https://www.bureau-broersma.nl/wp-content/uploads/2015/09/logo-broersma-bouwadvies.png";
 
@@ -98,7 +99,7 @@ export const InvestorPitch: React.FC<InvestorPitchProps> = ({ setAppState }) => 
             <span className="px-2 py-1 bg-red-500/20 text-red-400 rounded text-[10px] font-bold ml-1">CONFIDENTIAL</span>
           </div>
           <div className="flex items-center gap-3">
-            <button onClick={() => setAppState(AppState.WIZARD_HOUSEHOLD)} className="text-xs text-white/50 hover:text-white transition-colors">
+            <button onClick={() => setAppState(AppState.WIZARD_STEP_TYPE)} className="text-xs text-white/50 hover:text-white transition-colors">
               Demo →
             </button>
           </div>
@@ -1311,13 +1312,13 @@ export const InvestorPitch: React.FC<InvestorPitchProps> = ({ setAppState }) => 
           </AnimatedSection>
 
           <AnimatedSection delay={200}>
-            <button 
-              onClick={() => setAppState(AppState.WIZARD_HOUSEHOLD)}
-              className="group bg-white text-[#030712] px-10 py-5 text-lg font-bold rounded-full hover:bg-white/90 transition-all shadow-2xl shadow-white/10 inline-flex items-center gap-3 mb-6"
+            <PrimaryButton 
+              onClick={() => setAppState(AppState.WIZARD_STEP_TYPE)}
+              size="lg"
+              className="mb-6"
             >
               Bekijk de Demo
-              <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
-            </button>
+            </PrimaryButton>
             <p className="text-white/30 text-sm">
               Strategisch Projectdossier • November 2025 • Versie 1.0
             </p>

@@ -3,6 +3,7 @@ import { UserPreferences } from '../types';
 import { ArrowRight, MessageSquare, Download, Sparkles, Check, Shield, ChevronUp, Move, ZoomIn, ZoomOut, Maximize2 } from 'lucide-react';
 import { CURRENCY_SYMBOL, calculateBuildCost, estimateLandCost, ENERGY_OPTIONS, MATERIAL_OPTIONS } from '../constants';
 import { motion, AnimatePresence, useMotionValue, useTransform, PanInfo } from 'framer-motion';
+import { useTranslation } from '../i18n';
 
 interface ResultsProps {
   image: string;
@@ -20,6 +21,10 @@ export const Results: React.FC<ResultsProps> = ({ image, locked, onUnlock, onDas
   const [imageScale, setImageScale] = useState(1);
   const [showHint, setShowHint] = useState(true);
   const constraintsRef = useRef<HTMLDivElement>(null);
+  const { t, tObj, language } = useTranslation();
+  
+  // Get translated material options
+  const materialOptions = tObj<Array<{ value: string; label: string }>>('options.material');
 
   // Motion values for image panning
   const x = useMotionValue(0);
@@ -63,7 +68,8 @@ export const Results: React.FC<ResultsProps> = ({ image, locked, onUnlock, onDas
     : 'A';
 
   const materialOpt = MATERIAL_OPTIONS.find(m => m.value === preferences.config.material);
-  const materialDesc = materialOpt?.label || 'Baksteen';
+  const materialTranslated = materialOptions.find(m => m.value === preferences.config.material);
+  const materialDesc = materialTranslated?.label || materialOpt?.label || 'Baksteen';
   const locationName = preferences.location.searchQuery.split(',')[0] || 'Dream';
 
   useEffect(() => {
@@ -116,11 +122,11 @@ export const Results: React.FC<ResultsProps> = ({ image, locked, onUnlock, onDas
         <div className="absolute top-6 left-6 flex gap-2 z-10">
           <div className="flex items-center gap-1.5 px-3 py-1.5 bg-white/90 backdrop-blur-sm text-[#0a1628] text-[10px] font-bold uppercase tracking-wider rounded-full">
             <Check size={12} className="text-blue-600" />
-            Gevalideerd
+            {t('common.validated')}
           </div>
           <div className="flex items-center gap-1.5 px-3 py-1.5 bg-gradient-to-r from-blue-500 to-blue-600 text-white text-[10px] font-bold uppercase tracking-wider rounded-full">
             <Sparkles size={12} />
-            AI Gegenereerd
+            {t('common.aiGenerated')}
           </div>
         </div>
 
@@ -132,11 +138,11 @@ export const Results: React.FC<ResultsProps> = ({ image, locked, onUnlock, onDas
           </div>
           <div className="bg-black/40 backdrop-blur-xl rounded-xl px-4 py-2 border border-white/20">
             <div className="text-xl font-mono font-bold text-white">{preferences.household.bedrooms}</div>
-            <div className="text-[9px] text-white/60 uppercase tracking-wider">Slaapkamers</div>
+            <div className="text-[9px] text-white/60 uppercase tracking-wider">{t('common.bedrooms')}</div>
           </div>
           <div className="bg-blue-500/30 backdrop-blur-xl rounded-xl px-4 py-2 border border-blue-500/40">
             <div className="text-xl font-mono font-bold text-blue-400">{energyLabel}</div>
-            <div className="text-[9px] text-blue-400/70 uppercase tracking-wider">Energie</div>
+            <div className="text-[9px] text-blue-400/70 uppercase tracking-wider">{t('common.energy')}</div>
           </div>
         </div>
 
@@ -153,19 +159,19 @@ export const Results: React.FC<ResultsProps> = ({ image, locked, onUnlock, onDas
 
               {/* Cost preview */}
               <div className="bg-white/5 rounded-xl p-4 mb-4 border border-white/10">
-                <div className="text-xs text-white/40 uppercase tracking-wider">Geschatte investering</div>
+                <div className="text-xs text-white/40 uppercase tracking-wider">{t('results.estimatedInvestment')}</div>
                 <div className="text-2xl font-mono font-bold text-white">
                   {CURRENCY_SYMBOL} {totalCost.toLocaleString('nl-NL')}
                 </div>
                 <div className="text-blue-400 text-sm">
-                  -{CURRENCY_SYMBOL}{saving.toLocaleString('nl-NL')} besparing
+                  -{CURRENCY_SYMBOL}{saving.toLocaleString('nl-NL')} {t('results.saving')}
                 </div>
               </div>
               
               {/* Email input */}
               <input 
                 type="email" 
-                placeholder="Jouw emailadres"
+                placeholder={t('results.emailPlaceholder')}
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 className="w-full bg-white/10 border border-white/20 rounded-xl py-3 px-4 text-center text-white placeholder:text-white/30 outline-none focus:border-blue-500/50 mb-3"
@@ -178,12 +184,12 @@ export const Results: React.FC<ResultsProps> = ({ image, locked, onUnlock, onDas
                 disabled={!email.includes('@')}
                 className="w-full bg-gradient-to-r from-[#1e3a5f] to-[#0d1f3c] disabled:bg-white/10 disabled:text-white/30 text-white py-3 font-semibold rounded-full flex items-center justify-center gap-2 shadow-lg shadow-[#0a1628]/40 border border-[#2a4a73]/30 hover:from-[#2a4a73] hover:to-[#1e3a5f]"
               >
-                Bekijk Volledig Paspoort
+                {t('results.viewFullPassport')}
                 <ArrowRight size={18} />
               </motion.button>
 
               <p className="text-[10px] text-white/30 mt-3">
-                Geen spam • Gevalideerd door Bureau Broersma
+                {t('results.noSpam')}
               </p>
             </div>
           </div>
@@ -268,8 +274,8 @@ export const Results: React.FC<ResultsProps> = ({ image, locked, onUnlock, onDas
               >
                 <Move size={32} className="text-white/80 mx-auto mb-2" />
               </motion.div>
-              <p className="text-white/80 text-sm font-medium">Sleep om te verkennen</p>
-              <p className="text-white/50 text-xs mt-1">Pinch to zoom</p>
+              <p className="text-white/80 text-sm font-medium">{t('results.dragToExplore')}</p>
+              <p className="text-white/50 text-xs mt-1">{t('results.pinchToZoom')}</p>
             </div>
           </motion.div>
         )}
@@ -342,11 +348,11 @@ export const Results: React.FC<ResultsProps> = ({ image, locked, onUnlock, onDas
         </div>
         <div className="bg-black/50 backdrop-blur-xl rounded-xl px-4 py-3 border border-white/20 text-center">
           <div className="text-2xl font-mono font-bold text-white">{preferences.household.bedrooms}</div>
-          <div className="text-[9px] text-white/60 uppercase tracking-wider">Slaapkamers</div>
+          <div className="text-[9px] text-white/60 uppercase tracking-wider">{t('common.bedrooms')}</div>
         </div>
         <div className="bg-blue-500/30 backdrop-blur-xl rounded-xl px-4 py-3 border border-blue-500/40 text-center">
           <div className="text-2xl font-mono font-bold text-blue-400">{energyLabel}</div>
-          <div className="text-[9px] text-blue-400/70 uppercase tracking-wider">Energie</div>
+          <div className="text-[9px] text-blue-400/70 uppercase tracking-wider">{t('common.energy')}</div>
         </div>
       </motion.div>
 
@@ -639,7 +645,7 @@ export const Results: React.FC<ResultsProps> = ({ image, locked, onUnlock, onDas
                 className="bg-gradient-to-r from-[#1e3a5f] to-[#0d1f3c] text-white px-6 py-2 font-semibold rounded-full flex items-center gap-2 shadow-lg shadow-[#0a1628]/40 border border-[#2a4a73]/30 hover:from-[#2a4a73] hover:to-[#1e3a5f]"
               >
                 <MessageSquare size={16} />
-                Overzicht
+                {t('results.overview')}
               </motion.button>
             </div>
           </div>

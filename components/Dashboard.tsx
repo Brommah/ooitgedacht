@@ -3,6 +3,7 @@ import { UserPreferences } from '../types';
 import { MessageSquare, FileText, CheckCircle2, Clock, Bell, Leaf, Shield, ArrowRight, Home, Users, Zap, ChevronDown, ChevronUp, Lock, Camera, Send, X, AlertTriangle, HardHat, FileCheck, Sparkles, Award, QrCode, Building2, ThermometerSun, Droplets, Sun, Plug } from 'lucide-react';
 import { ENERGY_OPTIONS, CURRENCY_SYMBOL, calculateBuildCost } from '../constants';
 import { CONSTRUCTION_PHASES, MilestoneTask, getPhaseProgress, getOverallProgress } from '../constants/milestones';
+import { useTranslation } from '../i18n';
 
 // Chat message types
 interface ChatMessage {
@@ -118,6 +119,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ preferences, image }) => {
   const [selectedTask, setSelectedTask] = useState<MilestoneTask | null>(
     CONSTRUCTION_PHASES[1].tasks[2] // Default to Wapeningsstaal
   );
+  const { t, tObj, language } = useTranslation();
   
   // Chat state
   const [messages, setMessages] = useState<ChatMessage[]>(SAMPLE_MESSAGES);
@@ -263,11 +265,11 @@ export const Dashboard: React.FC<DashboardProps> = ({ preferences, image }) => {
       {/* Top Navigation */}
       <nav className="sticky top-0 z-50 backdrop-blur-xl bg-[#0a1628]/90 border-b border-blue-500/10 px-6 py-4 flex justify-between items-center">
         <div className="flex items-center gap-4">
-            <div className="font-bold text-lg hidden md:block text-blue-50">{projectName}</div>
-            <div className="font-bold text-lg md:hidden text-blue-50">Ooit Gedacht</div>
+            <img src="/generated/og-logo.png" alt="Ooit Gedacht" className="h-9 brightness-0 invert opacity-80" />
+            <div className="font-bold text-lg text-blue-50">{projectName}</div>
             <div className="flex items-center px-2 py-1 bg-emerald-500/20 text-emerald-400 text-[10px] font-bold uppercase tracking-widest rounded-full border border-emerald-500/30">
                 <span className="w-1.5 h-1.5 bg-emerald-400 rounded-full mr-1.5 animate-pulse" />
-                Constructie OK
+                {t('dashboard.constructionOk')}
             </div>
         </div>
         <div className="flex gap-4 items-center">
@@ -293,12 +295,12 @@ export const Dashboard: React.FC<DashboardProps> = ({ preferences, image }) => {
              {showNotifications && (
                <div className="absolute right-0 top-full mt-2 w-80 bg-[#0d1f35] border border-blue-500/30 rounded-2xl shadow-2xl shadow-black/50 overflow-hidden z-50">
                  <div className="p-4 border-b border-blue-500/20 flex justify-between items-center">
-                   <h3 className="font-bold text-blue-50">Meldingen</h3>
+                   <h3 className="font-bold text-blue-50">{t('dashboard.notifications')}</h3>
                    <button 
                      onClick={() => setNotifications(prev => prev.map(n => ({ ...n, read: true })))}
                      className="text-xs text-blue-400 hover:text-blue-300 transition-colors"
                    >
-                     Alles gelezen
+                     {t('dashboard.markAllRead')}
                    </button>
                  </div>
                  <div className="max-h-96 overflow-y-auto">
@@ -375,7 +377,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ preferences, image }) => {
                 <span className="font-mono font-bold">{preferences.config.sqm}</span> m²
               </div>
               <div className="bg-black/40 backdrop-blur-xl px-3 py-2 rounded-lg text-white text-sm border border-white/10">
-                <span className="font-mono font-bold">{preferences.household.bedrooms}</span> slaapkamers
+                <span className="font-mono font-bold">{preferences.household.bedrooms}</span> {t('common.bedrooms').toLowerCase()}
               </div>
               <div className="bg-emerald-500/20 backdrop-blur-xl px-3 py-2 rounded-lg text-emerald-400 text-sm font-bold border border-emerald-500/30">
                 {energyLabel}
@@ -393,12 +395,12 @@ export const Dashboard: React.FC<DashboardProps> = ({ preferences, image }) => {
               <div className="p-6 border-b border-blue-500/20">
                 <div className="flex justify-between items-start">
                   <div>
-                      <h2 className="text-2xl font-bold mb-1 text-blue-50">Bouwbesturingssysteem</h2>
+                      <h2 className="text-2xl font-bold mb-1 text-blue-50">{t('dashboard.buildingControlSystem')}</h2>
                       <p className="text-sm text-blue-300/60">Project Status: Fase 2 - Fundering</p>
                   </div>
                   <div className="flex flex-col items-end">
                       <div className="text-4xl font-mono text-blue-400">{overallProgress.percentage}%</div>
-                      <span className="text-[10px] uppercase tracking-widest text-blue-400/60">Voltooid</span>
+                      <span className="text-[10px] uppercase tracking-widest text-blue-400/60">{t('dashboard.completed')}</span>
                   </div>
               </div>
               
@@ -610,7 +612,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ preferences, image }) => {
                      </div>
                      <div>
                        <div className="flex items-center gap-2">
-                         <h3 className="text-2xl font-bold text-white">Woning Paspoort</h3>
+                         <h3 className="text-2xl font-bold text-white">{t('dashboard.housingPassport')}</h3>
                          <span className="px-2 py-0.5 bg-emerald-500 text-white text-[10px] font-bold uppercase tracking-widest rounded-full flex items-center gap-1">
                            <Sparkles size={10} />
                            Gecertificeerd
@@ -906,19 +908,19 @@ export const Dashboard: React.FC<DashboardProps> = ({ preferences, image }) => {
             {/* Project Summary */}
             <div className="bg-blue-500/5 backdrop-blur-sm p-6 border border-blue-500/20 rounded-2xl">
                 <h3 className="text-lg font-bold mb-4 flex items-center gap-2 text-blue-50">
-                    <Home size={18} className="text-blue-400" /> Project Specificaties
+                    <Home size={18} className="text-blue-400" /> {t('dashboard.projectSpecifications')}
                 </h3>
                 <div className="space-y-3 text-sm">
                     <div className="flex justify-between">
-                      <span className="text-blue-300/70">Oppervlakte</span>
+                      <span className="text-blue-300/70">{t('dashboard.area')}</span>
                       <span className="font-mono text-blue-100">{preferences.config.sqm} m²</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-blue-300/70">Slaapkamers</span>
+                      <span className="text-blue-300/70">{t('common.bedrooms')}</span>
                       <span className="font-mono text-blue-100">{preferences.household.bedrooms}</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-blue-300/70">Materiaal</span>
+                      <span className="text-blue-300/70">{t('dashboard.material')}</span>
                       <span className="text-blue-100">{preferences.config.material === 'wood' ? 'Hout' : preferences.config.material === 'brick' ? 'Baksteen' : preferences.config.material === 'concrete' ? 'Beton' : 'Mix'}</span>
                     </div>
                     <div className="flex justify-between">
@@ -927,7 +929,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ preferences, image }) => {
                     </div>
                     {preferences.config.extras.length > 0 && (
                       <div className="pt-3 border-t border-blue-500/20">
-                        <span className="text-blue-400/60 text-xs uppercase tracking-wider">Extra's</span>
+                        <span className="text-blue-400/60 text-xs uppercase tracking-wider">{t('dashboard.extras')}</span>
                         <div className="flex flex-wrap gap-1 mt-2">
                           {preferences.config.extras.map((extra, i) => (
                             <span key={i} className="px-2 py-1 bg-blue-500/10 text-blue-300 text-xs rounded border border-blue-500/20">
@@ -943,7 +945,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ preferences, image }) => {
             {/* Dossier Mini */}
             <div className="bg-blue-500/5 backdrop-blur-sm p-6 border border-blue-500/20 rounded-2xl">
                 <h3 className="text-lg font-bold mb-4 flex items-center gap-2 text-blue-50">
-                    <FileText size={18} className="text-blue-400" /> Documentenkluis
+                    <FileText size={18} className="text-blue-400" /> {t('dashboard.documentVault')}
                 </h3>
                 <div className="space-y-3">
                     <DocItem name="Woningpaspoort_Ondertekend.pdf" verified />
@@ -952,7 +954,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ preferences, image }) => {
                     <DocItem name="Sonderingsrapport_Gecontroleerd.pdf" verified />
                 </div>
                 <button className="text-xs font-bold uppercase tracking-widest mt-6 text-blue-400 hover:text-blue-300 flex items-center gap-1 transition-colors">
-                    Open Kluis <ArrowRight size={10} />
+                    {t('dashboard.openVault')} <ArrowRight size={10} />
                 </button>
             </div>
         </div>

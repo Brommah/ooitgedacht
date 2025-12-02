@@ -228,7 +228,7 @@ export const MarketResearchPresentation: React.FC<MarketResearchPresentationProp
               {isAutoPlaying ? <Pause size={18} /> : <Play size={18} />}
             </button>
             <button
-              onClick={() => setAppState(AppState.WIZARD_MOODBOARD)}
+              onClick={() => setAppState(AppState.WIZARD_STEP_TYPE)}
               className="bg-blue-400 text-[#0a1628] px-4 py-2 text-sm font-bold hover:bg-blue-300 transition-colors rounded-lg"
             >
               Start Bouwen →
@@ -788,7 +788,7 @@ export const MarketResearchPresentation: React.FC<MarketResearchPresentationProp
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <button
-              onClick={() => setAppState(AppState.WIZARD_MOODBOARD)}
+              onClick={() => setAppState(AppState.WIZARD_STEP_TYPE)}
               className="bg-green-500 text-black px-10 py-5 text-lg font-bold hover:bg-green-400 transition-colors flex items-center gap-3 group"
             >
               Start Jouw Project

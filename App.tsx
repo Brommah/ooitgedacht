@@ -7,27 +7,30 @@ import { MarketResearchPresentation } from './components/MarketResearchPresentat
 import { BuildersPage } from './components/BuildersPage';
 import { CollaborativeWorkspace } from './components/CollaborativeWorkspace';
 import { InvestorPitch } from './components/InvestorPitch';
+import { LanguageProvider } from './i18n';
 
 export default function App() {
   const [appState, setAppState] = useState<AppState>(AppState.LANDING);
 
   return (
-    <main className="font-sans text-white antialiased selection:bg-blue-400 selection:text-[#0a1628] min-h-screen bg-[#0a1628]">
-      {appState === AppState.LANDING ? (
-        <Hero setAppState={setAppState} />
-      ) : appState === AppState.STATE_OF_MARKET ? (
-        <StateOfMarket setAppState={setAppState} />
-      ) : appState === AppState.MARKET_RESEARCH ? (
-        <MarketResearchPresentation setAppState={setAppState} />
-      ) : appState === AppState.WORKSPACE ? (
-        <CollaborativeWorkspace setAppState={setAppState} />
-      ) : appState === AppState.B2B_BUILDERS ? (
-        <BuildersPage setAppState={setAppState} />
-      ) : appState === AppState.INVESTOR_PITCH ? (
-        <InvestorPitch setAppState={setAppState} />
-      ) : (
-        <Wizard appState={appState} setAppState={setAppState} />
-      )}
-    </main>
+    <LanguageProvider>
+      <main className="font-sans text-white antialiased selection:bg-blue-400 selection:text-[#0a1628] min-h-screen bg-[#0a1628]">
+        {appState === AppState.LANDING ? (
+          <Hero setAppState={setAppState} />
+        ) : appState === AppState.STATE_OF_MARKET ? (
+          <StateOfMarket setAppState={setAppState} />
+        ) : appState === AppState.MARKET_RESEARCH ? (
+          <MarketResearchPresentation setAppState={setAppState} />
+        ) : appState === AppState.WORKSPACE ? (
+          <CollaborativeWorkspace setAppState={setAppState} />
+        ) : appState === AppState.B2B_BUILDERS ? (
+          <BuildersPage setAppState={setAppState} />
+        ) : appState === AppState.INVESTOR_PITCH ? (
+          <InvestorPitch setAppState={setAppState} />
+        ) : (
+          <Wizard appState={appState} setAppState={setAppState} />
+        )}
+      </main>
+    </LanguageProvider>
   );
 }

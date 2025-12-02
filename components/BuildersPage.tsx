@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { PrimaryButton } from './PrimaryButton';
 import { 
   ArrowRight, 
   ArrowLeft,
@@ -83,12 +84,12 @@ export const BuildersPage: React.FC<BuildersPageProps> = ({ setAppState }) => {
             <ArrowLeft size={18} className="text-white/40 group-hover:text-white transition-colors" />
             <img src="/generated/og-logo.png" alt="OoitGedacht" className="h-7 brightness-0 invert opacity-70 group-hover:opacity-100 transition-opacity" />
           </button>
-          <button 
+          <PrimaryButton 
             onClick={() => document.getElementById('demo-form')?.scrollIntoView({ behavior: 'smooth' })}
-            className="bg-white text-[#0a0f1a] px-5 py-2 text-sm font-semibold rounded-full hover:bg-white/90 transition-colors"
+            size="sm"
           >
             Praat met ons
-          </button>
+          </PrimaryButton>
         </div>
       </nav>
 

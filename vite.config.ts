@@ -13,6 +13,9 @@ export default defineConfig(({ mode }) => {
         host: '0.0.0.0',
       },
       plugins: [react()],
+      optimizeDeps: {
+        include: ['gsap', '@gsap/react', 'roughjs']
+      },
       define: {
         'process.env.API_KEY': JSON.stringify(apiKey),
         'process.env.GEMINI_API_KEY': JSON.stringify(apiKey)
