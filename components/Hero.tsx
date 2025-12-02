@@ -940,7 +940,7 @@ const DashboardPreviewSection: React.FC<{ setAppState: (state: AppState) => void
           <div className="bg-blue-500/5 px-6 py-4 border-t border-blue-500/20 flex justify-between items-center">
             <div className="text-xs text-blue-300/50">Laatste update: Vandaag, 09:41</div>
             <button 
-              onClick={() => setAppState(AppState.WORKSPACE)}
+              onClick={() => setAppState(AppState.DASHBOARD)}
               className="group flex items-center gap-2 text-xs font-bold text-blue-400 hover:text-blue-300 transition-colors"
             >
               Open Overzicht <ArrowRight size={12} className="group-hover:translate-x-1 transition-transform" />
@@ -1192,7 +1192,7 @@ export const Hero: React.FC<HeroProps> = ({ setAppState }) => {
               <div className="hidden md:flex items-center absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
                 <div className="flex items-center bg-white/[0.04] rounded-full px-2 py-1.5 border border-white/[0.06]">
                   <button 
-                    onClick={() => setAppState(AppState.WORKSPACE)}
+                    onClick={() => setAppState(AppState.DASHBOARD)}
                     className="relative px-4 md:px-5 py-2 text-[12px] md:text-[13px] text-white/70 hover:text-white transition-all duration-300 rounded-full hover:bg-white/[0.08] group"
                   >
                     <span className="relative z-10 flex items-center gap-1.5">
@@ -1264,104 +1264,73 @@ export const Hero: React.FC<HeroProps> = ({ setAppState }) => {
           </div>
         </nav>
 
-        {/* Mobile Menu - Full Screen Glassmorphic Overlay (only rendered after first interaction) */}
+        {/* Mobile Menu - Clean Transparent Overlay */}
         {mobileMenuMounted && (
         <div 
-          className={`fixed inset-0 z-[100] lg:hidden transition-all duration-500 ${mobileMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}
+          className={`fixed inset-0 z-[100] lg:hidden transition-all duration-300 ${mobileMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}
         >
-          {/* Backdrop blur */}
+          {/* Clean backdrop with blur */}
           <div 
-            className="absolute inset-0 bg-[#030712]/60 backdrop-blur-2xl"
+            className="absolute inset-0 bg-[#2a2f3d]/95 backdrop-blur-2xl"
             onClick={() => setMobileMenuOpen(false)}
           />
           
-          {/* Gradient overlays for depth */}
-          <div className="absolute inset-0 bg-gradient-to-b from-emerald-500/5 via-transparent to-cyan-500/5 pointer-events-none" />
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(16,185,129,0.1),transparent_50%)] pointer-events-none" />
-          
-          {/* Animated grid pattern */}
-          <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{
-            backgroundImage: `linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)`,
-            backgroundSize: '60px 60px'
-          }} />
-          
           {/* Menu Content */}
-          <div className={`relative h-full flex flex-col px-6 pt-24 pb-8 transition-all duration-500 delay-100 ${mobileMenuOpen ? 'translate-y-0 opacity-100' : '-translate-y-4 opacity-0'}`}>
+          <div className={`relative h-full flex flex-col transition-all duration-300 ${mobileMenuOpen ? 'translate-y-0 opacity-100' : '-translate-y-4 opacity-0'}`}>
             
-            {/* Close button in top right */}
-            <button 
-              onClick={() => setMobileMenuOpen(false)}
-              className="absolute top-6 right-6 w-12 h-12 rounded-2xl bg-white/[0.05] border border-white/[0.1] flex items-center justify-center hover:bg-white/[0.1] transition-all"
-            >
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" className="text-white/70">
-                <path d="M18 6L6 18M6 6l12 12" />
-              </svg>
-            </button>
-            
-            {/* Logo */}
-            <div className="mb-12 flex items-center">
-              {/* OG Logo */}
-              <div className="w-14 h-14 flex items-center justify-center">
-                <img 
-                  src="/generated/og-logo.png" 
-                  alt="Ooit Gedacht" 
-                  className="w-full h-full object-contain brightness-0 invert"
-                />
+            {/* Header - Logo & Close */}
+            <div className="flex items-center justify-between px-6 py-6">
+              {/* Logo */}
+              <div className="flex items-center gap-2.5">
+                <div className="w-8 h-8 flex items-center justify-center">
+                  <img 
+                    src="/generated/og-logo.png" 
+                    alt="Ooit Gedacht" 
+                    className="w-full h-full object-contain brightness-0 invert"
+                  />
+                </div>
+                <span className="text-white/90 font-semibold text-base tracking-wide">OOIT GEDACHT</span>
               </div>
+              
+              {/* Close button */}
+              <button 
+                onClick={() => setMobileMenuOpen(false)}
+                className="w-9 h-9 flex items-center justify-center rounded-full hover:bg-white/10 transition-colors"
+                aria-label="Sluit menu"
+              >
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" className="text-white/60">
+                  <path d="M18 6L6 18M6 6l12 12" />
+                </svg>
+              </button>
             </div>
             
             {/* Navigation Links */}
-            <nav className="flex-1">
-              <ul className="space-y-3">
-                {/* Voor Aannemers - Featured */}
-                <li>
-                  <button 
-                    onClick={() => {
-                      setAppState(AppState.B2B_BUILDERS);
-                      setMobileMenuOpen(false);
-                    }}
-                    className="group w-full flex items-center gap-5 p-5 rounded-3xl bg-gradient-to-r from-amber-500/20 to-orange-500/10 border border-amber-500/30 hover:from-amber-500/30 hover:to-orange-500/20 hover:border-amber-500/50 transition-all duration-300"
-                  >
-                    <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-amber-400 to-orange-500 p-[1px]">
-                      <div className="w-full h-full rounded-2xl bg-[#0a0f1a] flex items-center justify-center text-amber-400 group-hover:text-amber-300 transition-colors">
-                        <Hammer size={24} />
-                      </div>
-                    </div>
-                    <div className="text-left flex-1">
-                      <p className="text-lg font-bold text-amber-400 group-hover:text-amber-300 transition-colors">Voor Aannemers</p>
-                      <p className="text-sm text-amber-400/60 group-hover:text-amber-300/70 transition-colors">BouwBorg B2B Platform</p>
-                    </div>
-                    <ChevronRight size={20} className="text-amber-400/40 group-hover:text-amber-300/70 group-hover:translate-x-1 transition-all" />
-                  </button>
-                </li>
-                
-                {/* Other nav items */}
+            <nav className="flex-1 px-6 pt-6">
+              <ul className="space-y-0">
                 {[
                   { 
-                    icon: <Home size={22} />, 
-                    label: 'Overzicht', 
-                    sublabel: 'Dashboard & Status',
-                    color: 'from-blue-400 to-cyan-400',
+                    label: 'Overzicht',
                     onClick: () => {
-                      setAppState(AppState.WORKSPACE);
+                      setAppState(AppState.DASHBOARD);
                       setMobileMenuOpen(false);
                     }
                   },
                   { 
-                    icon: <BarChart3 size={22} />, 
-                    label: 'Markt Analyse', 
-                    sublabel: 'Actuele marktdata',
-                    color: 'from-emerald-400 to-teal-400',
+                    label: 'Voor Aannemers',
+                    onClick: () => {
+                      setAppState(AppState.B2B_BUILDERS);
+                      setMobileMenuOpen(false);
+                    }
+                  },
+                  { 
+                    label: 'Markt Analyse',
                     onClick: () => {
                       setAppState(AppState.STATE_OF_MARKET);
                       setMobileMenuOpen(false);
                     }
                   },
                   { 
-                    icon: <FileText size={22} />, 
-                    label: 'Presentatie', 
-                    sublabel: 'Investor Pitch Deck',
-                    color: 'from-purple-400 to-violet-400',
+                    label: 'Investeerders',
                     onClick: () => {
                       setAppState(AppState.INVESTOR_PITCH);
                       setMobileMenuOpen(false);
@@ -1371,19 +1340,14 @@ export const Hero: React.FC<HeroProps> = ({ setAppState }) => {
                   <li key={i}>
                     <button 
                       onClick={item.onClick}
-                      className="group w-full flex items-center gap-5 p-5 rounded-3xl bg-white/[0.03] border border-white/[0.06] hover:bg-white/[0.08] hover:border-white/[0.12] transition-all duration-300"
-                      style={{ transitionDelay: `${i * 50}ms` }}
+                      className="group w-full flex items-center justify-between py-5 border-b border-white/[0.08] transition-colors"
                     >
-                      <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${item.color} p-[1px]`}>
-                        <div className="w-full h-full rounded-2xl bg-[#0a0f1a] flex items-center justify-center text-white/80 group-hover:text-white transition-colors">
-                          {item.icon}
-                        </div>
-                      </div>
-                      <div className="text-left">
-                        <p className="text-lg font-semibold text-white/90 group-hover:text-white transition-colors">{item.label}</p>
-                        <p className="text-sm text-white/40 group-hover:text-white/60 transition-colors">{item.sublabel}</p>
-                      </div>
-                      <ChevronRight size={20} className="ml-auto text-white/20 group-hover:text-white/50 group-hover:translate-x-1 transition-all" />
+                      <span className="text-white/80 text-[17px] font-medium group-hover:text-white transition-colors">
+                        {item.label}
+                      </span>
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-white/30 group-hover:text-white/50 transition-colors">
+                        <polyline points="9 18 15 12 9 6"/>
+                      </svg>
                     </button>
                   </li>
                 ))}
@@ -1391,22 +1355,16 @@ export const Hero: React.FC<HeroProps> = ({ setAppState }) => {
             </nav>
             
             {/* Bottom CTA */}
-            <div className="mt-auto space-y-4">
-              <PrimaryButton 
+            <div className="px-6 pb-10 pt-6 mt-auto">
+              <button 
                 onClick={() => {
                   setAppState(AppState.WIZARD_STEP_TYPE);
                   setMobileMenuOpen(false);
                 }}
-                size="lg"
-                fullWidth
-                icon={<Sparkles size={22} />}
+                className="w-full py-4 px-6 bg-white text-[#1a1f2e] font-semibold text-[15px] rounded-full hover:bg-white/95 active:scale-[0.98] transition-all duration-200"
               >
                 Start je droomhuis
-              </PrimaryButton>
-              
-              <p className="text-center text-white/30 text-sm">
-                Gratis • Geen account nodig
-              </p>
+              </button>
             </div>
           </div>
         </div>
@@ -2315,7 +2273,7 @@ export const Hero: React.FC<HeroProps> = ({ setAppState }) => {
                       <ul className="space-y-3 text-sm text-gray-400 font-light">
                           <li>
                             <button 
-                              onClick={() => setAppState(AppState.WORKSPACE)}
+                              onClick={() => setAppState(AppState.DASHBOARD)}
                               className="hover:text-white transition-colors"
                             >
                               Overzicht
