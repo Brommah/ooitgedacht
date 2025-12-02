@@ -322,7 +322,7 @@ const HeroContent: React.FC<{ setAppState: (state: AppState) => void }> = ({ set
         <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 mb-8">
           {/* Primary CTA - Prominent */}
           <PrimaryButton 
-            onClick={() => setAppState(AppState.WIZARD_HOUSEHOLD)}
+            onClick={() => setAppState(AppState.WIZARD_STEP_TYPE)}
             size="lg"
           >
             Ontdek je mogelijkheden
@@ -966,7 +966,7 @@ const DashboardPreviewSection: React.FC<{ setAppState: (state: AppState) => void
             </a>
           </div>
           <PrimaryButton 
-            onClick={() => setAppState(AppState.WIZARD_HOUSEHOLD)}
+            onClick={() => setAppState(AppState.WIZARD_STEP_TYPE)}
             size="lg"
           >
             Start je droomhuis ontwerp
@@ -990,14 +990,14 @@ const HowItWorksSection: React.FC<{ setAppState: (state: AppState) => void }> = 
       title: 'Vibe & Stijl',
       description: 'Bepaal je esthetiek. Onze AI vertaalt jouw smaak naar een architectonisch ontwerp.',
       image: '/generated/steps/step-01-vibe-stijl.jpg',
-      onClick: () => setAppState(AppState.WIZARD_HOUSEHOLD),
+      onClick: () => setAppState(AppState.WIZARD_STEP_TYPE),
     },
     {
       number: '02',
       title: 'Kaveltoets',
       description: 'Wij scannen het bestemmingsplan. Mag je hier bouwen? Wat zijn de regels? Direct antwoord.',
       image: '/generated/steps/step-02-kavel-check.jpg',
-      onClick: () => setAppState(AppState.WIZARD_HOUSEHOLD),
+      onClick: () => setAppState(AppState.WIZARD_STEP_TYPE),
     },
     {
       number: '03',
@@ -1014,7 +1014,7 @@ const HowItWorksSection: React.FC<{ setAppState: (state: AppState) => void }> = 
       title: 'Het Bouwdashboard',
       description: 'Geen gedoe. Volg de bouw via je dashboard. Betalingen gaan pas weg als het werk af is.',
       image: '/generated/steps/step-04-bouw-os.jpg',
-      onClick: () => setAppState(AppState.WIZARD_HOUSEHOLD),
+      onClick: () => setAppState(AppState.WIZARD_STEP_TYPE),
       hasOverlay: true,
     },
   ];
@@ -1061,7 +1061,7 @@ const HowItWorksSection: React.FC<{ setAppState: (state: AppState) => void }> = 
           {/* CTA Section */}
           <AnimatedSection className="text-center">
             <PrimaryButton 
-              onClick={() => setAppState(AppState.WIZARD_HOUSEHOLD)}
+              onClick={() => setAppState(AppState.WIZARD_STEP_TYPE)}
               size="lg"
             >
               Start het proces
@@ -1238,7 +1238,7 @@ export const Hero: React.FC<HeroProps> = ({ setAppState }) => {
                 
                 {/* Desktop CTA */}
                 <PrimaryButton 
-                  onClick={() => setAppState(AppState.WIZARD_HOUSEHOLD)}
+                  onClick={() => setAppState(AppState.WIZARD_STEP_TYPE)}
                   size="sm"
                   className="hidden md:flex"
                 >
@@ -1394,7 +1394,7 @@ export const Hero: React.FC<HeroProps> = ({ setAppState }) => {
             <div className="mt-auto space-y-4">
               <PrimaryButton 
                 onClick={() => {
-                  setAppState(AppState.WIZARD_HOUSEHOLD);
+                  setAppState(AppState.WIZARD_STEP_TYPE);
                   setMobileMenuOpen(false);
                 }}
                 size="lg"
@@ -1444,7 +1444,7 @@ export const Hero: React.FC<HeroProps> = ({ setAppState }) => {
           {/* Simple CTA */}
           <AnimatedSection delay={200} className="text-center flex flex-col items-center">
             <PrimaryButton 
-              onClick={() => setAppState(AppState.WIZARD_HOUSEHOLD)}
+              onClick={() => setAppState(AppState.WIZARD_STEP_TYPE)}
               size="lg"
             >
               Start jouw ontwerp
@@ -1764,7 +1764,7 @@ export const Hero: React.FC<HeroProps> = ({ setAppState }) => {
                       Klaar om jouw droomhuis te ontwerpen?
                   </p>
                   <button 
-                      onClick={() => setAppState(AppState.WIZARD_HOUSEHOLD)}
+                      onClick={() => setAppState(AppState.WIZARD_STEP_TYPE)}
                       className="group px-8 py-4 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-full transition-all duration-200"
                   >
                       <span className="flex items-center gap-3">
@@ -1940,7 +1940,7 @@ export const Hero: React.FC<HeroProps> = ({ setAppState }) => {
                     Van eerste schets tot oplevering: elk document, elke goedkeuring, elke wijziging wordt vastgelegd. Nooit meer discussie over wie wat wanneer heeft besloten.
                   </p>
                   <PrimaryButton 
-                    onClick={() => setAppState(AppState.WIZARD_HOUSEHOLD)}
+                    onClick={() => setAppState(AppState.WIZARD_STEP_TYPE)}
                     size="md"
                   >
                     Begin nu met ontwerpen
@@ -2331,7 +2331,7 @@ export const Hero: React.FC<HeroProps> = ({ setAppState }) => {
                           </li>
                           <li>
                             <button 
-                              onClick={() => setAppState(AppState.WIZARD_HOUSEHOLD)}
+                              onClick={() => setAppState(AppState.WIZARD_STEP_TYPE)}
                               className="hover:text-white transition-colors"
                             >
                               Start Ontwerp
@@ -2364,7 +2364,7 @@ export const Hero: React.FC<HeroProps> = ({ setAppState }) => {
 
               <div className="w-full md:w-auto">
                  <button 
-                    onClick={() => setAppState(AppState.WIZARD_HOUSEHOLD)}
+                    onClick={() => setAppState(AppState.WIZARD_STEP_TYPE)}
                     className="w-full md:w-auto bg-white text-[#0a1628] px-6 md:px-8 py-3 md:py-4 font-bold text-sm hover:bg-white/90 transition-colors flex items-center justify-center gap-2"
                  >
                      Start Project <ArrowRight size={16} />
