@@ -523,7 +523,7 @@ const MilestoneNode: React.FC<{
               <CheckCircle2 size={28} className="text-white drop-shadow-lg" />
             </motion.div>
           ) : (
-            React.cloneElement(milestone.icon as React.ReactElement, {
+            React.cloneElement(milestone.icon as React.ReactElement<{ size?: number; className?: string }>, {
               size: 26,
               className: isCurrent ? 'text-white drop-shadow-lg' : isDark ? 'text-white/40' : 'text-slate-400'
             })
@@ -633,7 +633,7 @@ const CarouselItem: React.FC<{
           {isCompleted ? (
             <CheckCircle2 size={24} className="text-white drop-shadow" />
           ) : (
-            React.cloneElement(milestone.icon as React.ReactElement, {
+            React.cloneElement(milestone.icon as React.ReactElement<{ size?: number; className?: string }>, {
               size: 22,
               className: isCurrent ? 'text-white drop-shadow' : isDark ? 'text-white/50' : 'text-slate-400'
             })
@@ -809,7 +809,7 @@ export const InteractiveTimeline: React.FC<{ className?: string }> = ({ classNam
                   {isCompleted ? (
                     <CheckCircle2 size={20} className="text-white" />
                   ) : (
-                    React.cloneElement(milestone.icon as React.ReactElement, {
+                    React.cloneElement(milestone.icon as React.ReactElement<{ size?: number; className?: string }>, {
                       size: 18,
                       className: isCurrent ? 'text-white' : isDark ? 'text-white/50' : 'text-slate-400'
                     })

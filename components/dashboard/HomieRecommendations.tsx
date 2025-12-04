@@ -105,13 +105,13 @@ export const HomieRecommendations: React.FC<HomieRecommendationsProps> = ({
     ? CUSTOMER_RECOMMENDATIONS 
     : BUILDER_RECOMMENDATIONS;
 
-  const getIcon = (type: Recommendation['type']) => {
+  const getIcon = (type: Recommendation['type'], size = 16) => {
     switch (type) {
-      case 'savings': return <PiggyBank size={16} />;
-      case 'tip': return <Lightbulb size={16} />;
-      case 'upgrade': return <TrendingUp size={16} />;
-      case 'insight': return <Star size={16} />;
-      case 'eco': return <Leaf size={16} />;
+      case 'savings': return <PiggyBank size={size} />;
+      case 'tip': return <Lightbulb size={size} />;
+      case 'upgrade': return <TrendingUp size={size} />;
+      case 'insight': return <Star size={size} />;
+      case 'eco': return <Leaf size={size} />;
     }
   };
 
@@ -161,7 +161,7 @@ export const HomieRecommendations: React.FC<HomieRecommendationsProps> = ({
           >
             <div className="flex items-start gap-2 mb-2">
               <div className={`w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0 ${getIconColor(rec.type)}`}>
-                {React.cloneElement(getIcon(rec.type) as React.ReactElement, { size: 14 })}
+                {getIcon(rec.type, 14)}
               </div>
               {rec.impact && (
                 <span className={`ml-auto text-xs font-bold ${

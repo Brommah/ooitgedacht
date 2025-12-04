@@ -53,9 +53,7 @@ export const Results: React.FC<ResultsProps> = ({ image, locked, onUnlock, onDas
     preferences.config.vibe
   );
 
-  const landCost = preferences.location.hasLand === 'yes' 
-    ? 0 
-    : estimateLandCost(preferences.location.searchQuery, preferences.location.plotSize);
+  const landCost = estimateLandCost(preferences.location.searchQuery, '300-500');
 
   const totalCost = buildCost + landCost;
   const maxCost = Math.round(totalCost * 1.1 / 5000) * 5000;
@@ -447,19 +445,14 @@ export const Results: React.FC<ResultsProps> = ({ image, locked, onUnlock, onDas
                     </div>
 
                     {/* Features */}
-                    {(preferences.household.workFromHome || preferences.household.pets || preferences.config.extras.length > 0) && (
+                    {preferences.config.extras.length > 0 && (
                       <div className="flex flex-wrap gap-2 mb-4">
-                        {preferences.household.workFromHome && (
+                        {preferences.config.extras.includes('office') && (
                           <span className="px-3 py-1.5 bg-blue-500/10 rounded-lg text-xs text-blue-400 border border-blue-500/20">
                             💼 Thuiskantoor
                           </span>
                         )}
-                        {preferences.household.pets && (
-                          <span className="px-3 py-1.5 bg-amber-500/10 rounded-lg text-xs text-amber-400 border border-amber-500/20">
-                            🐕 Huisdieren
-                          </span>
-                        )}
-                        {preferences.config.extras.slice(0, 3).map((extra, i) => (
+                        {preferences.config.extras.filter(e => e !== 'office').slice(0, 3).map((extra, i) => (
                           <span key={i} className="px-3 py-1.5 bg-white/5 rounded-lg text-xs text-white/60 border border-white/10">
                             {extra}
                           </span>
@@ -576,26 +569,21 @@ export const Results: React.FC<ResultsProps> = ({ image, locked, onUnlock, onDas
                     </div>
 
                     {/* Features */}
-                    {(preferences.household.workFromHome || preferences.household.pets || preferences.config.extras.length > 0) && (
+                    {preferences.config.extras.length > 0 && (
                       <div className="flex flex-wrap gap-1">
-                        {preferences.household.workFromHome && (
+                        {preferences.config.extras.includes('office') && (
                           <span className="px-2 py-1 bg-blue-500/10 rounded text-[10px] text-blue-400 border border-blue-500/20">
                             💼 Thuiskantoor
                           </span>
                         )}
-                        {preferences.household.pets && (
-                          <span className="px-2 py-1 bg-amber-500/10 rounded text-[10px] text-amber-400 border border-amber-500/20">
-                            🐕 Huisdieren
-                          </span>
-                        )}
-                        {preferences.config.extras.slice(0, 2).map((extra, i) => (
+                        {preferences.config.extras.filter(e => e !== 'office').slice(0, 2).map((extra, i) => (
                           <span key={i} className="px-2 py-1 bg-white/5 rounded text-[10px] text-white/60 border border-white/10">
                             {extra}
                           </span>
                         ))}
-                        {preferences.config.extras.length > 2 && (
+                        {preferences.config.extras.filter(e => e !== 'office').length > 2 && (
                           <span className="px-2 py-1 bg-white/5 rounded text-[10px] text-white/40">
-                            +{preferences.config.extras.length - 2} meer
+                            +{preferences.config.extras.filter(e => e !== 'office').length - 2} meer
                           </span>
                         )}
                       </div>
