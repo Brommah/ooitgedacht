@@ -23,6 +23,7 @@ const HomieSVG: React.FC<HomieSVGProps> = ({ mood, size = 80, className = '' }) 
       }, 3000 + Math.random() * 2000);
       return () => clearInterval(interval);
     }
+    return undefined;
   }, [mood]);
 
   const eyeOpen = mood === 'happy' ? 'M0 -2 Q3 2 6 -2' : 'M0 0 Q3 -4 6 0';
@@ -412,6 +413,7 @@ export const Homie: React.FC<HomieProps> = ({ viewMode = 'customer' }) => {
       }, 8000);
       return () => clearTimeout(timeout);
     }
+    return undefined;
   }, [isOpen, currentNotification, viewMode]);
 
   // Scroll to bottom of chat
