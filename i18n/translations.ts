@@ -62,15 +62,263 @@ export interface TranslationKeys {
     solutionDescription: string;
     testimonialTitle: string;
     faqTitle: string;
+    faqSubtitle: string;
     ctaTitle: string;
     ctaDescription: string;
     ctaButtonFinal: string;
+    // Mobile menu
+    bouwborgB2b: string;
+    dashboardStatus: string;
+    marketAnalysis: string;
+    currentMarketData: string;
+    investorPitchDeck: string;
+    startDreamHome: string;
+    freeNoAccount: string;
+    // Result showcase
+    whatYouGet: string;
+    whatYouGetSubtitle: string;
+    startYourDesign: string;
+    free3MinNoAccount: string;
+    // Passport section
+    certificateOfAuthenticity: string;
+    housingPassport: string;
+    passportSubtitle1: string;
+    passportSubtitle2: string;
+    totalBuildCost: string;
+    exclVatLand: string;
+    energyLabel: string;
+    buildTime: string;
+    fromBuildStart: string;
+    mpgScore: string;
+    hideDetails: string;
+    viewFullValidation: string;
+    validationTimeline: string;
+    aiDesignGenerated: string;
+    aiDesignDesc: string;
+    zoningPlanChecked: string;
+    zoningPlanDesc: string;
+    buildingVolumeOk: string;
+    eavesHeightOk: string;
+    ridgeHeightOk: string;
+    structuralFeasibility: string;
+    structuralDesc: string;
+    validatedBy: string;
+    costEstimateGenerated: string;
+    costEstimateDesc: string;
+    shellConstruction: string;
+    installations: string;
+    finishing: string;
+    contingency: string;
+    passportIssued: string;
+    passportIssuedDesc: string;
+    verification: string;
+    scanToVerify: string;
+    digitalSignature: string;
+    issuedBy: string;
+    constructionAdviceSince: string;
+    constructionValidated: string;
+    zoningPlanOk: string;
+    costsVerified: string;
+    validUntil: string;
+    readyToDesign: string;
+    startFreeConfiguration: string;
+    noAccountNeeded3MinFree: string;
+    // Stakeholder section
+    forEveryoneInProcess: string;
+    unprecedentedCollaboration: string;
+    fullTransparency: string;
+    stakeholderSubtitle: string;
+    buildingOwner: string;
+    buildingOwnerDesc: string;
+    realtimeCostInsight: string;
+    directDecisionMaking: string;
+    completeDocumentation: string;
+    architect: string;
+    architectDesc: string;
+    directFeasibilityCheck: string;
+    sharedDesignEnvironment: string;
+    versionControlChangeLog: string;
+    structuralEngineer: string;
+    structuralEngineerDesc: string;
+    standardizedInput: string;
+    digitalSignatureFeature: string;
+    liabilityTracking: string;
+    municipality: string;
+    municipalityDesc: string;
+    prevalidatedDossiers: string;
+    zoningPlanCheck: string;
+    fewerObjections: string;
+    fullAuditTrail: string;
+    everyDecisionDocumented: string;
+    auditTrailDesc: string;
+    startDesigningNow: string;
+    designGenerated: string;
+    constructionValidatedLog: string;
+    ownerApproved: string;
+    now: string;
+    waitingForMunicipality: string;
+    // Market report section
+    marketReport2025: string;
+    theDutch: string;
+    housingMarket: string;
+    housingShortage: string;
+    failureCostsPerYear: string;
+    projectsOverBudget: string;
+    whatItMeansForYou: string;
+    viewFullAnalysis: string;
+    liveData: string;
+    // Dashboard preview section
+    buildingControlSystem: string;
+    followYourProject: string;
+    inRealtime: string;
+    dashboardDesc: string;
+    allBuildingPhases: string;
+    housingPassportCertifications: string;
+    chatWithContractor: string;
+    viewDemoDashboard: string;
+    liveDemo: string;
+    constructionOk: string;
+    // B2B section
+    forBuilders: string;
+    doYouBuildHomes: string;
+    weHandlePaperwork: string;
+    b2bDesc: string;
+    building: string;
+    discoverBouwborg: string;
+    lessAdmin: string;
+    wkbCompliant: string;
+    automatic: string;
+    wkbDocumentation: string;
+    // Newsletter section
+    stayUpdated: string;
+    weeklyLandNewsTips: string;
+    newsletterDesc: string;
+    subscribe: string;
+    subscribersAlready: string;
+    thankYouSignup: string;
+    // Footer
+    togetherBuilding: string;
+    withSupportFrom: string;
+    platform: string;
+    startDesign: string;
+    forMunicipalities: string;
+    legal: string;
+    termsAndConditions: string;
+    privacyStatement: string;
+    disclaimer: string;
+    startProject: string;
+    stateOfMarket: string;
+    investorDeck: string;
+    // Hero content
+    heroLine1: string;
+    heroLine2: string;
+    heroLine3: string;
+    heroTagline1: string;
+    heroTagline2: string;
+    heroTagline3: string;
+    discoverPossibilities: string;
+    howItWorksLink: string;
+    inCollaborationWith: string;
+    // Dashboard preview section
+    yourBuildSystem: string;
+    followEveryPhase: string;
+    transparentValidated: string;
+    projectName: string;
+    completed: string;
+    lastUpdate: string;
+    today: string;
+    openOverview: string;
+    withSupportOf: string;
+    startDreamHomeDesign: string;
+    // Workflow steps
+    groundResearch: string;
+    groundResearchSub: string;
+    reinforcementInspection: string;
+    reinforcementInspectionSub: string;
+    pourFoundation: string;
+    pourFoundationSub: string;
+    shellConstruction2: string;
+    shellConstructionSub: string;
+    // How it works section
+    theProcess: string;
+    howItWorksTitle: string;
+    howItWorksSectionSubtitle: string;
+    vibeStyle: string;
+    vibeStyleDesc: string;
+    plotCheck: string;
+    plotCheckDesc: string;
+    thePassport: string;
+    thePassportDesc: string;
+    theBuildDashboard: string;
+    theBuildDashboardDesc: string;
+    startTheProcess: string;
+    // Passport details section
+    readyToDesignDream: string;
+    startFreeConfig: string;
+    noAccount3MinFree: string;
+    // Stakeholder section  
+    forEveryoneProcess: string;
+    unprecedentedCollab: string;
+    fullTransp: string;
+    onePlatformDesc: string;
+    buildOwner: string;
+    buildOwnerDesc: string;
+    realtimeCost: string;
+    directDecision: string;
+    completeDoc: string;
+    architectTitle: string;
+    architectDescText: string;
+    directFeasibility: string;
+    sharedDesign: string;
+    versionControl: string;
+    structEngineer: string;
+    structEngineerDesc: string;
+    standardInput: string;
+    digitalSig: string;
+    liabilityTrack: string;
+    municipalityTitle: string;
+    municipalityDescText: string;
+    prevalidatedDoss: string;
+    zoningCheck: string;
+    fewerObj: string;
+    fullAudit: string;
+    everyDecisionEveryChange: string;
+    auditDesc: string;
+    startDesignNow: string;
+    designGeneratedLog: string;
+    constructionValidatedLog2: string;
+    ownerApprovedLog: string;
+    nowLabel: string;
+    waitingMunicipality: string;
+    // Market section
+    marketReport: string;
+    theDutchWord: string;
+    housingMarketWord: string;
+    housingShortageNum: string;
+    failureCostsNum: string;
+    projectsOverBudgetNum: string;
+    whatMeansForPlans: string;
+    viewFullAnalysis2: string;
+    liveData2: string;
+    // Dashboard section
+    buildControlSys: string;
+    followProject: string;
+    inRealtimeWord: string;
+    dashboardDescText: string;
+    allPhaseMilestones: string;
+    passportEnergyCert: string;
+    chatContractorInspector: string;
+    viewDemoBoard: string;
+    liveDemoLabel: string;
+    constructionOkLabel: string;
     footer: {
       tagline: string;
       privacy: string;
       terms: string;
       contact: string;
     };
+    // FAQs
+    faqs: Array<{ question: string; answer: string }>;
   };
 
   // Wizard
@@ -296,15 +544,284 @@ export const translations: Record<'nl' | 'en', TranslationKeys> = {
       solutionDescription: 'Transparante prijzen, gevalideerde kwaliteit, snelle oplevering',
       testimonialTitle: 'Wat onze klanten zeggen',
       faqTitle: 'Veelgestelde vragen',
+      faqSubtitle: 'Alles wat je wilt weten over de OoitGedacht-methode.',
       ctaTitle: 'Klaar om te beginnen?',
       ctaDescription: 'Configureer je droomhuis in 5 minuten',
       ctaButtonFinal: 'Begin nu',
+      // Mobile menu
+      bouwborgB2b: 'BouwBorg B2B Platform',
+      dashboardStatus: 'Dashboard & Status',
+      marketAnalysis: 'Markt Analyse',
+      currentMarketData: 'Actuele marktdata',
+      investorPitchDeck: 'Investor Pitch Deck',
+      startDreamHome: 'Start je droomhuis',
+      freeNoAccount: 'Gratis • Geen account nodig',
+      // Result showcase
+      whatYouGet: 'Wat je gratis krijgt van OoitGedacht',
+      whatYouGetSubtitle: 'Een volledig gevalideerd ontwerp met realistische kosten en specificaties.',
+      startYourDesign: 'Start jouw ontwerp',
+      free3MinNoAccount: 'Gratis • 3 minuten • Geen account nodig',
+      // Passport section
+      certificateOfAuthenticity: 'Certificaat van Authenticiteit',
+      housingPassport: 'Het Woningpaspoort',
+      passportSubtitle1: 'Elk ontwerp krijgt een uniek, geverifieerd document',
+      passportSubtitle2: 'met volledige traceerbaarheid van idee tot vergunning.',
+      totalBuildCost: 'Totale Bouwkosten',
+      exclVatLand: 'excl. BTW & grond',
+      energyLabel: 'Energielabel',
+      buildTime: 'Bouwtijd',
+      fromBuildStart: 'vanaf start bouw',
+      mpgScore: 'MPG Score',
+      hideDetails: 'Verberg details',
+      viewFullValidation: 'Bekijk volledige validatie & herkomst',
+      validationTimeline: 'Validatie Timeline',
+      aiDesignGenerated: 'AI Ontwerp Gegenereerd',
+      aiDesignDesc: 'Stijlprofiel geanalyseerd, bouwvolume berekend, eerste 3D model gegenereerd op basis van 47 voorkeuren.',
+      zoningPlanChecked: 'Bestemmingsplan Getoetst',
+      zoningPlanDesc: 'Automatische check tegen gemeentelijk bestemmingsplan. Bouwvlak, goothoogte, en bebouwingspercentage gevalideerd.',
+      buildingVolumeOk: 'Bouwvlak OK',
+      eavesHeightOk: 'Goothoogte OK',
+      ridgeHeightOk: 'Nokhoogte OK',
+      structuralFeasibility: 'Constructieve Haalbaarheid',
+      structuralDesc: 'Preliminaire constructieberekening door Bureau Broersma. Fundering, draagstructuur en spanwijdtes gecontroleerd.',
+      validatedBy: 'Gevalideerd door',
+      costEstimateGenerated: 'Kostenraming Gegenereerd',
+      costEstimateDesc: 'Gedetailleerde kostenopbouw op basis van actuele marktprijzen Q4 2024. Inclusief 10% onvoorzien.',
+      shellConstruction: 'Ruwbouw',
+      installations: 'Installaties',
+      finishing: 'Afbouw',
+      contingency: 'Onvoorzien',
+      passportIssued: 'Paspoort Afgegeven',
+      passportIssuedDesc: 'Document cryptografisch ondertekend en opgeslagen. Geldig voor 90 dagen, automatisch verlengbaar.',
+      verification: 'Verificatie',
+      scanToVerify: 'Scan om authenticiteit te controleren op passport.ooitgedacht.nl',
+      digitalSignature: 'Digitale Handtekening',
+      issuedBy: 'Uitgegeven door',
+      constructionAdviceSince: 'Constructie & Advies sinds 1932',
+      constructionValidated: 'Constructie Gevalideerd',
+      zoningPlanOk: 'Bestemmingsplan OK',
+      costsVerified: 'Kosten Geverifieerd',
+      validUntil: 'Geldig t/m',
+      readyToDesign: 'Klaar om jouw droomhuis te ontwerpen?',
+      startFreeConfiguration: 'Start Gratis Configuratie',
+      noAccountNeeded3MinFree: 'Geen account nodig • 3 minuten • 100% gratis',
+      // Stakeholder section
+      forEveryoneInProcess: 'Voor Iedereen in het Proces',
+      unprecedentedCollaboration: 'Ongekende samenwerking.',
+      fullTransparency: 'Volledige transparantie.',
+      stakeholderSubtitle: 'Eén platform waar bouwheer, architect, constructeur, gemeente en aannemer samen werken aan hetzelfde dossier. Realtime. Auditeerbaar. Foutloos.',
+      buildingOwner: 'Bouwheer',
+      buildingOwnerDesc: 'Volledige controle over je project. Zie precies waar elke euro naartoe gaat en volg de voortgang realtime.',
+      realtimeCostInsight: 'Realtime kosteninzicht',
+      directDecisionMaking: 'Directe besluitvorming',
+      completeDocumentation: 'Complete documentatie',
+      architect: 'Architect',
+      architectDesc: 'Focus op ontwerp, niet op papierwerk. AI-assistentie voor snelle iteraties met directe validatie.',
+      directFeasibilityCheck: 'Directe haalbaarheidscheck',
+      sharedDesignEnvironment: 'Gedeelde ontwerpomgeving',
+      versionControlChangeLog: 'Versiebeheer & wijzigingslog',
+      structuralEngineer: 'Constructeur',
+      structuralEngineerDesc: 'Efficiënte validatie met vooraf gestructureerde data. Minder heen-en-weer, snellere goedkeuring.',
+      standardizedInput: 'Gestandaardiseerde input',
+      digitalSignatureFeature: 'Digitale handtekening',
+      liabilityTracking: 'Aansprakelijkheid bijhouden',
+      municipality: 'Gemeente',
+      municipalityDesc: 'Complete, gevalideerde dossiers die direct voldoen aan bestemmingsplan eisen. Snellere afhandeling.',
+      prevalidatedDossiers: 'Voorgevalideerde dossiers',
+      zoningPlanCheck: 'Bestemmingsplan check',
+      fewerObjections: 'Minder bezwaren',
+      fullAuditTrail: 'Volledige Audit Trail',
+      everyDecisionDocumented: 'Elke beslissing. Elke wijziging. Gedocumenteerd.',
+      auditTrailDesc: 'Van eerste schets tot oplevering: elk document, elke goedkeuring, elke wijziging wordt vastgelegd. Nooit meer discussie over wie wat wanneer heeft besloten.',
+      startDesigningNow: 'Begin nu met ontwerpen',
+      designGenerated: 'Ontwerp gegenereerd',
+      constructionValidatedLog: 'Constructie gevalideerd',
+      ownerApproved: 'Bouwheer akkoord',
+      now: 'Nu',
+      waitingForMunicipality: 'Wacht op gemeente...',
+      // Market report section
+      marketReport2025: 'Marktrapport 2025',
+      theDutch: 'De Nederlandse',
+      housingMarket: 'Woningmarket',
+      housingShortage: 'woningen tekort.',
+      failureCostsPerYear: 'aan faalkosten per jaar.',
+      projectsOverBudget: 'van projecten over budget.',
+      whatItMeansForYou: 'Wat betekent dit voor jouw bouwplannen? Ontdek de cijfers, de oorzaken, en hoe je tot €50.000 kunt besparen.',
+      viewFullAnalysis: 'Bekijk Volledige Analyse',
+      liveData: 'Live Data 2025',
+      // Dashboard preview section
+      buildingControlSystem: 'Bouwbesturingssysteem',
+      followYourProject: 'Volg je project',
+      inRealtime: 'in realtime',
+      dashboardDesc: 'Elke fase, elke betaling, elk document — transparant en gevalideerd door Bureau Broersma.',
+      allBuildingPhases: 'Alle bouwfases met milestones en verificatie',
+      housingPassportCertifications: 'Woning Paspoort met energielabel en certificeringen',
+      chatWithContractor: 'Direct chatten met aannemer en keurmeester',
+      viewDemoDashboard: 'Bekijk Demo Dashboard',
+      liveDemo: 'Live Demo',
+      constructionOk: 'Constructie OK',
+      // B2B section
+      forBuilders: 'Voor Bouwers',
+      doYouBuildHomes: 'Bouwt u huizen?',
+      weHandlePaperwork: 'Wij regelen het papierwerk.',
+      b2bDesc: 'De Wkb maakt u 20 jaar aansprakelijk. Onze smart glasses + AI documenteren automatisch elke stap die u zet. Zodat u kunt focussen op wat u het beste doet:',
+      building: 'bouwen.',
+      discoverBouwborg: 'Ontdek BouwBorg',
+      lessAdmin: '80% minder administratie',
+      wkbCompliant: 'WKB compliant',
+      automatic: 'Automatische',
+      wkbDocumentation: 'WKB Documentatie',
+      // Newsletter section
+      stayUpdated: 'Blijf op de hoogte',
+      weeklyLandNewsTips: 'Wekelijks kavelnieuws & tips',
+      newsletterDesc: 'Ontvang de beste kavels in jouw regio, bouwtrends en slimme bespaartips. Geen spam, altijd waardevol.',
+      subscribe: 'Aanmelden',
+      subscribersAlready: '1.247 bouwers ontvangen onze nieuwsbrief al',
+      thankYouSignup: 'Bedankt voor je aanmelding!',
+      // Footer
+      togetherBuilding: 'Samen bouwen aan betaalbaar wonen.',
+      withSupportFrom: 'Met ondersteuning van',
+      platform: 'Platform',
+      startDesign: 'Start Ontwerp',
+      forMunicipalities: 'Voor Gemeenten',
+      legal: 'Legal',
+      termsAndConditions: 'Algemene Voorwaarden',
+      privacyStatement: 'Privacy Statement',
+      disclaimer: 'Disclaimer',
+      startProject: 'Start Project',
+      stateOfMarket: 'State of Market',
+      investorDeck: 'Investor Deck',
+      // Hero content
+      heroLine1: 'OoitGedacht',
+      heroLine2: 'dat je een huis',
+      heroLine3: 'Kon Toveren?',
+      heroTagline1: 'Van droom naar bouwplan — helder, eerlijk, op maat',
+      heroTagline2: 'precies op',
+      heroTagline3: 'jouw situatie toegepast.',
+      discoverPossibilities: 'Ontdek je mogelijkheden',
+      howItWorksLink: 'Hoe werkt het?',
+      inCollaborationWith: 'In samenwerking met',
+      // Dashboard preview section
+      yourBuildSystem: 'Jouw Bouwsysteem',
+      followEveryPhase: 'Volg elke fase van je bouwproject in realtime.',
+      transparentValidated: 'Transparant, gevalideerd en volledig onder controle.',
+      projectName: 'Project Veluwse Heide',
+      completed: 'Voltooid',
+      lastUpdate: 'Laatste update',
+      today: 'Vandaag',
+      openOverview: 'Open Overzicht',
+      withSupportOf: 'Met ondersteuning van',
+      startDreamHomeDesign: 'Start je droomhuis ontwerp',
+      // Workflow steps
+      groundResearch: 'Grondonderzoek & Sondering',
+      groundResearchSub: 'Gevalideerd door Bureau Broersma',
+      reinforcementInspection: 'Wapeningskeuring',
+      reinforcementInspectionSub: 'Foto upload geverifieerd • Betaling vrijgegeven',
+      pourFoundation: 'Storten Fundering',
+      pourFoundationSub: 'Wacht op: Betonstort Logboek Upload',
+      shellConstruction2: 'Casco Opbouw',
+      shellConstructionSub: 'Start pas na uitharding validatie',
+      // How it works section
+      theProcess: 'Het Proces',
+      howItWorksTitle: 'Hoe werkt het?',
+      howItWorksSectionSubtitle: 'Van eerste idee naar sleuteloverdracht in vier stappen.',
+      vibeStyle: 'Vibe & Stijl',
+      vibeStyleDesc: 'Bepaal je esthetiek. Onze AI vertaalt jouw smaak naar een architectonisch ontwerp.',
+      plotCheck: 'Kaveltoets',
+      plotCheckDesc: 'Wij scannen het bestemmingsplan. Mag je hier bouwen? Wat zijn de regels? Direct antwoord.',
+      thePassport: 'Het Paspoort',
+      thePassportDesc: 'Je ontvangt een Woningpaspoort. Kosten, materialen en duurzaamheid in één dossier.',
+      theBuildDashboard: 'Het Bouwdashboard',
+      theBuildDashboardDesc: 'Geen gedoe. Volg de bouw via je dashboard. Betalingen gaan pas weg als het werk af is.',
+      startTheProcess: 'Start het proces',
+      // Passport details section
+      readyToDesignDream: 'Klaar om jouw droomhuis te ontwerpen?',
+      startFreeConfig: 'Start Gratis Configuratie',
+      noAccount3MinFree: 'Geen account nodig • 3 minuten • 100% gratis',
+      // Stakeholder section
+      forEveryoneProcess: 'Voor Iedereen in het Proces',
+      unprecedentedCollab: 'Ongekende samenwerking.',
+      fullTransp: 'Volledige transparantie.',
+      onePlatformDesc: 'Eén platform waar bouwheer, architect, constructeur, gemeente en aannemer samen werken aan hetzelfde dossier. Realtime. Auditeerbaar. Foutloos.',
+      buildOwner: 'Bouwheer',
+      buildOwnerDesc: 'Volledige controle over je project. Zie precies waar elke euro naartoe gaat en volg de voortgang realtime.',
+      realtimeCost: 'Realtime kosteninzicht',
+      directDecision: 'Directe besluitvorming',
+      completeDoc: 'Complete documentatie',
+      architectTitle: 'Architect',
+      architectDescText: 'Focus op ontwerp, niet op papierwerk. AI-assistentie voor snelle iteraties met directe validatie.',
+      directFeasibility: 'Directe haalbaarheidscheck',
+      sharedDesign: 'Gedeelde ontwerpomgeving',
+      versionControl: 'Versiebeheer & wijzigingslog',
+      structEngineer: 'Constructeur',
+      structEngineerDesc: 'Efficiënte validatie met vooraf gestructureerde data. Minder heen-en-weer, snellere goedkeuring.',
+      standardInput: 'Gestandaardiseerde input',
+      digitalSig: 'Digitale handtekening',
+      liabilityTrack: 'Aansprakelijkheid bijhouden',
+      municipalityTitle: 'Gemeente',
+      municipalityDescText: 'Complete, gevalideerde dossiers die direct voldoen aan bestemmingsplan eisen. Snellere afhandeling.',
+      prevalidatedDoss: 'Voorgevalideerde dossiers',
+      zoningCheck: 'Bestemmingsplan check',
+      fewerObj: 'Minder bezwaren',
+      fullAudit: 'Volledige Audit Trail',
+      everyDecisionEveryChange: 'Elke beslissing. Elke wijziging. Gedocumenteerd.',
+      auditDesc: 'Van eerste schets tot oplevering: elk document, elke goedkeuring, elke wijziging wordt vastgelegd. Nooit meer discussie over wie wat wanneer heeft besloten.',
+      startDesignNow: 'Begin nu met ontwerpen',
+      designGeneratedLog: 'Ontwerp gegenereerd',
+      constructionValidatedLog2: 'Constructie gevalideerd',
+      ownerApprovedLog: 'Bouwheer akkoord',
+      nowLabel: 'Nu',
+      waitingMunicipality: 'Wacht op gemeente...',
+      // Market section
+      marketReport: 'Marktrapport 2025',
+      theDutchWord: 'De Nederlandse',
+      housingMarketWord: 'Woningmarkt',
+      housingShortageNum: 'woningen tekort.',
+      failureCostsNum: 'aan faalkosten per jaar.',
+      projectsOverBudgetNum: 'van projecten over budget.',
+      whatMeansForPlans: 'Wat betekent dit voor jouw bouwplannen? Ontdek de cijfers, de oorzaken, en hoe je tot €50.000 kunt besparen.',
+      viewFullAnalysis2: 'Bekijk Volledige Analyse',
+      liveData2: 'Live Data 2025',
+      // Dashboard section
+      buildControlSys: 'Bouwbesturingssysteem',
+      followProject: 'Volg je project',
+      inRealtimeWord: 'in realtime',
+      dashboardDescText: 'Elke fase, elke betaling, elk document — transparant en gevalideerd door Bureau Broersma.',
+      allPhaseMilestones: 'Alle bouwfases met milestones en verificatie',
+      passportEnergyCert: 'Woning Paspoort met energielabel en certificeringen',
+      chatContractorInspector: 'Direct chatten met aannemer en keurmeester',
+      viewDemoBoard: 'Bekijk Demo Dashboard',
+      liveDemoLabel: 'Live Demo',
+      constructionOkLabel: 'Constructie OK',
       footer: {
         tagline: 'De toekomst van woningbouw',
         privacy: 'Privacy',
         terms: 'Voorwaarden',
         contact: 'Contact',
       },
+      // FAQs
+      faqs: [
+        {
+          question: 'Wat kost het om te starten?',
+          answer: 'Het eerste ontwerp en je Woningpaspoort zijn volledig gratis. Je betaalt pas wanneer je besluit door te gaan met de bouw. Geen verborgen kosten, geen verplichtingen.',
+        },
+        {
+          question: 'Hoe lang duurt het hele traject van ontwerp tot sleutel?',
+          answer: 'Gemiddeld 10-14 maanden van eerste ontwerp tot sleuteloverdracht. Dit is significant sneller dan traditioneel bouwen (18-24 maanden) dankzij onze voorgevalideerde processen en gestroomlijnde vergunningsaanvraag.',
+        },
+        {
+          question: 'Werkt dit ook als ik nog geen kavel heb?',
+          answer: 'Jazeker! Je kunt alvast je droomhuis ontwerpen en wij helpen je met onze Kavelzoeker om de perfecte locatie te vinden die past bij jouw ontwerp en budget.',
+        },
+        {
+          question: 'Is dit voor particulieren of ook projectontwikkelaars?',
+          answer: 'Beide. Particulieren gebruiken ons platform voor hun droomhuis, terwijl ontwikkelaars profiteren van onze schaalbare workflows en gevalideerde processen voor meerdere projecten tegelijk.',
+        },
+        {
+          question: 'Wat als mijn ontwerp niet past binnen het bestemmingsplan?',
+          answer: 'Ons systeem checkt dit automatisch voordat je tijd investeert. We geven direct feedback over wat wel en niet mogelijk is, inclusief suggesties voor aanpassingen die wél binnen de regels vallen.',
+        },
+      ],
     },
 
     wizard: {
@@ -636,15 +1153,284 @@ export const translations: Record<'nl' | 'en', TranslationKeys> = {
       solutionDescription: 'Transparent pricing, validated quality, fast delivery',
       testimonialTitle: 'What our customers say',
       faqTitle: 'Frequently asked questions',
+      faqSubtitle: 'Everything you want to know about the OoitGedacht method.',
       ctaTitle: 'Ready to get started?',
       ctaDescription: 'Configure your dream home in 5 minutes',
       ctaButtonFinal: 'Start now',
+      // Mobile menu
+      bouwborgB2b: 'BouwBorg B2B Platform',
+      dashboardStatus: 'Dashboard & Status',
+      marketAnalysis: 'Market Analysis',
+      currentMarketData: 'Current market data',
+      investorPitchDeck: 'Investor Pitch Deck',
+      startDreamHome: 'Start your dream home',
+      freeNoAccount: 'Free • No account needed',
+      // Result showcase
+      whatYouGet: 'What you get for free from OoitGedacht',
+      whatYouGetSubtitle: 'A fully validated design with realistic costs and specifications.',
+      startYourDesign: 'Start your design',
+      free3MinNoAccount: 'Free • 3 minutes • No account needed',
+      // Passport section
+      certificateOfAuthenticity: 'Certificate of Authenticity',
+      housingPassport: 'The Housing Passport',
+      passportSubtitle1: 'Every design receives a unique, verified document',
+      passportSubtitle2: 'with complete traceability from idea to permit.',
+      totalBuildCost: 'Total Build Cost',
+      exclVatLand: 'excl. VAT & land',
+      energyLabel: 'Energy Label',
+      buildTime: 'Build Time',
+      fromBuildStart: 'from build start',
+      mpgScore: 'MPG Score',
+      hideDetails: 'Hide details',
+      viewFullValidation: 'View full validation & provenance',
+      validationTimeline: 'Validation Timeline',
+      aiDesignGenerated: 'AI Design Generated',
+      aiDesignDesc: 'Style profile analyzed, building volume calculated, first 3D model generated based on 47 preferences.',
+      zoningPlanChecked: 'Zoning Plan Verified',
+      zoningPlanDesc: 'Automatic check against municipal zoning plan. Building envelope, eaves height, and building percentage validated.',
+      buildingVolumeOk: 'Building Volume OK',
+      eavesHeightOk: 'Eaves Height OK',
+      ridgeHeightOk: 'Ridge Height OK',
+      structuralFeasibility: 'Structural Feasibility',
+      structuralDesc: 'Preliminary structural calculation by Bureau Broersma. Foundation, load-bearing structure and spans checked.',
+      validatedBy: 'Validated by',
+      costEstimateGenerated: 'Cost Estimate Generated',
+      costEstimateDesc: 'Detailed cost breakdown based on current market prices Q4 2024. Including 10% contingency.',
+      shellConstruction: 'Shell',
+      installations: 'Installations',
+      finishing: 'Finishing',
+      contingency: 'Contingency',
+      passportIssued: 'Passport Issued',
+      passportIssuedDesc: 'Document cryptographically signed and stored. Valid for 90 days, automatically renewable.',
+      verification: 'Verification',
+      scanToVerify: 'Scan to verify authenticity at passport.ooitgedacht.nl',
+      digitalSignature: 'Digital Signature',
+      issuedBy: 'Issued by',
+      constructionAdviceSince: 'Construction & Advice since 1932',
+      constructionValidated: 'Construction Validated',
+      zoningPlanOk: 'Zoning Plan OK',
+      costsVerified: 'Costs Verified',
+      validUntil: 'Valid until',
+      readyToDesign: 'Ready to design your dream home?',
+      startFreeConfiguration: 'Start Free Configuration',
+      noAccountNeeded3MinFree: 'No account needed • 3 minutes • 100% free',
+      // Stakeholder section
+      forEveryoneInProcess: 'For Everyone in the Process',
+      unprecedentedCollaboration: 'Unprecedented collaboration.',
+      fullTransparency: 'Full transparency.',
+      stakeholderSubtitle: 'One platform where owner, architect, engineer, municipality and contractor work together on the same file. Real-time. Auditable. Error-free.',
+      buildingOwner: 'Building Owner',
+      buildingOwnerDesc: 'Full control over your project. See exactly where every euro goes and follow progress in real-time.',
+      realtimeCostInsight: 'Real-time cost insight',
+      directDecisionMaking: 'Direct decision making',
+      completeDocumentation: 'Complete documentation',
+      architect: 'Architect',
+      architectDesc: 'Focus on design, not paperwork. AI assistance for quick iterations with direct validation.',
+      directFeasibilityCheck: 'Direct feasibility check',
+      sharedDesignEnvironment: 'Shared design environment',
+      versionControlChangeLog: 'Version control & change log',
+      structuralEngineer: 'Structural Engineer',
+      structuralEngineerDesc: 'Efficient validation with pre-structured data. Less back-and-forth, faster approval.',
+      standardizedInput: 'Standardized input',
+      digitalSignatureFeature: 'Digital signature',
+      liabilityTracking: 'Liability tracking',
+      municipality: 'Municipality',
+      municipalityDesc: 'Complete, validated dossiers that directly meet zoning requirements. Faster processing.',
+      prevalidatedDossiers: 'Pre-validated dossiers',
+      zoningPlanCheck: 'Zoning plan check',
+      fewerObjections: 'Fewer objections',
+      fullAuditTrail: 'Full Audit Trail',
+      everyDecisionDocumented: 'Every decision. Every change. Documented.',
+      auditTrailDesc: 'From first sketch to delivery: every document, every approval, every change is recorded. Never again discussion about who decided what and when.',
+      startDesigningNow: 'Start designing now',
+      designGenerated: 'Design generated',
+      constructionValidatedLog: 'Construction validated',
+      ownerApproved: 'Owner approved',
+      now: 'Now',
+      waitingForMunicipality: 'Waiting for municipality...',
+      // Market report section
+      marketReport2025: 'Market Report 2025',
+      theDutch: 'The Dutch',
+      housingMarket: 'Housing Market',
+      housingShortage: 'housing shortage.',
+      failureCostsPerYear: 'in failure costs per year.',
+      projectsOverBudget: 'of projects over budget.',
+      whatItMeansForYou: 'What does this mean for your building plans? Discover the numbers, the causes, and how you can save up to €50,000.',
+      viewFullAnalysis: 'View Full Analysis',
+      liveData: 'Live Data 2025',
+      // Dashboard preview section
+      buildingControlSystem: 'Building Control System',
+      followYourProject: 'Follow your project',
+      inRealtime: 'in real-time',
+      dashboardDesc: 'Every phase, every payment, every document — transparent and validated by Bureau Broersma.',
+      allBuildingPhases: 'All building phases with milestones and verification',
+      housingPassportCertifications: 'Housing Passport with energy label and certifications',
+      chatWithContractor: 'Chat directly with contractor and inspector',
+      viewDemoDashboard: 'View Demo Dashboard',
+      liveDemo: 'Live Demo',
+      constructionOk: 'Construction OK',
+      // B2B section
+      forBuilders: 'For Builders',
+      doYouBuildHomes: 'Do you build homes?',
+      weHandlePaperwork: 'We handle the paperwork.',
+      b2bDesc: 'The Wkb makes you liable for 20 years. Our smart glasses + AI automatically document every step you take. So you can focus on what you do best:',
+      building: 'building.',
+      discoverBouwborg: 'Discover BouwBorg',
+      lessAdmin: '80% less administration',
+      wkbCompliant: 'WKB compliant',
+      automatic: 'Automatic',
+      wkbDocumentation: 'WKB Documentation',
+      // Newsletter section
+      stayUpdated: 'Stay updated',
+      weeklyLandNewsTips: 'Weekly land news & tips',
+      newsletterDesc: 'Receive the best plots in your region, building trends and smart saving tips. No spam, always valuable.',
+      subscribe: 'Subscribe',
+      subscribersAlready: '1,247 builders already receive our newsletter',
+      thankYouSignup: 'Thank you for signing up!',
+      // Footer
+      togetherBuilding: 'Building affordable housing together.',
+      withSupportFrom: 'With support from',
+      platform: 'Platform',
+      startDesign: 'Start Design',
+      forMunicipalities: 'For Municipalities',
+      legal: 'Legal',
+      termsAndConditions: 'Terms & Conditions',
+      privacyStatement: 'Privacy Statement',
+      disclaimer: 'Disclaimer',
+      startProject: 'Start Project',
+      stateOfMarket: 'State of Market',
+      investorDeck: 'Investor Deck',
+      // Hero content
+      heroLine1: 'Ever Thought',
+      heroLine2: 'you could magically',
+      heroLine3: 'Create a Home?',
+      heroTagline1: 'From dream to building plan — clear, honest, tailored',
+      heroTagline2: 'exactly to',
+      heroTagline3: 'your situation.',
+      discoverPossibilities: 'Discover your possibilities',
+      howItWorksLink: 'How does it work?',
+      inCollaborationWith: 'In collaboration with',
+      // Dashboard preview section
+      yourBuildSystem: 'Your Building System',
+      followEveryPhase: 'Follow every phase of your building project in real-time.',
+      transparentValidated: 'Transparent, validated and fully under control.',
+      projectName: 'Project Veluwse Heide',
+      completed: 'Completed',
+      lastUpdate: 'Last update',
+      today: 'Today',
+      openOverview: 'Open Overview',
+      withSupportOf: 'With support from',
+      startDreamHomeDesign: 'Start your dream home design',
+      // Workflow steps
+      groundResearch: 'Ground Research & Sounding',
+      groundResearchSub: 'Validated by Bureau Broersma',
+      reinforcementInspection: 'Reinforcement Inspection',
+      reinforcementInspectionSub: 'Photo upload verified • Payment released',
+      pourFoundation: 'Pour Foundation',
+      pourFoundationSub: 'Waiting for: Concrete Pour Logbook Upload',
+      shellConstruction2: 'Shell Construction',
+      shellConstructionSub: 'Starts only after curing validation',
+      // How it works section
+      theProcess: 'The Process',
+      howItWorksTitle: 'How does it work?',
+      howItWorksSectionSubtitle: 'From first idea to key handover in four steps.',
+      vibeStyle: 'Vibe & Style',
+      vibeStyleDesc: 'Define your aesthetic. Our AI translates your taste into an architectural design.',
+      plotCheck: 'Plot Check',
+      plotCheckDesc: 'We scan the zoning plan. Can you build here? What are the rules? Instant answer.',
+      thePassport: 'The Passport',
+      thePassportDesc: 'You receive a Housing Passport. Costs, materials and sustainability in one file.',
+      theBuildDashboard: 'The Build Dashboard',
+      theBuildDashboardDesc: 'No hassle. Follow the build via your dashboard. Payments only leave when work is done.',
+      startTheProcess: 'Start the process',
+      // Passport details section
+      readyToDesignDream: 'Ready to design your dream home?',
+      startFreeConfig: 'Start Free Configuration',
+      noAccount3MinFree: 'No account needed • 3 minutes • 100% free',
+      // Stakeholder section
+      forEveryoneProcess: 'For Everyone in the Process',
+      unprecedentedCollab: 'Unprecedented collaboration.',
+      fullTransp: 'Full transparency.',
+      onePlatformDesc: 'One platform where owner, architect, engineer, municipality and contractor work together on the same file. Real-time. Auditable. Error-free.',
+      buildOwner: 'Building Owner',
+      buildOwnerDesc: 'Full control over your project. See exactly where every euro goes and follow progress in real-time.',
+      realtimeCost: 'Real-time cost insight',
+      directDecision: 'Direct decision making',
+      completeDoc: 'Complete documentation',
+      architectTitle: 'Architect',
+      architectDescText: 'Focus on design, not paperwork. AI assistance for quick iterations with direct validation.',
+      directFeasibility: 'Direct feasibility check',
+      sharedDesign: 'Shared design environment',
+      versionControl: 'Version control & change log',
+      structEngineer: 'Structural Engineer',
+      structEngineerDesc: 'Efficient validation with pre-structured data. Less back-and-forth, faster approval.',
+      standardInput: 'Standardized input',
+      digitalSig: 'Digital signature',
+      liabilityTrack: 'Liability tracking',
+      municipalityTitle: 'Municipality',
+      municipalityDescText: 'Complete, validated dossiers that directly meet zoning requirements. Faster processing.',
+      prevalidatedDoss: 'Pre-validated dossiers',
+      zoningCheck: 'Zoning plan check',
+      fewerObj: 'Fewer objections',
+      fullAudit: 'Full Audit Trail',
+      everyDecisionEveryChange: 'Every decision. Every change. Documented.',
+      auditDesc: 'From first sketch to delivery: every document, every approval, every change is recorded. Never again discussion about who decided what and when.',
+      startDesignNow: 'Start designing now',
+      designGeneratedLog: 'Design generated',
+      constructionValidatedLog2: 'Construction validated',
+      ownerApprovedLog: 'Owner approved',
+      nowLabel: 'Now',
+      waitingMunicipality: 'Waiting for municipality...',
+      // Market section
+      marketReport: 'Market Report 2025',
+      theDutchWord: 'The Dutch',
+      housingMarketWord: 'Housing Market',
+      housingShortageNum: 'housing shortage.',
+      failureCostsNum: 'in failure costs per year.',
+      projectsOverBudgetNum: 'of projects over budget.',
+      whatMeansForPlans: 'What does this mean for your building plans? Discover the numbers, the causes, and how you can save up to €50,000.',
+      viewFullAnalysis2: 'View Full Analysis',
+      liveData2: 'Live Data 2025',
+      // Dashboard section
+      buildControlSys: 'Building Control System',
+      followProject: 'Follow your project',
+      inRealtimeWord: 'in real-time',
+      dashboardDescText: 'Every phase, every payment, every document — transparent and validated by Bureau Broersma.',
+      allPhaseMilestones: 'All building phases with milestones and verification',
+      passportEnergyCert: 'Housing Passport with energy label and certifications',
+      chatContractorInspector: 'Chat directly with contractor and inspector',
+      viewDemoBoard: 'View Demo Dashboard',
+      liveDemoLabel: 'Live Demo',
+      constructionOkLabel: 'Construction OK',
       footer: {
         tagline: 'The future of home building',
         privacy: 'Privacy',
         terms: 'Terms',
         contact: 'Contact',
       },
+      // FAQs
+      faqs: [
+        {
+          question: 'What does it cost to get started?',
+          answer: 'The first design and your Housing Passport are completely free. You only pay when you decide to proceed with construction. No hidden costs, no obligations.',
+        },
+        {
+          question: 'How long does the entire process from design to key handover take?',
+          answer: 'On average 10-14 months from first design to key handover. This is significantly faster than traditional building (18-24 months) thanks to our pre-validated processes and streamlined permit application.',
+        },
+        {
+          question: 'Does this work if I don\'t have a plot yet?',
+          answer: 'Absolutely! You can design your dream home in advance and we\'ll help you with our Plot Finder to find the perfect location that fits your design and budget.',
+        },
+        {
+          question: 'Is this for individuals or also project developers?',
+          answer: 'Both. Individuals use our platform for their dream home, while developers benefit from our scalable workflows and validated processes for multiple projects simultaneously.',
+        },
+        {
+          question: 'What if my design doesn\'t fit within the zoning plan?',
+          answer: 'Our system checks this automatically before you invest time. We provide immediate feedback on what is and isn\'t possible, including suggestions for adjustments that do fit within the regulations.',
+        },
+      ],
     },
 
     wizard: {

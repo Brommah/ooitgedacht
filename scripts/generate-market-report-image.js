@@ -100,3 +100,7 @@ async function generateMarketReportImage() {
 // Run
 generateMarketReportImage();
 
+
+
+
+

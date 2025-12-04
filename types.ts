@@ -20,13 +20,6 @@ export enum AppState {
   WIZARD_STEP_EXTRAS_COMFORT = 'WIZARD_STEP_EXTRAS_COMFORT',
   WIZARD_STEP_VIBE = 'WIZARD_STEP_VIBE',
   
-  // Legacy wizard states (deprecated - kept for compatibility)
-  WIZARD_HOUSEHOLD = 'WIZARD_HOUSEHOLD',
-  WIZARD_MOODBOARD = 'WIZARD_MOODBOARD',
-  WIZARD_PREFERENCES = 'WIZARD_PREFERENCES',
-  WIZARD_LOCATION = 'WIZARD_LOCATION',
-  WIZARD_BUDGET = 'WIZARD_BUDGET',
-  
   GENERATING = 'GENERATING',
   RESULTS_LOCKED = 'RESULTS_LOCKED',
   RESULTS_UNLOCKED = 'RESULTS_UNLOCKED',
@@ -177,15 +170,6 @@ export interface UserPreferences {
     total: number;
     timeline: Timeline;
   };
-}
-
-// Legacy interface for backward compatibility (maps to new structure)
-export interface LegacyUserPreferences {
-  moodBoardSelections: string[];
-  vibe: number;
-  material: 'wood' | 'brick' | 'concrete' | 'glass';
-  budgetLevel: number;
-  location: string;
 }
 
 // Mood image for swipe cards

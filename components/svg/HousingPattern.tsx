@@ -83,3 +83,7 @@ export const HousingPatternBackground: React.FC<{ className?: string }> = ({ cla
   );
 };
 
+
+
+
+

@@ -65,6 +65,39 @@
       .animate-fade-in-up {
         animation: fadeInUp 0.6s ease-out forwards;
       }
+      
+      /* iOS-style Widget Jiggle Animation - Smooth & gentle like Apple */
+      @keyframes widget-jiggle {
+        0%, 100% { transform: rotate(-0.6deg); }
+        50% { transform: rotate(0.6deg); }
+      }
+      .widget-jiggle {
+        animation: widget-jiggle 0.4s ease-in-out infinite;
+      }
+      
+      /* Dashboard Mobile Responsive Overrides */
+      @media (max-width: 1023px) {
+        .desktop-sidebar {
+          display: none !important;
+        }
+        .mobile-header {
+          display: block !important;
+        }
+        .mobile-bottom-nav {
+          display: flex !important;
+        }
+      }
+      @media (min-width: 1024px) {
+        .desktop-sidebar {
+          display: flex !important;
+        }
+        .mobile-header {
+          display: none !important;
+        }
+        .mobile-bottom-nav {
+          display: none !important;
+        }
+      }
     </style>
   <script type="importmap">
 {

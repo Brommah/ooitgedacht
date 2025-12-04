@@ -7,9 +7,9 @@ import {
   ROOF_OPTIONS, 
   SIZE_OPTIONS, 
   getVibePromptHint,
-  getVibeLabel,
   HOUSEHOLD_OPTIONS 
 } from "../constants";
+import { getVibeLabel } from "../i18n";
 
 // Initialize Gemini Client
 const API_KEY = import.meta.env.VITE_GEMINI_API_KEY || import.meta.env.GEMINI_API_KEY || '';
@@ -191,7 +191,7 @@ const buildComprehensivePrompt = (prefs: UserPreferences): string => {
 
   // ===== VIBE/ATMOSPHERE =====
   const vibeAtmosphere = getVibeAtmosphere(prefs.config.vibe);
-  const vibeLabel = getVibeLabel(prefs.config.vibe);
+  const vibeLabel = getVibeLabel(prefs.config.vibe, 'en');
   
   // ===== ENERGY SYSTEMS (all visible) =====
   const energyFeatures: string[] = [];

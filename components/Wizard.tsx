@@ -139,12 +139,22 @@ export const Wizard: React.FC<WizardProps> = ({ appState, setAppState }) => {
     }
   }, [preferences, appState]);
 
-  // Clear progress when user completes the wizard successfully
+  // Save dashboard data and clear wizard progress when transitioning to dashboard
   useEffect(() => {
-    if (appState === AppState.RESULTS_UNLOCKED || appState === AppState.DASHBOARD) {
+    if (appState === AppState.DASHBOARD && generatedImage) {
+      // Save preferences and image for dashboard access
+      try {
+        localStorage.setItem('ooit-gedacht-dashboard-prefs', JSON.stringify(preferences));
+        localStorage.setItem('ooit-gedacht-dashboard-image', generatedImage);
+      } catch (e) {
+        console.error('Failed to save dashboard data:', e);
+      }
+      // Clear wizard progress
+      clearProgress();
+    } else if (appState === AppState.RESULTS_UNLOCKED) {
       clearProgress();
     }
-  }, [appState]);
+  }, [appState, preferences, generatedImage]);
 
   // =========================================
   // STEP HANDLERS
@@ -339,6 +349,7 @@ export const Wizard: React.FC<WizardProps> = ({ appState, setAppState }) => {
         isCancelled = true;
       };
     }
+    return undefined; // No cleanup needed when not generating
   }, [appState, preferences, setAppState]);
 
   // Dashboard view
